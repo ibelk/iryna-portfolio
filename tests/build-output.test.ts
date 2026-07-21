@@ -67,3 +67,10 @@ describe('home page', () => {
     expect(html).toContain('href="/writing"');
   });
 });
+
+describe('experiments page', () => {
+  it('builds and lists at least the LEAF illustrations entry', () => {
+    const html = readFileSync('dist/experiments/index.html', 'utf-8');
+    expect(html).toContain('LEAF — 3D Illustrations');
+  });
+});

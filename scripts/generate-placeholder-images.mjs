@@ -8,6 +8,9 @@ const targets = [
   ['public/images/case-freelancehunt/hero.svg', 'Freelancehunt'],
   ['public/images/case-resonance/hero.svg', 'Resonance'],
   ['public/images/case-leaf/hero.svg', 'LEAF'],
+  ['public/images/experiments/leaf-illustrations.svg', 'LEAF 3D Illustrations'],
+  ['public/images/experiments/experiment-2.svg', 'Experiment 2'],
+  ['public/images/experiments/experiment-3.svg', 'Experiment 3'],
 ];
 
 function svgFor(label) {
