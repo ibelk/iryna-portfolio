@@ -11,6 +11,11 @@ const targets = [
   ['public/images/experiments/leaf-illustrations.svg', 'LEAF 3D Illustrations'],
   ['public/images/experiments/experiment-2.svg', 'Experiment 2'],
   ['public/images/experiments/experiment-3.svg', 'Experiment 3'],
+  ['public/images/posts/figma-make.svg', 'Figma Make'],
+  ['public/images/posts/figma-sites.svg', 'Figma Sites'],
+  ['public/images/posts/figma-buzz.svg', 'Figma Buzz'],
+  ['public/images/posts/figma-motion.svg', 'Figma Motion'],
+  ['public/images/posts/figma-draw.svg', 'Figma Draw'],
 ];
 
 function svgFor(label) {

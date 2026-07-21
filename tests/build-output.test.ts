@@ -74,3 +74,20 @@ describe('experiments page', () => {
     expect(html).toContain('LEAF — 3D Illustrations');
   });
 });
+
+describe('writing page', () => {
+  it('builds and lists the Figma Make post', () => {
+    const html = readFileSync('dist/writing/index.html', 'utf-8');
+    expect(html).toContain('Figma Make');
+  });
+
+  it('links out to LinkedIn for every post card', () => {
+    const html = readFileSync('dist/writing/index.html', 'utf-8');
+    expect(html).toContain('linkedin.com');
+  });
+
+  it('never mentions impressions, reach, or view counts', () => {
+    const html = readFileSync('dist/writing/index.html', 'utf-8');
+    expect(html).not.toMatch(/impressions|reach|[0-9]+\s*views?/i);
+  });
+});

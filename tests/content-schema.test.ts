@@ -42,3 +42,29 @@ describe('case study content', () => {
     expect(typography.data.ndaBadge).toBe(true);
   });
 });
+
+describe('writing section content', () => {
+  const POSTS_DIR = 'src/content/posts';
+  const bannedPattern = /impressions|reach|[0-9]+\s*views?/i;
+
+  it('has at least 5 posts', () => {
+    const files = readdirSync(POSTS_DIR);
+    expect(files.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('never mentions impressions, reach, or view counts in any post', () => {
+    const files = readdirSync(POSTS_DIR);
+    for (const file of files) {
+      const raw = readFileSync(`${POSTS_DIR}/${file}`, 'utf-8');
+      expect(raw, `${file} should not mention reach/impressions/views`).not.toMatch(bannedPattern);
+    }
+  });
+
+  it('every post links out to LinkedIn rather than hosting the full text', () => {
+    const files = readdirSync(POSTS_DIR);
+    for (const file of files) {
+      const { data } = matter(readFileSync(`${POSTS_DIR}/${file}`, 'utf-8'));
+      expect(data.linkedinUrl, `${file}: linkedinUrl`).toMatch(/^https:\/\/www\.linkedin\.com\//);
+    }
+  });
+});
