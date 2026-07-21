@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://iryna-portfolio.vercel.app',
+  site: 'https://iryna-portfolio-eight.vercel.app',
   output: 'static',
 });
