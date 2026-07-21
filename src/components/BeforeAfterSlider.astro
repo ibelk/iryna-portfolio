@@ -1,0 +1,56 @@
+---
+interface Props {
+  beforeSrc: string;
+  afterSrc: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+const { beforeSrc, afterSrc, beforeLabel = 'Before', afterLabel = 'After' } = Astro.props;
+---
+<div class="before-after container" data-before-after>
+  <img src={beforeSrc} alt={beforeLabel} />
+  <div class="before-after__after" data-after-layer>
+    <img src={afterSrc} alt={afterLabel} />
+  </div>
+  <div class="before-after__handle" data-handle></div>
+  <span class="before-after__label before-after__label--before">{beforeLabel}</span>
+  <span class="before-after__label before-after__label--after">{afterLabel}</span>
+</div>
+
+<style>
+  .before-after {
+    position: relative;
+    margin: var(--space-4) 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .before-after__after {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 50% 0 0);
+  }
+  .before-after__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: white;
+    cursor: ew-resize;
+    touch-action: none;
+  }
+  .before-after__label {
+    position: absolute;
+    bottom: var(--space-2);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+  .before-after__label--before {
+    left: var(--space-2);
+  }
+  .before-after__label--after {
+    right: var(--space-2);
+  }
+</style>

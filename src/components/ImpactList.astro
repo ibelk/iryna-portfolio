@@ -1,0 +1,51 @@
+---
+interface Item {
+  label: string;
+  description: string;
+}
+interface Props {
+  items: Item[];
+  heading?: string;
+}
+const { items, heading = 'Product Impact' } = Astro.props;
+---
+<div class="impact-list container">
+  <h3>{heading}</h3>
+  <ul>
+    {items.map((item) => (
+      <li>
+        <span class="impact-list__dot" aria-hidden="true"></span>
+        <div>
+          <strong>{item.label}.</strong> {item.description}
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .impact-list {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    margin: var(--space-4) 0;
+  }
+  .impact-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .impact-list li {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+  }
+  .impact-list__dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+</style>
