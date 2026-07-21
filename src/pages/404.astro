@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Page not found — Iryna Belkova">
+  <Header />
+  <section class="container not-found">
+    <h1>Page not found</h1>
+    <p><a href="/">Back to home</a></p>
+  </section>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: var(--space-5) 0;
+    text-align: center;
+  }
+</style>
