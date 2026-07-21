@@ -45,7 +45,7 @@ describe('case study content', () => {
 
 describe('writing section content', () => {
   const POSTS_DIR = 'src/content/posts';
-  const bannedPattern = /impressions|reach|[0-9]+\s*views?/i;
+  const bannedPattern = /impressions|reach(?:ed)?|[\d.,]+\s*[kKmM]?\+?\s*views?\b/i;
 
   it('has at least 5 posts', () => {
     const files = readdirSync(POSTS_DIR);

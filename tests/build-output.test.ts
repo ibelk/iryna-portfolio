@@ -88,6 +88,6 @@ describe('writing page', () => {
 
   it('never mentions impressions, reach, or view counts', () => {
     const html = readFileSync('dist/writing/index.html', 'utf-8');
-    expect(html).not.toMatch(/impressions|reach|[0-9]+\s*views?/i);
+    expect(html).not.toMatch(/impressions|reach(?:ed)?|[\d.,]+\s*[kKmM]?\+?\s*views?\b/i);
   });
 });
