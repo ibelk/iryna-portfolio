@@ -41,3 +41,29 @@ describe('case study pages', () => {
     expect(resonance).not.toContain('Interfaces reproduced for portfolio via NDA');
   });
 });
+
+describe('home page', () => {
+  it('does not contain the old generic hero copy', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
+    expect(html).not.toContain('crafting innovative product designs');
+  });
+
+  it('lists all 5 case study tags', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
+    for (const tag of [
+      'Consumer / Growth',
+      'Accessibility / Infrastructure',
+      'Marketplace',
+      'Enterprise / Data-heavy',
+      'Consumer Mobile / 0→1',
+    ]) {
+      expect(html).toContain(tag);
+    }
+  });
+
+  it('links to both Experiments and Writing from the preview strip', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
+    expect(html).toContain('href="/experiments"');
+    expect(html).toContain('href="/writing"');
+  });
+});
