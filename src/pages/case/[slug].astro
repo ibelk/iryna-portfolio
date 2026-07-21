@@ -1,0 +1,47 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CaseHeader from '../../components/CaseHeader.astro';
+import StatCallout from '../../components/StatCallout.astro';
+import ContextCardGrid from '../../components/ContextCardGrid.astro';
+import QuoteTable from '../../components/QuoteTable.astro';
+import ImpactList from '../../components/ImpactList.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('case-studies');
+  return cases.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'case-studies'>;
+}
+const { entry } = Astro.props;
+const { title, subtitle, meta, ndaBadge, heroImage, statValue, statCaption, contextCards, quoteTable, impactList } =
+  entry.data;
+---
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+  <CaseHeader title={title} subtitle={subtitle} meta={meta} ndaBadge={ndaBadge} />
+  <div class="container">
+    <img src={heroImage} alt={title} class="case-hero-image" />
+  </div>
+  <div class="container">
+    <StatCallout value={statValue} caption={statCaption} />
+  </div>
+  <ContextCardGrid cards={contextCards} />
+  <QuoteTable rows={quoteTable} />
+  <ImpactList items={impactList} />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .case-hero-image {
+    border-radius: var(--radius);
+    margin: var(--space-3) 0;
+  }
+</style>
