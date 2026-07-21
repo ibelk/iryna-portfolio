@@ -9,7 +9,7 @@ interface Props {
 }
 const { items, heading = 'Product Impact' } = Astro.props;
 ---
-<div class="impact-list container">
+<div class="impact-list container" data-reveal>
   <h3>{heading}</h3>
   <ul>
     {items.map((item) => (

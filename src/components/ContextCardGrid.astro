@@ -8,7 +8,7 @@ interface Props {
 }
 const { cards } = Astro.props;
 ---
-<div class="context-grid container">
+<div class="context-grid container" data-reveal>
   {cards.map((card) => (
     <div class="context-grid__card">
       <h3>{card.title}</h3>
