@@ -9,7 +9,7 @@ interface Props {
 const { slug, title, subtitle, tag, heroImage } = Astro.props;
 ---
 <a href={`/case/${slug}/`} class="case-card">
-  <img src={heroImage} alt={title} />
+  <img src={heroImage} alt={title} loading="lazy" decoding="async" />
   <span class="case-card__tag">{tag}</span>
   <h3>{title}</h3>
   <p>{subtitle}</p>

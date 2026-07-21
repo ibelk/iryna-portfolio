@@ -13,7 +13,7 @@ const items = (await getCollection('experiments')).sort((a, b) => a.data.order -
     <div class="experiments-grid">
       {items.map((item) => (
         <figure>
-          <img src={item.data.image} alt={item.data.title} />
+          <img src={item.data.image} alt={item.data.title} loading="lazy" decoding="async" />
           <figcaption>{item.data.title}</figcaption>
         </figure>
       ))}

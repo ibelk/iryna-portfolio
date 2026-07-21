@@ -14,7 +14,7 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
     <div class="writing-grid">
       {posts.map((post) => (
         <a class="writing-card" href={post.data.linkedinUrl} target="_blank" rel="noopener noreferrer">
-          <img src={post.data.image} alt={post.data.title} />
+          <img src={post.data.image} alt={post.data.title} loading="lazy" decoding="async" />
           <h3>{post.data.title}</h3>
           <p>{post.data.excerpt}</p>
           <span class="writing-card__cta">Read on LinkedIn →</span>
