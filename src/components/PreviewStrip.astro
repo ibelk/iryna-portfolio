@@ -1,0 +1,36 @@
+<section class="preview-strip container" data-reveal>
+  <a href="/experiments" class="preview-strip__card">
+    <h3>Experiments</h3>
+    <p>3D illustration work, outside the case studies.</p>
+  </a>
+  <a href="/writing" class="preview-strip__card">
+    <h3>Writing</h3>
+    <p>Notes on troubleshooting design problems and testing new AI-native tools.</p>
+  </a>
+</section>
+
+<style>
+  .preview-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+  }
+  .preview-strip__card {
+    display: block;
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+  .preview-strip__card p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 640px) {
+    .preview-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

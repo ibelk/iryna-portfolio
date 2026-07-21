@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const items = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Experiments — Iryna Belkova">
+  <Header />
+  <section class="container">
+    <h1>Experiments</h1>
+    <div class="experiments-grid">
+      {items.map((item) => (
+        <figure>
+          <img src={item.data.image} alt={item.data.title} loading="lazy" decoding="async" />
+          <figcaption>{item.data.title}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .experiments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-3) 0;
+  }
+  .experiments-grid figure {
+    margin: 0;
+  }
+  .experiments-grid img {
+    border-radius: var(--radius);
+  }
+  .experiments-grid figcaption {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-top: var(--space-1);
+  }
+</style>

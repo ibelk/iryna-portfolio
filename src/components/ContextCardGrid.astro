@@ -1,0 +1,38 @@
+---
+interface Card {
+  title: string;
+  bullets: string[];
+}
+interface Props {
+  cards: Card[];
+}
+const { cards } = Astro.props;
+---
+<div class="context-grid container" data-reveal>
+  {cards.map((card) => (
+    <div class="context-grid__card">
+      <h3>{card.title}</h3>
+      <ul>
+        {card.bullets.map((bullet) => <li>{bullet}</li>)}
+      </ul>
+    </div>
+  ))}
+</div>
+
+<style>
+  .context-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+  }
+  .context-grid__card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+  .context-grid__card ul {
+    padding-left: 1.1rem;
+    color: var(--color-text-muted);
+  }
+</style>

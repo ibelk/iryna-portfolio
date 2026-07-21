@@ -1,0 +1,33 @@
+---
+import { parseStatValue } from '../lib/stats';
+
+interface Props {
+  value: string;
+  caption: string;
+}
+const { value, caption } = Astro.props;
+const parsed = parseStatValue(value);
+---
+<div class="stat-callout" data-animatable={parsed.isNumeric} data-target={parsed.numericTarget ?? ''} data-prefix={parsed.prefix} data-suffix={parsed.suffix}>
+  <div class="stat-callout__value">{value}</div>
+  <div class="stat-callout__caption">{caption}</div>
+</div>
+
+<style>
+  .stat-callout {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+  .stat-callout__value {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .stat-callout__caption {
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import AboutSection from '../components/AboutSection.astro';
+import CaseCard from '../components/CaseCard.astro';
+import PreviewStrip from '../components/PreviewStrip.astro';
+
+const cases = (await getCollection('case-studies')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Iryna Belkova — Product Designer">
+  <Header />
+  <Hero />
+  <AboutSection />
+  <section id="work" class="container case-grid" data-reveal>
+    {cases.map((entry) => (
+      <CaseCard
+        slug={entry.slug}
+        title={entry.data.title}
+        subtitle={entry.data.subtitle}
+        tag={entry.data.tag}
+        heroImage={entry.data.heroImage}
+      />
+    ))}
+  </section>
+  <PreviewStrip />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+  }
+</style>
