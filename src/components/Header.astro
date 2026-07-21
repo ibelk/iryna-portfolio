@@ -1,0 +1,37 @@
+<header class="site-header">
+  <div class="container site-header__row">
+    <a href="/" class="site-header__name">Iryna Belkova</a>
+    <nav class="site-header__nav">
+      <a href="/#work">Work</a>
+      <a href="/experiments">Experiments</a>
+      <a href="/writing">Writing</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding: var(--space-3) 0;
+  }
+  .site-header__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header__name {
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  .site-header__nav {
+    display: flex;
+    gap: var(--space-3);
+  }
+  .site-header__nav a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+  }
+  .site-header__nav a:hover {
+    color: var(--color-text);
+  }
+</style>
