@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  body: string;
+  linkLabel: string;
+  href: string;
+}
+const { title, body, linkLabel, href } = Astro.props;
+---
+
+<a class="writing-cta" href={href}>
+  <div class="writing-cta__text">
+    <h3 class="writing-cta__title">{title}</h3>
+    <p class="writing-cta__body">{body}</p>
+  </div>
+  <span class="writing-cta__link">{linkLabel}</span>
+</a>
+
+<style>
+  .writing-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--size-32);
+    padding: var(--size-32);
+    background: var(--color-surface-inverse);
+    border-radius: var(--radius-card);
+    color: var(--color-text-inverse);
+    text-decoration: none;
+    transition: transform var(--motion-normal) var(--motion-ease);
+  }
+
+  .writing-cta:hover {
+    transform: translateY(-4px);
+  }
+
+  .writing-cta__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-16);
+  }
+
+  .writing-cta__title {
+    font-size: var(--text-title-m);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  .writing-cta__body {
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-normal);
+    color: var(--color-text-inverse-secondary);
+  }
+
+  .writing-cta__link {
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+</style>

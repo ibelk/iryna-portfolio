@@ -2,6 +2,7 @@
 title: "Freelancer Portfolio Redesign"
 subtitle: "63% of users were re-uploading finished work just to reorder it — replaced a fixed template with a flexible portfolio builder."
 tag: "Marketplace"
+tags: ["Web", "Product design", "Amplitude", "User interview", "Design system"]
 order: 3
 ndaBadge: false
 heroImage: "/images/case-freelancehunt/hero.svg"

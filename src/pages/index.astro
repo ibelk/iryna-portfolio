@@ -4,36 +4,114 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
-import AboutSection from '../components/AboutSection.astro';
 import CaseCard from '../components/CaseCard.astro';
-import PreviewStrip from '../components/PreviewStrip.astro';
+import ExperimentCard from '../components/ExperimentCard.astro';
+import WritingCard from '../components/WritingCard.astro';
+import WritingCta from '../components/WritingCta.astro';
 
-const cases = (await getCollection('case-studies')).sort((a, b) => a.data.order - b.data.order);
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const cases = (await getCollection('case-studies')).sort(byOrder);
+const experiments = (await getCollection('experiments')).sort(byOrder);
+const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
 ---
+
 <BaseLayout title="Iryna Belkova — Product Designer">
   <Header />
-  <Hero />
-  <AboutSection />
-  <section id="work" class="container case-grid" data-reveal>
-    {cases.map((entry) => (
-      <CaseCard
-        slug={entry.slug}
-        title={entry.data.title}
-        subtitle={entry.data.subtitle}
-        tag={entry.data.tag}
-        heroImage={entry.data.heroImage}
-      />
-    ))}
-  </section>
-  <PreviewStrip />
+
+  <main>
+    <Hero
+      headline="Product designer shipping across the full range — from data-heavy enterprise platforms to consumer mobile apps"
+      location="Based in Ukraine"
+    />
+
+    <section id="work" class="work" aria-label="Selected work">
+      {
+        cases.map((entry) => (
+          <div class="container work__item" data-reveal>
+            <CaseCard
+              slug={entry.slug}
+              title={entry.data.title}
+              subtitle={entry.data.subtitle}
+              tags={entry.data.tags}
+              heroImage={entry.data.heroImage}
+            />
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="experiments" class="section container" data-reveal>
+      <h2 class="section__title">Experiments</h2>
+      <div class="grid grid--two">
+        {
+          experiments.map((entry) => (
+            <ExperimentCard title={entry.data.title} image={entry.data.image} href="/experiments" />
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="writing" class="section container" data-reveal>
+      <h2 class="section__title">Writing</h2>
+      <div class="grid grid--three">
+        {
+          posts.map((entry) => (
+            <WritingCard
+              title={entry.data.title}
+              image={entry.data.image}
+              href={entry.data.linkedinUrl}
+              tags={entry.data.tags}
+            />
+          ))
+        }
+        <WritingCta
+          title="More writing"
+          body="Notes on testing new AI-native tools and on troubleshooting design problems inside live products."
+          linkLabel="View All Work"
+          href="/writing"
+        />
+      </div>
+    </section>
+  </main>
+
   <Footer />
 </BaseLayout>
 
 <style>
-  .case-grid {
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-section-gap);
+    padding-block: var(--space-section-y);
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block-gap);
+    padding-block: var(--space-section-y);
+  }
+
+  .section__title {
+    font-size: var(--text-title-l);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--space-3);
-    padding: var(--space-4) 0;
+    gap: var(--space-grid-gap);
+  }
+
+  @media (min-width: 1024px) {
+    .grid--two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--three {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

@@ -1,31 +1,47 @@
-/* Design tokens: fallback-observed values from dark theme case-study screenshots, pending correction against source Figma file */
+/* Global base styles. All values come from the token layer — no raw hex or
+   pixel values below except the reset itself. See tokens.css for the source. */
+
+@import '@fontsource-variable/manrope';
+@import './tokens.css';
+
+/* =============================================================================
+   LEGACY ALIASES
+   The inner pages (case studies, experiments, writing, 404) were built against
+   an earlier, approximate token set before the Figma design existed. These
+   aliases keep them rendering while they are redesigned page by page.
+   Delete each alias once no component references it.
+   ============================================================================= */
 :root {
-  --color-bg: #0a0a0c;
-  --color-surface: #17171b;
-  --color-surface-alt: #1f1f24;
-  --color-text: #f5f5f5;
-  --color-text-muted: #9a9aa2;
-  --color-accent: #e8542c;
+  --font-sans: var(--font-manrope);
+  --color-text: var(--color-text-primary);
+  --color-surface-alt: var(--white-a10);
   --color-accent-blue: #3b6fe0;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2.5rem;
-  --space-5: 4rem;
-  --radius: 12px;
+  --space-1: var(--size-8);
+  --space-2: var(--size-16);
+  --space-3: var(--size-24);
+  --space-4: var(--size-32);
+  --space-5: var(--size-48);
+  --radius: var(--radius-card);
 }
 
-* {
+/* =============================================================================
+   RESET
+   ============================================================================= */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
   background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  line-height: 1.5;
+  color: var(--color-text-primary);
+  font-family: var(--font-manrope);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
 }
 
 img {
@@ -37,15 +53,53 @@ a {
   color: inherit;
 }
 
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* The Figma source trims every text box to cap height (`text-box-trim:
+   trim-both` / `text-box-edge: cap alphabetic`). Without it, CSS line boxes add
+   leading above and below each block and every measured gap reads too large.
+   Progressive enhancement: browsers without support show slightly looser
+   vertical rhythm, never broken layout. */
+h1,
+h2,
+h3,
+p {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+/* =============================================================================
+   LAYOUT
+   ============================================================================= */
 .container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 var(--space-3);
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-section-x);
+}
+
+/* =============================================================================
+   ACCESSIBILITY
+   Not specified in the Figma source — added to meet WCAG 2.2 AA. Flagged for
+   design review so the focus treatment becomes a deliberate design decision.
+   ============================================================================= */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-dot);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

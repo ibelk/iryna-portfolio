@@ -48,30 +48,40 @@ describe('home page', () => {
     expect(html).not.toContain('crafting innovative product designs');
   });
 
-  it('lists all 5 case study tags', () => {
+  it('shows a card for every case study, each with its tag set', () => {
     const html = readFileSync('dist/index.html', 'utf-8');
+    // One representative tag per case, taken from the Figma source of truth.
     for (const tag of [
-      'Consumer / Growth',
-      'Accessibility / Infrastructure',
-      'Marketplace',
-      'Enterprise / Data-heavy',
-      'Consumer Mobile / 0→1',
+      'Microsoft Clarity', // vpn-premium
+      'Browser extensions', // vpn-typography
+      'Amplitude', // freelancehunt
+      'Data-heavy', // resonance
+      'Solo project', // leaf
     ]) {
       expect(html).toContain(tag);
     }
   });
 
-  it('links to both Experiments and Writing from the preview strip', () => {
+  it('links to both Experiments and Writing', () => {
     const html = readFileSync('dist/index.html', 'utf-8');
     expect(html).toContain('href="/experiments"');
     expect(html).toContain('href="/writing"');
   });
+
+  it('renders the Experiments and Writing sections inline', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
+    expect(html).toContain('id="experiments"');
+    expect(html).toContain('id="writing"');
+    expect(html).toContain('Claude Code');
+  });
 });
 
 describe('experiments page', () => {
-  it('builds and lists at least the LEAF illustrations entry', () => {
+  it('builds and lists every experiment category', () => {
     const html = readFileSync('dist/experiments/index.html', 'utf-8');
-    expect(html).toContain('LEAF — 3D Illustrations');
+    for (const title of ['3D', 'Figma AI', 'Claude Code', 'UI Practice']) {
+      expect(html).toContain(title);
+    }
   });
 });
 

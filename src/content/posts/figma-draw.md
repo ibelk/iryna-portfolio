@@ -4,4 +4,5 @@ excerpt: "Made a poster and a custom illustration for a fictional product withou
 linkedinUrl: "https://www.linkedin.com/in/iryna-belkova-1368981a0/"
 image: "/images/posts/figma-draw.svg"
 order: 5
+tags: ["Figma Draw", "AI"]
 ---

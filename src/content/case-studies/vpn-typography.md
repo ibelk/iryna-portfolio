@@ -2,6 +2,7 @@
 title: "Typography & Accessibility in VPN"
 subtitle: "Caught a systemic accessibility problem before it broke translations for 60+ languages — cut fix requests from weekly to monthly."
 tag: "Accessibility / Infrastructure"
+tags: ["B2C", "Mobile", "Desktop", "Browser extensions", "Product design", "Design system"]
 order: 2
 ndaBadge: true
 heroImage: "/images/case-vpn-typography/hero.svg"

@@ -1,0 +1,201 @@
+/* =============================================================================
+   Design tokens — extracted from Figma "Web-portfolio" / page "Ready to dev"
+   File key: Ex1mth8SiIUd4mL8lJmKwC   Node: 45:14107
+   Desktop source frame: Main-1920 (1440px)   Mobile source frame: Main-375 (375px)
+
+   Two layers:
+     1. Primitives  — raw values, no meaning. Never used directly in components.
+     2. Semantic    — meaning-bearing aliases. Components reference ONLY these.
+
+   Responsive pairs: mobile values are the base (mobile-first); the desktop
+   half of each pair lives in the `@media (min-width: 1024px)` block at the
+   bottom. Colors have no responsive pair — they are identical on both.
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     1. PRIMITIVES — COLOR
+     ------------------------------------------------------------------------ */
+  --brand-orange-500: #ff5e3a;
+
+  --neutral-0: #ffffff;
+  --neutral-850: #222222;
+  --neutral-950: #0a0a0a;
+
+  /* White alpha ramp — every translucent surface/text in the design */
+  --white-a90: rgba(255, 255, 255, 0.9);
+  --white-a80: rgba(255, 255, 255, 0.8);
+  --white-a20: rgba(255, 255, 255, 0.2);
+  --white-a15: rgba(255, 255, 255, 0.15);
+  --white-a10: rgba(255, 255, 255, 0.1);
+
+  /* Ink alpha ramp — text on light surfaces (the "View all work" CTA card) */
+  --ink-a90: rgba(10, 10, 10, 0.9);
+
+  /* ---------------------------------------------------------------------------
+     1. PRIMITIVES — SPACE (4px base scale)
+     ------------------------------------------------------------------------ */
+  --size-4: 4px;
+  --size-8: 8px;
+  --size-12: 12px;
+  --size-16: 16px;
+  --size-20: 20px;
+  --size-24: 24px;
+  --size-32: 32px;
+  --size-36: 36px;
+  --size-48: 48px;
+  --size-72: 72px;
+  --size-80: 80px;
+  --size-120: 120px;
+
+  /* ---------------------------------------------------------------------------
+     1. PRIMITIVES — TYPE
+     ------------------------------------------------------------------------ */
+  --font-manrope: 'Manrope Variable', 'Manrope', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-normal: normal; /* Figma `leading-[normal]` */
+  --leading-snug: 1.35; /* Figma `leading-[1.35]` — nav, tags */
+
+  /* ---------------------------------------------------------------------------
+     1. PRIMITIVES — RADIUS
+     ------------------------------------------------------------------------ */
+  --radius-4: 4px;
+  --radius-20: 20px;
+  --radius-22: 22px;
+  --radius-24: 24px;
+  --radius-30: 30px;
+  --radius-32: 32px;
+  --radius-pill: 999px;
+
+  /* =========================================================================
+     2. SEMANTIC — COLOR   (no mobile/desktop pair: identical on both)
+     ========================================================================= */
+  --color-bg: var(--neutral-950);
+  --color-surface: var(--neutral-850);
+  --color-surface-inverse: var(--neutral-0); /* CTA card */
+  --color-surface-subtle: var(--white-a15); /* tag / chip background */
+  --color-surface-raised: var(--white-a20); /* lang toggle track */
+  --color-border-subtle: var(--white-a10); /* header pill outline */
+
+  --color-text-primary: var(--neutral-0);
+  --color-text-secondary: var(--white-a90); /* card subtitle */
+  --color-text-muted: var(--white-a80); /* "Based in Ukraine" */
+  --color-text-inverse: var(--neutral-950); /* on light surfaces */
+  --color-text-inverse-secondary: var(--ink-a90);
+
+  --color-accent: var(--brand-orange-500);
+
+  /* Focus ring — not in the Figma source; added to meet the 3:1 / visible-focus
+     requirement the design does not yet specify. Flagged for design review. */
+  --color-focus-ring: var(--brand-orange-500);
+
+  /* =========================================================================
+     2. SEMANTIC — TYPE  (mobile base; desktop pair below)
+     ========================================================================= */
+  --text-display: 36px; /* hero headline             desktop 64 */
+  --text-title-l: 24px; /* section + case-card title desktop 42 */
+  --text-title-m: 24px; /* CTA card title            desktop 32 */
+  --text-title-s: 20px; /* experiment / writing card desktop 24 */
+  --text-logo: 20px; /* wordmark                  same */
+  --text-body: 16px; /* body, nav, links          same */
+  --text-label: 14px; /* tags / chips              same */
+
+  /* =========================================================================
+     2. SEMANTIC — SPACE, GROUP 1: BETWEEN BLOCKS
+     Section-level rhythm: page gutter, section padding, gaps between sections
+     and between grid items.
+     ========================================================================= */
+  --space-section-x: var(--size-16); /* page gutter        desktop 120 */
+  --space-section-y: var(--size-32); /* section padding-y  desktop 48  */
+  --space-section-y-lg: var(--size-32); /* hero padding-y     desktop 72  */
+  --space-section-gap: var(--size-24); /* section ↔ section  desktop 36  */
+  --space-grid-gap: var(--size-12); /* card ↔ card        desktop 20  */
+
+  /* =========================================================================
+     2. SEMANTIC — SPACE, GROUP 2: INSIDE BLOCKS
+     Rhythm within one section: heading to its content, hero stack.
+     ========================================================================= */
+  --space-block-gap: var(--size-36); /* section title ↔ content  same */
+  --space-block-gap-lg: var(--size-32); /* hero headline ↔ meta  desktop 80 */
+
+  /* =========================================================================
+     2. SEMANTIC — SPACE, GROUP 3: INSIDE REPEATING ELEMENTS (CARDS)
+     Everything inside a card, tag or chip. These repeat dozens of times, so
+     they are the tokens most worth locking down.
+     ========================================================================= */
+  --space-card-padding: var(--size-12); /* card shell padding      same */
+  --space-card-inset: var(--size-16); /* card content padding  desktop 48 */
+  --space-card-inset-sm: var(--size-12); /* compact card (experiments) same */
+  --space-card-inset-md: var(--size-20); /* writing card content   same */
+  --space-card-gap: var(--size-12); /* stacked card parts    desktop 20 */
+  --space-card-stack: var(--size-24); /* text block ↔ tag row  same */
+  --space-card-text-gap: var(--size-20); /* title ↔ subtitle    desktop 24 */
+
+  --space-tag-x: var(--size-12); /* tag padding-inline  same */
+  --space-tag-y: var(--size-8); /* tag padding-block   same */
+  --space-tag-gap: var(--size-4); /* tag ↔ tag           same */
+
+  /* =========================================================================
+     2. SEMANTIC — RADIUS
+     ========================================================================= */
+  --radius-card: var(--radius-24); /* card shell      desktop 32 */
+  --radius-media: var(--radius-20); /* card image      desktop 30 */
+  --radius-media-sm: var(--radius-20); /* icon thumbnail  desktop 22 */
+  --radius-media-post: var(--radius-20); /* writing card image (Figma 18.8, rounded to the scale) */
+  --radius-dot: var(--radius-4);
+  --radius-control: var(--radius-pill);
+
+  /* =========================================================================
+     2. SEMANTIC — LAYOUT
+     ========================================================================= */
+  --layout-max-width: 1440px; /* design frame width; content = 1440 - 2*120 = 1200 */
+
+  /* =========================================================================
+     2. SEMANTIC — MOTION
+     ========================================================================= */
+  --motion-fast: 150ms;
+  --motion-normal: 300ms;
+  --motion-slow: 600ms;
+  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================================================
+   DESKTOP HALF OF EVERY RESPONSIVE PAIR
+   Breakpoint note: the Figma source defines only 375 and 1440. Everything from
+   768–1023 (tablet) currently inherits the mobile token set — that range is
+   undesigned, not deliberately mobile. Flagged for design review.
+   ============================================================================= */
+@media (min-width: 1024px) {
+  :root {
+    /* TYPE */
+    --text-display: 64px;
+    --text-title-l: 42px;
+    --text-title-m: 32px;
+    --text-title-s: 24px;
+
+    /* GROUP 1 — BETWEEN BLOCKS */
+    --space-section-x: var(--size-120);
+    --space-section-y: var(--size-48);
+    --space-section-y-lg: var(--size-72);
+    --space-section-gap: var(--size-36);
+    --space-grid-gap: var(--size-20);
+
+    /* GROUP 2 — INSIDE BLOCKS */
+    --space-block-gap-lg: var(--size-80);
+
+    /* GROUP 3 — INSIDE CARDS */
+    --space-card-inset: var(--size-48);
+    --space-card-gap: var(--size-20);
+    --space-card-text-gap: var(--size-24);
+
+    /* RADIUS */
+    --radius-card: var(--radius-32);
+    --radius-media: var(--radius-30);
+    --radius-media-sm: var(--radius-22);
+  }
+}

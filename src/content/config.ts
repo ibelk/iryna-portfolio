@@ -28,6 +28,7 @@ const caseStudies = defineCollection({
     title: z.string(),
     subtitle: z.string(),
     tag: z.string(),
+    tags: z.array(z.string()).default([]),
     order: z.number(),
     ndaBadge: z.boolean().default(false),
     heroImage: z.string(),
@@ -57,6 +58,7 @@ const posts = defineCollection({
     linkedinUrl: z.string().url(),
     image: z.string(),
     order: z.number(),
+    tags: z.array(z.string()).default([]),
   }),
 });
 

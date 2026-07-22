@@ -4,4 +4,5 @@ excerpt: "Pushed a multi-step B2B workflow through 9 prompts and 9 iterations wi
 linkedinUrl: "https://www.linkedin.com/in/iryna-belkova-1368981a0/"
 image: "/images/posts/figma-make.svg"
 order: 1
+tags: ["Figma Make", "AI"]
 ---

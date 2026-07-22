@@ -1,37 +1,209 @@
+---
+const navLinks = [
+  { label: 'Work', href: '/#work' },
+  { label: 'Experiments', href: '/#experiments' },
+  { label: 'Writing', href: '/#writing' },
+  { label: 'Download CV', href: '/Belkova_Iryna_CV_EN.pdf' },
+];
+---
+
 <header class="site-header">
-  <div class="container site-header__row">
-    <a href="/" class="site-header__name">Iryna Belkova</a>
-    <nav class="site-header__nav">
-      <a href="/#work">Work</a>
-      <a href="/experiments">Experiments</a>
-      <a href="/writing">Writing</a>
-    </nav>
+  <div class="container">
+    <div class="site-header__pill">
+      <a class="site-header__brand" href="/">
+        <img class="site-header__logo" src="/images/logo.svg" alt="" width="36" height="36" />
+        <span class="site-header__name">Belkova Iryna</span>
+      </a>
+
+      <nav class="site-header__nav" id="site-nav" aria-label="Main">
+        {
+          navLinks.map((link) => (
+            <a class="site-header__link" href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Ukrainian is not built yet (v2). The inactive half is rendered as a
+           disabled control rather than a link that goes nowhere. -->
+      <div class="lang" role="group" aria-label="Language">
+        <span class="lang__option" aria-disabled="true" title="Ukrainian version coming soon">UA</span>
+        <span class="lang__option lang__option--active" aria-current="true">EN</span>
+      </div>
+
+      <button
+        class="site-header__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span class="site-header__burger" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 </header>
 
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.site-header__toggle');
+  const pill = document.querySelector<HTMLElement>('.site-header__pill');
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    pill?.classList.toggle('site-header__pill--open', !open);
+  });
+</script>
+
 <style>
   .site-header {
-    padding: var(--space-3) 0;
+    padding-block: var(--size-16);
   }
-  .site-header__row {
+
+  .site-header__pill {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--size-8);
+    padding: var(--size-8);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-control);
   }
-  .site-header__name {
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1.1rem;
-  }
-  .site-header__nav {
+
+  .site-header__brand {
     display: flex;
-    gap: var(--space-3);
-  }
-  .site-header__nav a {
+    align-items: center;
+    gap: var(--size-8);
     text-decoration: none;
+    color: inherit;
+  }
+
+  .site-header__logo {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-control);
+  }
+
+  .site-header__name {
+    font-size: var(--text-logo);
+    font-weight: var(--weight-bold);
+    white-space: nowrap;
+  }
+
+  /* Mobile: nav collapses behind the burger */
+  .site-header__nav {
+    display: none;
+    flex-direction: column;
+    gap: var(--size-16);
+    width: 100%;
+    padding: var(--size-16) var(--size-8) var(--size-8);
+  }
+
+  .site-header__pill--open .site-header__nav {
+    display: flex;
+  }
+
+  .site-header__link {
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--motion-fast) var(--motion-ease);
+  }
+
+  .site-header__link:hover {
     color: var(--color-text-muted);
   }
-  .site-header__nav a:hover {
-    color: var(--color-text);
+
+  .lang {
+    display: none;
+    align-items: center;
+    padding: var(--size-4);
+    background: var(--color-surface-raised);
+    border-radius: var(--radius-control);
+    backdrop-filter: blur(20px);
+  }
+
+  .lang__option {
+    padding: var(--size-8) var(--size-16);
+    border-radius: var(--radius-control);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .lang__option[aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .lang__option--active {
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+  }
+
+  .site-header__toggle {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-control);
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .site-header__burger,
+  .site-header__burger::before,
+  .site-header__burger::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .site-header__burger {
+    position: relative;
+  }
+
+  .site-header__burger::before,
+  .site-header__burger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .site-header__burger::before {
+    top: -6px;
+  }
+
+  .site-header__burger::after {
+    top: 6px;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--size-24);
+      width: auto;
+      padding: 0;
+    }
+
+    .lang {
+      display: flex;
+    }
+
+    .site-header__toggle {
+      display: none;
+    }
   }
 </style>

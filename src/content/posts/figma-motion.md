@@ -4,4 +4,5 @@ excerpt: "Animated dashboard cards, a hero section, and UI components three diff
 linkedinUrl: "https://www.linkedin.com/in/iryna-belkova-1368981a0/"
 image: "/images/posts/figma-motion.svg"
 order: 4
+tags: ["Figma Motion", "AI"]
 ---

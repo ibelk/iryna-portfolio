@@ -2,6 +2,7 @@
 title: "Design System for an Analytical Platform"
 subtitle: "Built a design system for a data-heavy fintech platform that's still running the product 4+ years after I left."
 tag: "Enterprise / Data-heavy"
+tags: ["Web", "Data-heavy", "Product design", "Design system"]
 order: 4
 ndaBadge: false
 heroImage: "/images/case-resonance/hero.svg"

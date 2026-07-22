@@ -2,6 +2,7 @@
 title: "Premium Purchase Flow Redesign"
 subtitle: "Redesigned the upgrade flow on a live VPN product — conversion moved from 0.28% to 0.34% in the first two weeks."
 tag: "Consumer / Growth"
+tags: ["B2C", "Web", "Product design", "Microsoft Clarity"]
 order: 1
 ndaBadge: true
 heroImage: "/images/case-vpn-premium/hero.svg"
