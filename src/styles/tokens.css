@@ -177,6 +177,11 @@
      ========================================================================= */
   --layout-max-width: 1440px; /* design frame width; content = 1440 - 2*120 = 1200 */
 
+  /* Desktop case-card stack: where the first card parks, and how much of each
+     card stays visible under the next one. */
+  --stack-top: var(--size-48);
+  --stack-step: var(--size-16);
+
   /* =========================================================================
      2. SEMANTIC — MOTION
      ========================================================================= */

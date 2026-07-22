@@ -28,8 +28,8 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
 
     <section id="work" class="work" aria-label="Selected work">
       {
-        cases.map((entry) => (
-          <div class="container work__item" data-reveal>
+        cases.map((entry, i) => (
+          <div class="container work__item" style={`--stack-index: ${i}`}>
             <CaseCard
               slug={entry.slug}
               title={entry.data.title}
@@ -85,6 +85,23 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
     flex-direction: column;
     gap: var(--space-section-gap);
     padding-block: var(--space-section-y);
+  }
+
+  /* Desktop card stack: each card sticks a little lower than the one before, so
+     the next card scrolls up over it and the edge of each stays visible.
+     Pure CSS — no scroll listener, nothing to fall out of sync. */
+  @media (min-width: 1024px) {
+    .work__item {
+      position: sticky;
+      top: calc(var(--stack-top) + var(--stack-index) * var(--stack-step));
+    }
+  }
+
+  /* Scroll-driven stacking is motion; opt out with the rest of the animation. */
+  @media (prefers-reduced-motion: reduce) {
+    .work__item {
+      position: static;
+    }
   }
 
   .section {
