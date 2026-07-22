@@ -29,13 +29,15 @@ const { headline, location } = Astro.props;
     line-height: var(--leading-normal);
   }
 
+  /* The Figma design shows this in pure white, not the muted tone an earlier
+     CSS draft used. Design is the source of truth. */
   .hero__meta {
     display: flex;
     align-items: center;
     gap: var(--size-8);
     font-size: var(--text-body);
     font-weight: var(--weight-regular);
-    color: var(--color-text-muted);
+    color: var(--color-text-primary);
   }
 
   .hero__dot {
