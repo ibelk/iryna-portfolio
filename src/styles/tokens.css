@@ -90,6 +90,9 @@
 
   --color-accent: var(--brand-orange-500);
 
+  /* Component-level: the footer email is an accent link in the Figma design */
+  --color-footer-link-accent: var(--brand-orange-500);
+
   /* Focus ring — not in the Figma source; added to meet the 3:1 / visible-focus
      requirement the design does not yet specify. Flagged for design review. */
   --color-focus-ring: var(--brand-orange-500);
@@ -139,6 +142,25 @@
   --space-tag-x: var(--size-12); /* tag padding-inline  same */
   --space-tag-y: var(--size-8); /* tag padding-block   same */
   --space-tag-gap: var(--size-4); /* tag ↔ tag           same */
+
+  /* Card geometry that the Figma component library also defines */
+  --size-thumb: 80px; /* experiment thumbnail   desktop 120 */
+  --size-post-media: 232px; /* writing card image     desktop 263 */
+  --space-thumb-gap: var(--size-20); /* body ↔ thumbnail       same */
+  --space-media-gap: var(--size-8); /* media ↔ body           same */
+  --space-cta-inset: var(--size-32); /* CTA card padding       same */
+  --space-cta-text-gap: var(--size-16); /* CTA title ↔ body       same */
+
+  /* =========================================================================
+     2. SEMANTIC — SPACE, GROUP 4: CONTROLS
+     Header pill, nav and the language switcher. Constant across breakpoints.
+     ========================================================================= */
+  --space-pill-padding: var(--size-8);
+  --space-nav-gap: var(--size-24);
+  --space-brand-gap: var(--size-8);
+  --space-option-x: var(--size-16);
+  --space-option-y: var(--size-8);
+  --space-track-inset: var(--size-4);
 
   /* =========================================================================
      2. SEMANTIC — RADIUS
@@ -192,6 +214,8 @@
     --space-card-inset: var(--size-48);
     --space-card-gap: var(--size-20);
     --space-card-text-gap: var(--size-24);
+    --size-thumb: var(--size-120);
+    --size-post-media: 263px;
 
     /* RADIUS */
     --radius-card: var(--radius-32);

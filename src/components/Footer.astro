@@ -1,8 +1,9 @@
 ---
+// `accent` matches the Figma design, where the email renders as an accent link.
 const links = [
-  { label: 'Linkedin', href: 'https://www.linkedin.com/in/iryna-belkova-1368981a0/', external: true },
-  { label: 'Telegram', href: 'https://t.me/belkovairyna', external: true },
-  { label: 'iryn.belkova@gmail.com', href: 'mailto:iryn.belkova@gmail.com', external: false },
+  { label: 'Linkedin', href: 'https://www.linkedin.com/in/iryna-belkova-1368981a0/', external: true, accent: false },
+  { label: 'Telegram', href: 'https://t.me/belkovairyna', external: true, accent: false },
+  { label: 'iryn.belkova@gmail.com', href: 'mailto:iryn.belkova@gmail.com', external: false, accent: true },
 ];
 ---
 
@@ -11,7 +12,7 @@ const links = [
     {
       links.map((link) => (
         <a
-          class="site-footer__link"
+          class:list={['site-footer__link', { 'site-footer__link--accent': link.accent }]}
           href={link.href}
           target={link.external ? '_blank' : undefined}
           rel={link.external ? 'noopener noreferrer' : undefined}
@@ -33,17 +34,26 @@ const links = [
     flex-direction: column;
     gap: var(--size-16);
     font-size: var(--text-body);
-    color: var(--color-text-muted);
   }
 
+  /* Weight and colour follow the Figma design (SemiBold, white), which is the
+     source of truth here — the earlier Regular/muted treatment came from an
+     older CSS draft and did not match. */
   .site-footer__link {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
     text-decoration: none;
-    transition: color var(--motion-fast) var(--motion-ease);
+    transition: opacity var(--motion-fast) var(--motion-ease);
     width: fit-content;
   }
 
+  .site-footer__link--accent {
+    color: var(--color-footer-link-accent);
+  }
+
   .site-footer__link:hover {
-    color: var(--color-text-primary);
+    opacity: 0.8;
   }
 
   @media (min-width: 1024px) {
