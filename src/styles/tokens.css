@@ -163,6 +163,33 @@
   --space-track-inset: var(--size-4);
 
   /* =========================================================================
+     2. SEMANTIC — SPACE, THE UNIVERSAL SCALE
+     Named by step rather than by the component that happens to use it, so any
+     component can reach for the same rung. `-static` marks a step whose value
+     is the same on both breakpoints. These mirror the `space/*` collection in
+     Figma one-for-one — each Figma token carries the matching name in its
+     codeSyntax, which is what lets the two sides be compared automatically.
+     ========================================================================= */
+  --space-3xs-static: var(--size-4);
+  --space-2xs-static: var(--size-8);
+  --space-xs-static: var(--size-12);
+  --space-sm-static: var(--size-16);
+  --space-md-static: var(--size-20);
+  --space-lg-static: var(--size-24);
+  --space-xl-static: var(--size-32);
+  --space-xs: var(--size-12); /* desktop 20 */
+  --space-sm: var(--size-16); /* desktop 48 */
+  --space-md: var(--size-20); /* desktop 24 */
+
+  /* =========================================================================
+     2. SEMANTIC — INTERACTION
+     Hover and pressed dim the element rather than recolouring it, so an accent
+     link keeps its hue while still reading as pressed.
+     ========================================================================= */
+  --opacity-hover: 0.8;
+  --opacity-pressed: 0.6;
+
+  /* =========================================================================
      2. SEMANTIC — RADIUS
      ========================================================================= */
   --radius-card: var(--radius-24); /* card shell      desktop 32 */
@@ -223,6 +250,11 @@
     --space-card-text-gap: var(--size-24);
     --size-thumb: var(--size-120);
     --size-post-media: 263px;
+
+    /* desktop half of the universal scale's responsive steps */
+    --space-xs: var(--size-20);
+    --space-sm: var(--size-48);
+    --space-md: var(--size-24);
 
     /* RADIUS */
     --radius-card: var(--radius-32);

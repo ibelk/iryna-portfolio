@@ -85,6 +85,50 @@ describe('experiments page', () => {
   });
 });
 
+describe('experiment detail pages', () => {
+  const slugs = ['3d', 'figma-ai', 'ui-practice', 'claude-code'];
+
+  it('builds a page for every experiment', () => {
+    for (const slug of slugs) {
+      const html = readFileSync(`dist/experiments/${slug}/index.html`, 'utf-8');
+      expect(html.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('the listing links to each detail page', () => {
+    const html = readFileSync('dist/experiments/index.html', 'utf-8');
+    for (const slug of slugs) {
+      expect(html).toContain(`href="/experiments/${slug}/"`);
+    }
+  });
+
+  it('the Figma AI page lists the tool write-ups and links them out', () => {
+    const html = readFileSync('dist/experiments/figma-ai/index.html', 'utf-8');
+    expect(html).toContain('Figma Make');
+    expect(html).toContain('linkedin.com');
+  });
+
+  it('the 3D page carries its real scale figure', () => {
+    const html = readFileSync('dist/experiments/3d/index.html', 'utf-8');
+    expect(html).toContain('130+ original assets');
+    expect(html).toContain('Cinema 4D');
+  });
+
+  it('pages without finished content are marked work in progress', () => {
+    for (const slug of ['ui-practice', 'claude-code']) {
+      const html = readFileSync(`dist/experiments/${slug}/index.html`, 'utf-8');
+      expect(html).toContain('Work in progress');
+    }
+  });
+
+  it('never mentions impressions, reach, or view counts', () => {
+    for (const slug of slugs) {
+      const html = readFileSync(`dist/experiments/${slug}/index.html`, 'utf-8');
+      expect(html).not.toMatch(/impressions|reach(?:ed)?|[\d.,]+\s*[kKmM]?\+?\s*views?\b/i);
+    }
+  });
+});
+
 describe('writing page', () => {
   it('builds and lists the Figma Make post', () => {
     const html = readFileSync('dist/writing/index.html', 'utf-8');

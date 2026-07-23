@@ -41,12 +41,29 @@ const caseStudies = defineCollection({
   }),
 });
 
+const experimentEntry = z.object({
+  title: z.string(),
+  description: z.string(),
+  // Optional outbound link — used where the entry was published somewhere else.
+  href: z.string().url().optional(),
+});
+
 const experiments = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     image: z.string(),
     order: z.number(),
+    // Detail-page fields. `status: wip` renders a badge and keeps the card
+    // visible without pretending the work is finished.
+    subtitle: z.string(),
+    intro: z.string(),
+    status: z.enum(['live', 'wip']).default('live'),
+    meta: z.array(metaItem).default([]),
+    entries: z.array(experimentEntry).default([]),
+    // When true the detail page lists the posts collection instead of `entries`,
+    // so the Figma-tool write-ups live in exactly one place.
+    listsPosts: z.boolean().default(false),
   }),
 });
 

@@ -1,0 +1,42 @@
+---
+interface Props {
+  parentLabel: string;
+  parentHref: string;
+  current: string;
+}
+const { parentLabel, parentHref, current } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a class="breadcrumbs__parent" href={parentHref}>{parentLabel}</a>
+  <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+  <span class="breadcrumbs__current" aria-current="page">{current}</span>
+</nav>
+
+<style>
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs-static);
+    font-size: var(--text-body);
+  }
+
+  .breadcrumbs__parent,
+  .breadcrumbs__sep {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumbs__parent {
+    transition: opacity var(--motion-fast) var(--motion-ease);
+  }
+
+  .breadcrumbs__parent:hover {
+    opacity: var(--opacity-hover);
+  }
+
+  .breadcrumbs__current {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+  }
+</style>

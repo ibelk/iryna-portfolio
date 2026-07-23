@@ -3,41 +3,67 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ExperimentCard from '../../components/ExperimentCard.astro';
 
 const items = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
 ---
+
 <BaseLayout title="Experiments — Iryna Belkova">
   <Header />
-  <section class="container">
-    <h1>Experiments</h1>
-    <div class="experiments-grid">
-      {items.map((item) => (
-        <figure>
-          <img src={item.data.image} alt={item.data.title} loading="lazy" decoding="async" />
-          <figcaption>{item.data.title}</figcaption>
-        </figure>
-      ))}
-    </div>
-  </section>
+
+  <main>
+    <section class="container page-head">
+      <h1 class="page-head__title">Experiments</h1>
+      <p class="page-head__intro">
+        Work made outside client briefs — 3D craft, hands-on tests of new AI-native tools, and
+        interface studies.
+      </p>
+    </section>
+
+    <section class="container grid">
+      {
+        items.map((item) => (
+          <ExperimentCard
+            title={item.data.title}
+            image={item.data.image}
+            href={`/experiments/${item.slug}/`}
+          />
+        ))
+      }
+    </section>
+  </main>
+
   <Footer />
 </BaseLayout>
 
 <style>
-  .experiments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-3);
-    margin: var(--space-3) 0;
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs-static);
+    padding-block: var(--space-section-y);
   }
-  .experiments-grid figure {
-    margin: 0;
+
+  .page-head__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
   }
-  .experiments-grid img {
-    border-radius: var(--radius);
-  }
-  .experiments-grid figcaption {
+
+  .page-head__intro {
+    max-width: 60ch;
     color: var(--color-text-muted);
-    font-size: 0.85rem;
-    margin-top: var(--space-1);
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--space-grid-gap);
+    padding-block: var(--space-section-y);
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>

@@ -3,57 +3,68 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import WritingCard from '../../components/WritingCard.astro';
 
 const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.data.order);
 ---
+
 <BaseLayout title="Writing — Iryna Belkova">
   <Header />
-  <section class="container">
-    <h1>Writing</h1>
-    <p class="writing-intro">Notes on testing new tools and troubleshooting design problems.</p>
-    <div class="writing-grid">
-      {posts.map((post) => (
-        <a class="writing-card" href={post.data.linkedinUrl} target="_blank" rel="noopener noreferrer">
-          <img src={post.data.image} alt={post.data.title} loading="lazy" decoding="async" />
-          <h3>{post.data.title}</h3>
-          <p>{post.data.excerpt}</p>
-          <span class="writing-card__cta">Read on LinkedIn →</span>
-        </a>
-      ))}
-    </div>
-  </section>
+
+  <main>
+    <section class="container page-head">
+      <h1 class="page-head__title">Writing</h1>
+      <p class="page-head__intro">
+        Notes on testing new tools and on troubleshooting design problems inside live products.
+        Each one links out to the original post.
+      </p>
+    </section>
+
+    <section class="container grid">
+      {
+        posts.map((post) => (
+          <WritingCard
+            title={post.data.title}
+            image={post.data.image}
+            href={post.data.linkedinUrl}
+            tags={post.data.tags}
+          />
+        ))
+      }
+    </section>
+  </main>
+
   <Footer />
 </BaseLayout>
 
 <style>
-  .writing-intro {
-    color: var(--color-text-muted);
-    max-width: 600px;
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs-static);
+    padding-block: var(--space-section-y);
   }
-  .writing-grid {
+
+  .page-head__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  .page-head__intro {
+    max-width: 60ch;
+    color: var(--color-text-muted);
+  }
+
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-3);
-    margin: var(--space-3) 0;
+    gap: var(--space-grid-gap);
+    padding-block: var(--space-section-y);
   }
-  .writing-card {
-    display: block;
-    text-decoration: none;
-    color: var(--color-text);
-    background: var(--color-surface);
-    border-radius: var(--radius);
-    padding: var(--space-3);
-  }
-  .writing-card img {
-    border-radius: var(--radius);
-    margin-bottom: var(--space-2);
-  }
-  .writing-card p {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-  }
-  .writing-card__cta {
-    font-size: 0.85rem;
-    color: var(--color-accent);
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

@@ -1,0 +1,233 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Tag from '../../components/Tag.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('experiments');
+  return items.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'experiments'>;
+}
+const { entry } = Astro.props;
+const { title, subtitle, intro, status, meta, entries, listsPosts } = entry.data;
+
+// The Figma-tool write-ups live in the posts collection; this page lists them
+// rather than duplicating their text.
+const posts = listsPosts
+  ? (await getCollection('posts')).sort((a, b) => a.data.order - b.data.order)
+  : [];
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main>
+    <section class="container page-head">
+      <Breadcrumbs parentLabel="Experiments" parentHref="/experiments" current={title} />
+      <div class="page-head__text">
+        <h1 class="page-head__title">{title}</h1>
+        <p class="page-head__subtitle">{subtitle}</p>
+        {status === 'wip' && <span class="wip">Work in progress</span>}
+      </div>
+      <p class="page-head__intro">{intro}</p>
+    </section>
+
+    {
+      meta.length > 0 && (
+        <section class="container meta">
+          {meta.map((row) => (
+            <div class="meta__row">
+              <span class="meta__label">{row.label}</span>
+              <span class="meta__value">{row.value}</span>
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      entries.length > 0 && (
+        <section class="container entries">
+          {entries.map((item) => (
+            <article class="entry">
+              <h2 class="entry__title">{item.title}</h2>
+              <p class="entry__description">{item.description}</p>
+            </article>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      posts.length > 0 && (
+        <section class="container entries">
+          {posts.map((post) => (
+            <a
+              class="entry entry--link"
+              href={post.data.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {post.data.tags.length > 0 && (
+                <div class="entry__tags">
+                  {post.data.tags.map((label) => (
+                    <Tag label={label} />
+                  ))}
+                </div>
+              )}
+              <h2 class="entry__title">{post.data.title}</h2>
+              <p class="entry__description">{post.data.excerpt}</p>
+              <span class="entry__cta">Read on LinkedIn →</span>
+            </a>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      entries.length === 0 && posts.length === 0 && (
+        <section class="container">
+          <p class="empty">Selected pieces are being written up.</p>
+        </section>
+      )
+    }
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg-static);
+    padding-block: var(--space-section-y);
+  }
+
+  .page-head__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs-static);
+  }
+
+  .page-head__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  .page-head__subtitle {
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-regular);
+    color: var(--color-text-muted);
+  }
+
+  .page-head__intro {
+    max-width: 68ch;
+    color: var(--color-text-secondary);
+  }
+
+  .wip {
+    padding: var(--space-tag-y) var(--space-tag-x);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-subtle);
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg-static);
+    padding-block: var(--space-section-y);
+  }
+
+  .meta__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs-static);
+    padding-bottom: var(--space-lg-static);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .meta__row:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .meta__label {
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+  }
+
+  .meta__value {
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+  }
+
+  .entries {
+    display: grid;
+    gap: var(--space-grid-gap);
+    padding-block: var(--space-section-y);
+  }
+
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs-static);
+    padding: var(--space-cta-inset);
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .entry--link {
+    transition: opacity var(--motion-fast) var(--motion-ease);
+  }
+
+  .entry--link:hover {
+    opacity: var(--opacity-hover);
+  }
+
+  .entry__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-tag-gap);
+  }
+
+  .entry__title {
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  .entry__description {
+    color: var(--color-text-secondary);
+  }
+
+  .entry__cta {
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .empty {
+    color: var(--color-text-muted);
+    padding-block: var(--space-section-y);
+  }
+
+  @media (min-width: 1024px) {
+    .entries {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
