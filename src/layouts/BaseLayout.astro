@@ -17,7 +17,13 @@ const { title } = Astro.props;
     <slot />
     <script>
       import { initAnimations } from '../scripts/animations.js';
-      document.addEventListener('DOMContentLoaded', initAnimations);
+      // A module can finish loading after DOMContentLoaded has already fired, in
+      // which case a listener for it never runs. Check the state first.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnimations);
+      } else {
+        initAnimations();
+      }
     </script>
   </body>
 </html>

@@ -181,6 +181,8 @@
      card stays visible under the next one. */
   --stack-top: var(--size-48);
   --stack-step: var(--size-16);
+  --stack-scale-min: 0.94; /* how small a fully covered card gets */
+  --stack-fade-min: 0.55; /* how faint a fully covered card gets */
 
   /* =========================================================================
      2. SEMANTIC — MOTION

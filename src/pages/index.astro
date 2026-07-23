@@ -95,6 +95,28 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
       position: sticky;
       top: calc(var(--stack-top) + var(--stack-index) * var(--stack-step));
     }
+
+    /* The card recedes as the next one covers it. The scroll island writes the
+       card's inline `transform` and `opacity` on every frame, so the motion is
+       already smooth — a CSS `transition` here must NOT be added: it would be
+       restarted each frame, never settle, and (as a perpetually-running
+       animation) sit above the inline styles in the cascade, overriding them.
+       This rule only anchors the scale origin to the top of the card. */
+    .work__item > :global(*) {
+      transform-origin: top center;
+    }
+
+    /* Inside the stack, the card's own hover-lift transition must be off: the
+       island rewrites `transform` every frame, and `.case-card`'s `transition:
+       transform` would restart each time — a never-settling animation that, in
+       the cascade, overrides the inline transform. The stack itself is the
+       interaction here, so the hover-lift isn't needed. */
+    .work__item > :global(.case-card) {
+      transition: none;
+    }
+    .work__item > :global(.case-card:hover) {
+      transform: none;
+    }
   }
 
   /* Scroll-driven stacking is motion; opt out with the rest of the animation. */
