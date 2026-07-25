@@ -60,17 +60,15 @@ p {
   margin: 0;
 }
 
-/* The Figma source trims every text box to cap height (`text-box-trim:
-   trim-both` / `text-box-edge: cap alphabetic`). Without it, CSS line boxes add
-   leading above and below each block and every measured gap reads too large.
-   Progressive enhancement: browsers without support show slightly looser
-   vertical rhythm, never broken layout. */
+/* The Figma source uses Standard vertical trim (not cap-height trim) on every
+   text layer — this is the browser default line-box behavior, so no
+   text-box-trim override is needed here. Kept as an explicit `none` so it
+   reads as a deliberate choice rather than an oversight. */
 h1,
 h2,
 h3,
 p {
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
+  text-box-trim: none;
 }
 
 /* =============================================================================
