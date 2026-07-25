@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Ported from Figma "Web-portfolio" / page "Premium" / frame Premium-1920 (269:16414).
+const title = 'Premium purchase flow redesign';
+const subtitle = 'Increased conversion to payment through changes in the purchase flow';
+
+const meta = [
+  { label: 'Product', value: 'B2C product' },
+  { label: 'Scale', value: '700,000+ website visitors per month' },
+  { label: 'Monetization model', value: 'Freemium → Premium' },
+  { label: 'Restrictions', value: 'Impossibility of complete redesign and change of pricing policy' },
+];
+
+const constraintCards = [
+  { title: '700,000+ users per month', desc: 'Any change scales immediately', icon: 'profile' },
+  { title: 'Iterative approach', desc: 'No full redesign. No stop in development', icon: 'cursor' },
+  { title: 'Fixed monetization model', desc: 'No changes in pricing or plans', icon: 'setting' },
+  { title: 'Transparent checkout', desc: 'Full order summary, discounts and savings', icon: 'eye' },
+];
+
+const problems = [
+  { title: 'Premium has no clear value explanation. Users delay the decision.' },
+  { title: 'Focus on free, not monetization' },
+  { title: 'Microsoft Clarity heat maps showed that the Premium button was losing priority to links to internal pages.' },
+];
+
+const changeCards = [
+  { title: 'Separation of selection and payment', desc: 'Pricing page and payment page became two steps. User focuses on one decision at a time.' },
+  { title: 'Shift of focus  to Premium', desc: 'Primary buttons now lead to purchase. Free option is still available but no longer dominant.' },
+  { title: 'Value instead  of illustrations', desc: 'Removed decorative blocks. Added clear list of Premium features. User sees what they pay for.' },
+  { title: 'Subscription period repositioning', desc: 'Plan selection moved to the top. Communication starts from the lowest monthly price.' },
+  { title: 'Transparency at checkout', desc: 'User sees full order details, discounts and savings.' },
+  { title: 'Promo code support', desc: 'Added clear entry point for promo code. No interface overload.' },
+];
+
+const icons: Record<string, string> = {
+  eye: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.25 9.14999C18.94 5.51999 15.56 3.42999 12 3.42999C10.22 3.42999 8.49 3.94999 6.91 4.91999C5.33 5.89999 3.91 7.32999 2.75 9.14999C1.75 10.72 1.75 13.27 2.75 14.84C5.06 18.48 8.44 20.56 12 20.56C13.78 20.56 15.51 20.04 17.09 19.07C18.67 18.09 20.09 16.66 21.25 14.84C22.25 13.28 22.25 10.72 21.25 9.14999ZM12 16.04C9.76 16.04 7.96 14.23 7.96 12C7.96 9.76999 9.76 7.95999 12 7.95999C14.24 7.95999 16.04 9.76999 16.04 12C16.04 14.23 14.24 16.04 12 16.04Z" fill="currentColor"/><path d="M11.9999 9.14001C10.4299 9.14001 9.1499 10.42 9.1499 12C9.1499 13.57 10.4299 14.85 11.9999 14.85C13.5699 14.85 14.8599 13.57 14.8599 12C14.8599 10.43 13.5699 9.14001 11.9999 9.14001Z" fill="currentColor"/></svg>`,
+  setting: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9401 5.42L13.7701 2.43C12.7801 1.86 11.2301 1.86 10.2401 2.43L5.02008 5.44C2.95008 6.84 2.83008 7.05 2.83008 9.28V14.71C2.83008 16.94 2.95008 17.16 5.06008 18.58L10.2301 21.57C10.7301 21.86 11.3701 22 12.0001 22C12.6301 22 13.2701 21.86 13.7601 21.57L18.9801 18.56C21.0501 17.16 21.1701 16.95 21.1701 14.72V9.28C21.1701 7.05 21.0501 6.84 18.9401 5.42ZM12.0001 15.25C10.2101 15.25 8.75008 13.79 8.75008 12C8.75008 10.21 10.2101 8.75 12.0001 8.75C13.7901 8.75 15.2501 10.21 15.2501 12C15.2501 13.79 13.7901 15.25 12.0001 15.25Z" fill="currentColor"/></svg>`,
+  profile: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9.38 2 7.25 4.13 7.25 6.75C7.25 9.32 9.26 11.4 11.88 11.49C11.96 11.48 12.04 11.48 12.1 11.49C12.12 11.49 12.13 11.49 12.15 11.49C12.16 11.49 12.16 11.49 12.17 11.49C14.73 11.4 16.74 9.32 16.75 6.75C16.75 4.13 14.62 2 12 2Z" fill="currentColor"/><path d="M17.08 14.15C14.29 12.29 9.73996 12.29 6.92996 14.15C5.65996 15 4.95996 16.15 4.95996 17.38C4.95996 18.61 5.65996 19.75 6.91996 20.59C8.31996 21.53 10.16 22 12 22C13.84 22 15.68 21.53 17.08 20.59C18.34 19.74 19.04 18.6 19.04 17.36C19.03 16.13 18.34 14.99 17.08 14.15Z" fill="currentColor"/></svg>`,
+  cursor: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.4347 10.7634L13.2642 13.0017C13.2025 13.021 13.1464 13.055 13.1006 13.1007C13.0549 13.1465 13.0209 13.2027 13.0016 13.2644L10.7634 20.4347C10.7058 20.6126 10.5944 20.7683 10.4446 20.8802C10.2949 20.9922 10.1141 21.055 9.92712 21.0599C9.74019 21.0649 9.55632 21.0117 9.40084 20.9078C9.24536 20.8039 9.12592 20.6544 9.05898 20.4797L2.99257 4.15072C2.93481 3.98915 2.92412 3.8145 2.96174 3.64709C2.99936 3.47968 3.08374 3.3264 3.20507 3.20507C3.3264 3.08374 3.47968 2.99936 3.64709 2.96174C3.8145 2.92412 3.98915 2.93481 4.15072 2.99257L20.4799 9.05898C20.6545 9.12595 20.804 9.2454 20.9079 9.40088C21.0118 9.55637 21.0649 9.74023 21.0599 9.92716C21.055 10.1141 20.9922 10.2949 20.8802 10.4447C20.7682 10.5944 20.6126 10.7058 20.4347 10.7634Z" fill="currentColor"/></svg>`,
+  chart: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 22.75H3C2.59 22.75 2.25 22.41 2.25 22C2.25 21.59 2.59 21.25 3 21.25H21C21.41 21.25 21.75 21.59 21.75 22C21.75 22.41 21.41 22.75 21 22.75Z" fill="currentColor"/><path d="M5.6 8.38H4C3.45 8.38 3 8.83 3 9.38V18C3 18.55 3.45 19 4 19H5.6C6.15 19 6.6 18.55 6.6 18V9.38C6.6 8.82 6.15 8.38 5.6 8.38Z" fill="currentColor"/><path d="M12.8 5.19H11.2C10.65 5.19 10.2 5.64 10.2 6.19V18C10.2 18.55 10.65 19 11.2 19H12.8C13.35 19 13.8 18.55 13.8 18V6.19C13.8 5.64 13.35 5.19 12.8 5.19Z" fill="currentColor"/><path d="M20 2H18.4C17.85 2 17.4 2.45 17.4 3V18C17.4 18.55 17.85 19 18.4 19H20C20.55 19 21 18.55 21 18V3C21 2.45 20.55 2 20 2Z" fill="currentColor"/></svg>`,
+  cube: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 22.75C14.73 22.75 14.48 22.6 14.35 22.37C14.22 22.14 14.22 21.85 14.36 21.62L15.41 19.87C15.62 19.51 16.08 19.4 16.44 19.61C16.8 19.82 16.91 20.28 16.7 20.64L16.43 21.09C19.19 20.44 21.26 17.96 21.26 15C21.26 14.59 21.6 14.25 22.01 14.25C22.42 14.25 22.76 14.59 22.76 15C22.75 19.27 19.27 22.75 15 22.75Z" fill="currentColor"/><path d="M2 9.75C1.59 9.75 1.25 9.41 1.25 9C1.25 4.73 4.73 1.25 9 1.25C9.27 1.25 9.52 1.4 9.65 1.63C9.78 1.86 9.78 2.15 9.64 2.38L8.59 4.14C8.38 4.49 7.92 4.61 7.56 4.39C7.21 4.18 7.09 3.72 7.31 3.36L7.58 2.91C4.81 3.56 2.75 6.04 2.75 9C2.75 9.41 2.41 9.75 2 9.75Z" fill="currentColor"/><path d="M10.67 13.85L7.53 12.16C7.2 11.98 6.8 11.98 6.47 12.16L3.33 13.85C3.1 13.97 2.96 14.22 2.96 14.49C2.96 14.76 3.1 15.01 3.33 15.13L6.47 16.82C6.64 16.91 6.82 16.95 7 16.95C7.18 16.95 7.36 16.91 7.53 16.82L10.67 15.13C10.9 15.01 11.04 14.76 11.04 14.49C11.04 14.22 10.89 13.98 10.67 13.85Z" fill="currentColor"/><path d="M5.95 17.41L3.03 15.95C2.81 15.84 2.55 15.85 2.33 15.98C2.13 16.11 2 16.34 2 16.59V19.35C2 19.83 2.26 20.26 2.69 20.47L5.61 21.93C5.71 21.97 5.82 22 5.93 22C6.06 22 6.19 21.96 6.31 21.89C6.52 21.76 6.65 21.53 6.65 21.28V18.52C6.65 18.05 6.38 17.62 5.95 17.41Z" fill="currentColor"/><path d="M11.66 15.98C11.45 15.85 11.19 15.84 10.96 15.95L8.04 17.41C7.61 17.62 7.35 18.05 7.35 18.53V21.29C7.35 21.54 7.48 21.77 7.69 21.9C7.81 21.96 7.94 22 8.07 22C8.18 22 8.29 21.97 8.39 21.92L11.31 20.46C11.74 20.25 12 19.82 12 19.34V16.58C12 16.34 11.87 16.11 11.66 15.98Z" fill="currentColor"/><path d="M20.67 3.83L17.53 2.14C17.2 1.96 16.8 1.96 16.47 2.14L13.33 3.83C13.1 3.95 12.96 4.2 12.96 4.47C12.96 4.74 13.1 4.99 13.33 5.11L16.47 6.8C16.64 6.89 16.82 6.93 17 6.93C17.18 6.93 17.36 6.89 17.53 6.8L20.67 5.11C20.9 4.99 21.04 4.74 21.04 4.47C21.04 4.19 20.89 3.95 20.67 3.83Z" fill="currentColor"/><path d="M15.95 7.38L13.03 5.92C12.81 5.81 12.55 5.82 12.33 5.95C12.13 6.08 12 6.31 12 6.56V9.32C12 9.8 12.26 10.23 12.69 10.44L15.61 11.9C15.71 11.95 15.82 11.98 15.93 11.98C16.06 11.98 16.19 11.94 16.31 11.87C16.52 11.74 16.65 11.51 16.65 11.26V8.5C16.65 8.02 16.38 7.59 15.95 7.38Z" fill="currentColor"/><path d="M21.66 5.95C21.45 5.82 21.19 5.81 20.96 5.92L18.04 7.38C17.61 7.59 17.35 8.02 17.35 8.5V11.26C17.35 11.51 17.48 11.74 17.69 11.87C17.81 11.94 17.94 11.98 18.07 11.98C18.18 11.98 18.29 11.95 18.39 11.9L21.31 10.44C21.74 10.22 22 9.79 22 9.32V6.56C22 6.31 21.87 6.08 21.66 5.95Z" fill="currentColor"/></svg>`,
+  danger: `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.49 0 0 4.49 0 10C0 15.51 4.49 20 10 20C15.51 20 20 15.51 20 10C20 4.49 15.52 0 10 0ZM9.25 6.5C9.25 6.09 9.59 5.75 10 5.75C10.41 5.75 10.75 6.09 10.75 6.5V11C10.75 11.41 10.41 11.75 10 11.75C9.59 11.75 9.25 11.41 9.25 11V6.5ZM10.92 14.33C10.87 14.46 10.8 14.56 10.71 14.66C10.61 14.75 10.5 14.82 10.38 14.87C10.26 14.92 10.13 14.95 10 14.95C9.87 14.95 9.74 14.92 9.62 14.87C9.5 14.82 9.39 14.75 9.29 14.66C9.2 14.56 9.13 14.46 9.08 14.33C9.03 14.21 9 14.08 9 13.95C9 13.82 9.03 13.69 9.08 13.57C9.13 13.45 9.2 13.34 9.29 13.24C9.39 13.15 9.5 13.08 9.62 13.03C9.86 12.93 10.14 12.93 10.38 13.03C10.5 13.08 10.61 13.15 10.71 13.24C10.8 13.34 10.87 13.45 10.92 13.57C10.97 13.69 11 13.82 11 13.95C11 14.08 10.97 14.21 10.92 14.33Z" fill="currentColor"/></svg>`,
+};
+
+const impact = [
+  { title: 'Shift in user focus from "Download" to "Buy Premium"', icon: 'eye' },
+  { title: 'Ready for A/B testing', icon: 'cube' },
+  { title: 'Conversion increased from 0.28% to 0.34%', icon: 'chart' },
+];
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main class="ap">
+    <nav class="container ap-crumb" aria-label="Breadcrumb">
+      <a href="/#work">Main</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="container ap-hero">
+      <div class="ap-hero__lead">
+        <h1>{title}</h1>
+        <p class="ap-hero__sub">{subtitle}</p>
+        <p class="ap-nda">
+          <span aria-hidden="true" set:html={icons.danger} />
+          Interfaces reproduced for portfolio via NDA
+        </p>
+      </div>
+      <dl class="ap-meta">
+        {meta.map((m) => (
+          <div class="ap-meta__row">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <!-- Main product showcase -->
+    <section class="container ap-figure ap-figure--lead">
+      <div class="ap-figure__frame">
+        <img src="/images/case-vpn-premium/web.png" alt="VPN web purchase flow — pricing and checkout screens"
+          width="1200" height="680" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Constraints and Context -->
+    <section class="container ap-section">
+      <h2>Constraints and Context</h2>
+      <div class="ap-criteria ap-criteria--2col">
+        {constraintCards.map((c) => (
+          <article class="ap-criteria__card">
+            <span class="ap-criteria__icon" aria-hidden="true" set:html={icons[c.icon]} />
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Why users don't reach payment -->
+    <section class="container ap-block">
+      <div class="ap-split">
+        <div class="ap-split__head">
+          <h2>Why Users don't <br />Reach Payment</h2>
+        </div>
+        <ol class="ap-horizon__list">
+          {problems.map((p, i) => (
+            <li>
+              <span class="ap-horizon__n">{String(i + 1).padStart(2, '0')}</span>
+              <p>{p.title}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="ap-figure__frame ap-split__visual">
+        <img src="/images/case-vpn-premium/mobile.png" alt="Heatmap showing users clicking away from the Premium button"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Rebuilding the decision architecture -->
+    <section class="container ap-figure">
+      <div class="ap-figure__lead">
+        <h2 class="ap-figure__title">Rebuilding the Decision Architecture</h2>
+        <p class="ap-figure__desc">We rebuilt the upgrade logic. Before: one screen with many elements. After: structured decision flow. The goal was to guide the user step by step to a clear purchase decision.</p>
+      </div>
+      <div class="ap-figure__frame">
+        <img src="/images/case-vpn-premium/plan.png" alt="New pricing plan selection screen"
+          width="1000" height="440" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Key changes in the purchase flow -->
+    <section class="container ap-section">
+      <h2>Key Changes in the Purchase Flow</h2>
+      <div class="ap-criteria ap-criteria--3col ap-criteria--text-only">
+        {changeCards.map((c) => (
+          <article class="ap-criteria__card">
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Product impact -->
+    <section class="container ap-block">
+      <div class="ap-split ap-panel">
+        <h2>Product Impact</h2>
+        <ul class="ap-impact">
+          {impact.map((i) => (
+            <li>
+              <span class="ap-impact__icon" aria-hidden="true" set:html={icons[i.icon]} />
+              <span>{i.title}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .ap { display: block; }
+  .ap-block { padding-block: var(--space-section-y); }
+  .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: 1.15; }
+  .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); }
+
+  .ap-crumb {
+    display: flex; gap: var(--space-3xs-static); align-items: center;
+    padding-block: var(--space-sm-static); color: var(--color-text-muted); font-size: var(--text-body);
+  }
+  .ap-crumb a:hover { opacity: var(--opacity-hover); }
+  .ap-crumb [aria-current] { color: var(--color-text-primary); font-weight: var(--weight-semibold); }
+
+  .ap-hero {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
+  }
+  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-hero h1 { font-size: var(--text-display-case); font-weight: var(--weight-semibold); line-height: 1.05; letter-spacing: -0.01em; }
+  .ap-hero__sub { max-width: 34ch; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-nda {
+    display: flex; align-items: center; gap: var(--space-2xs-static); margin-top: var(--space-sm-static);
+    padding: var(--space-sm-static); border-radius: var(--radius-banner); background: rgba(255, 128, 0, 0.27);
+    color: white; font-size: var(--text-label); font-weight: var(--weight-medium, 500);
+  }
+  .ap-nda :global(svg) { width: 20px; height: 20px; flex-shrink: 0; }
+  .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
+  .ap-meta__row { display: grid; gap: var(--space-2xs-static); }
+  .ap-meta__row + .ap-meta__row { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-meta dd { margin: 0; color: var(--color-text-primary); font-size: var(--text-body); font-weight: var(--weight-semibold); }
+
+  .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
+  .ap-figure--lead { padding-top: var(--space-section-y-lg); }
+  .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure__lead {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-sm-static);
+    text-align: center; max-width: 60ch; margin-inline: auto;
+  }
+  .ap-figure__title { order: -1; }
+  .ap-figure__desc { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-figure__frame { position: relative; }
+
+  .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
+  .ap-split__visual { margin-top: var(--space-md-static); }
+
+  .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-horizon__list li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); }
+  .ap-horizon__list li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
+  .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
+
+  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-lg-static); }
+  .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-impact li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
+    font-size: var(--text-title-s); font-weight: var(--weight-semibold);
+  }
+  .ap-impact li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-impact__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
+  .ap-impact__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
+  .ap-impact__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
+  .ap-impact__icon :global(svg) { position: relative; z-index: 1; width: 18px; height: 18px; color: var(--color-text-primary); }
+
+  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
+  .ap-criteria { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  .ap-criteria__card {
+    border: 1px solid var(--color-border-subtle); border-radius: var(--radius-card); padding: var(--space-card-inset-lg);
+    display: grid; gap: var(--space-lg-static);
+  }
+  .ap-criteria__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
+  .ap-criteria__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
+  .ap-criteria__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
+  .ap-criteria__icon :global(svg) { position: relative; z-index: 1; width: 24px; height: 24px; color: var(--color-text-primary); }
+  .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-sm-static); }
+
+  @media (min-width: 1024px) {
+    .ap-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start;
+      gap: var(--space-md-static); padding-block: var(--space-section-y-lg);
+    }
+    .ap-hero__lead { gap: var(--space-lg-static); }
+    .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
+    .ap-split__visual { margin-top: 0; }
+    .ap-section { gap: var(--space-card-inset-lg); }
+    .ap-criteria--2col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ap-criteria--3col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ap-criteria__card { padding: var(--space-card-inset-lg); }
+    .ap-impact__icon { width: 64px; height: 64px; }
+    .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
+  }
+</style>
