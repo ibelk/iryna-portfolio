@@ -5,7 +5,7 @@ tag: "Consumer / Growth"
 tags: ["B2C", "Web", "Product design", "Microsoft Clarity"]
 order: 1
 ndaBadge: true
-heroImage: "/images/case-vpn-premium/hero.svg"
+heroImage: "/images/case-vpn-premium/cover.png"
 meta:
   - label: "Product"
     value: "B2C VPN app"

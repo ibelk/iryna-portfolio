@@ -5,7 +5,7 @@ tag: "Consumer Mobile / 0→1"
 tags: ["B2C", "Mobile", "User Survey", "Solo project"]
 order: 5
 ndaBadge: false
-heroImage: "/images/case-leaf/hero.svg"
+heroImage: "/images/case-leaf/cover.png"
 meta:
   - label: "Product"
     value: "B2C startup, eco-habit mobile app"

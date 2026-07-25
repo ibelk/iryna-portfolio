@@ -5,7 +5,7 @@ tag: "Marketplace"
 tags: ["Web", "Product design", "Amplitude", "User interview", "Design system"]
 order: 3
 ndaBadge: false
-heroImage: "/images/case-freelancehunt/hero.svg"
+heroImage: "/images/case-freelancehunt/cover.png"
 meta:
   - label: "Product"
     value: "Freelance services marketplace"

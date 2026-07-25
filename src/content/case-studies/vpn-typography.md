@@ -5,7 +5,7 @@ tag: "Accessibility / Infrastructure"
 tags: ["B2C", "Mobile", "Desktop", "Browser extensions", "Product design", "Design system"]
 order: 2
 ndaBadge: true
-heroImage: "/images/case-vpn-typography/hero.svg"
+heroImage: "/images/case-vpn-typography/cover.png"
 meta:
   - label: "Product"
     value: "VPN apps (desktop, mobile, browser extension)"

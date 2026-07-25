@@ -5,7 +5,7 @@ tag: "Enterprise / Data-heavy"
 tags: ["Web", "Data-heavy", "Product design", "Design system"]
 order: 4
 ndaBadge: false
-heroImage: "/images/case-resonance/hero.svg"
+heroImage: "/images/case-resonance/cover.png"
 meta:
   - label: "Product"
     value: "Analytical platform (web, data-heavy)"
