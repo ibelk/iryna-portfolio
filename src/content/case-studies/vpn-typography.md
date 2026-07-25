@@ -1,6 +1,6 @@
 ---
-title: "Typography & Accessibility in VPN"
-subtitle: "Caught a systemic accessibility problem before it broke translations for 60+ languages — cut fix requests from weekly to monthly."
+title: "Typography and accessibility in VPN"
+subtitle: "Infrastructure solution without complete redesign"
 tag: "Accessibility / Infrastructure"
 tags: ["B2C", "Mobile", "Desktop", "Browser extensions", "Product design", "Design system"]
 order: 2

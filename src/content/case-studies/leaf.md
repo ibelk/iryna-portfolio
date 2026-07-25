@@ -1,6 +1,6 @@
 ---
-title: "LEAF"
-subtitle: "74% of users didn't know where to start — solo end-to-end, from research to a Google Play release."
+title: "Leaf"
+subtitle: "The app helps users build positive eco-friendly habits"
 tag: "Consumer Mobile / 0→1"
 tags: ["B2C", "Mobile", "User Survey", "Solo project"]
 order: 5
