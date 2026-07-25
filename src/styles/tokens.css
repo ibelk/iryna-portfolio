@@ -43,7 +43,9 @@
   --size-24: 24px;
   --size-32: 32px;
   --size-36: 36px;
+  --size-42: 42px;
   --size-48: 48px;
+  --size-60: 60px;
   --size-72: 72px;
   --size-80: 80px;
   --size-120: 120px;
@@ -65,6 +67,7 @@
      1. PRIMITIVES — RADIUS
      ------------------------------------------------------------------------ */
   --radius-4: 4px;
+  --radius-12: 12px;
   --radius-20: 20px;
   --radius-22: 22px;
   --radius-24: 24px;
@@ -101,6 +104,7 @@
      2. SEMANTIC — TYPE  (mobile base; desktop pair below)
      ========================================================================= */
   --text-display: 36px; /* hero headline             desktop 64 */
+  --text-display-case: 36px; /* case-study hero title     desktop 54 */
   --text-title-l: 24px; /* section + case-card title desktop 42 */
   --text-title-m: 24px; /* CTA card title            desktop 32 */
   --text-title-s: 20px; /* experiment / writing card desktop 24 */
@@ -135,6 +139,8 @@
   --space-card-inset: var(--size-16); /* card content padding  desktop 48 */
   --space-card-inset-sm: var(--size-12); /* compact card (experiments) same */
   --space-card-inset-md: var(--size-20); /* writing card content   same */
+  --space-card-inset-lg: var(--size-42); /* Block/Cards/Card padding  same */
+  --space-panel-inset: var(--size-60); /* Block/Text "List bg" panel same */
   --space-card-gap: var(--size-12); /* stacked card parts    desktop 20 */
   --space-card-stack: var(--size-24); /* text block ↔ tag row  same */
   --space-card-text-gap: var(--size-20); /* title ↔ subtitle    desktop 24 */
@@ -198,6 +204,7 @@
   --radius-media-post: var(--radius-20); /* writing card image (Figma 18.8, rounded to the scale) */
   --radius-dot: var(--radius-4);
   --radius-control: var(--radius-pill);
+  --radius-banner: var(--radius-12); /* NDA/Message banner  same */
 
   /* =========================================================================
      2. SEMANTIC — LAYOUT
@@ -230,6 +237,7 @@
   :root {
     /* TYPE */
     --text-display: 64px;
+    --text-display-case: 54px;
     --text-title-l: 42px;
     --text-title-m: 32px;
     --text-title-s: 24px;
