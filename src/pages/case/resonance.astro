@@ -160,10 +160,13 @@ const impact = [
         width="1440" height="942" loading="lazy" decoding="async" />
     </section>
 
-    <!-- Design system with a 4+ year horizon -->
-    <section class="container ap-split ap-horizon">
-      <h2>Design System with 4+ Year Horizon</h2>
-      <div class="ap-horizon__body">
+    <!-- Design system with a 4+ year horizon — Figma has this as two EQUAL
+         columns (title+list together on the left, visual alone on the
+         right), unlike the title-alone/content 1:1.4 split used elsewhere,
+         so it gets its own grid rather than reusing .ap-split. -->
+    <section class="container ap-horizon">
+      <div class="ap-horizon__left">
+        <h2>Design System with 4+ Year Horizon</h2>
         <ol class="ap-horizon__list">
           {horizon.map((h) => (
             <li>
@@ -172,9 +175,10 @@ const impact = [
             </li>
           ))}
         </ol>
-        <div class="ap-horizon__visual" role="img"
-          aria-label="Design-system components: a chart and an input, each with its properties panel"></div>
       </div>
+      <img class="ap-horizon__visual" src="/images/case-analytical/horizon-visual.png"
+        alt="Design-system components: a chart and an input, each with its properties panel"
+        width="590" height="520" loading="lazy" decoding="async" />
     </section>
 
     <!-- Product impact — Figma "List bg" type: split content on a raised panel,
@@ -403,8 +407,12 @@ const impact = [
   .ap-list__item:last-child { border-bottom: 1px solid var(--color-border-subtle); }
   .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
 
-  /* Design-system horizon */
-  .ap-horizon__body {
+  /* Design-system horizon — two equal columns on desktop (title+list, visual) */
+  .ap-horizon {
+    display: grid;
+    gap: var(--space-block-gap);
+  }
+  .ap-horizon__left {
     display: grid;
     gap: var(--space-block-gap);
   }
@@ -420,11 +428,10 @@ const impact = [
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual {
+    width: 100%;
+    height: auto;
     border-radius: var(--radius-card);
-    aspect-ratio: 700 / 560;
-    background:
-      url('/images/case-analytical/designsystem.png') right center / auto 100% no-repeat,
-      var(--color-surface);
+    aspect-ratio: 590 / 520;
   }
 
   /* Panel background used by the "List bg" blocks (Problems, Product Impact) */
@@ -476,17 +483,22 @@ const impact = [
   /* ---- Desktop ---- */
   @media (min-width: 1024px) {
     .ap-hero {
-      grid-template-columns: 1.1fr 0.9fr;
+      /* minmax(0, ...) so a long dd value or unbreakable word can't force a
+         track wider than its fr share and push the grid past the viewport */
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
       align-items: start;
       gap: var(--space-section-x);
     }
-    .ap-cards { grid-template-columns: 1fr 1fr; }
+    .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     .ap-split {
-      grid-template-columns: 1fr 1.4fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
       gap: var(--space-section-x);
     }
-    .ap-horizon { align-items: start; }
-    .ap-horizon__body { grid-template-columns: 1fr 1fr; align-items: center; gap: var(--space-section-x); }
+    .ap-horizon {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-md-static);
+    }
     .ap-figure__lead { display: grid; gap: var(--space-xs-static); }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
