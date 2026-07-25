@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Ported from Figma "Web-portfolio" / frame Analytical-platform-1920 (181:13347).
+// Text-analytical blocks are rebuilt in HTML on the token layer; the four chart
+// showcase blocks (RTT, comparison, adaptive, design system) are exported design
+// frames served as images. See docs — mobile-native version tracked separately.
+const title = 'Infrastructure solution for analytical platform';
+const subtitle =
+  'Complex data adaptive graphics and a design system with long-term support';
+
+const meta = [
+  { label: 'Product', value: 'Analytical platform (web, data-heavy)' },
+  { label: 'Scale', value: 'Startup → Break-even point' },
+  { label: 'Data', value: 'High-density information charts' },
+  { label: 'Environment', value: 'Continuous development and change of the team' },
+];
+
+const contextCards = [
+  { title: 'User behavior', bullets: ['Comparing large amounts of data', 'High sensitivity to delays and UI noise'] },
+  { title: 'Team', bullets: ['Designers were changing', 'Long-term support without the system author'] },
+  { title: 'Process', bullets: ['Startup environment', 'Limited resources', 'Product growth without full redesign'] },
+  { title: 'Constraints', bullets: ['Web platform', 'Real-time data', 'Browser performance limits'] },
+];
+
+const problems = [
+  { title: 'High cognitive load', desc: 'Many visual elements at the same time (charts, histograms, lists, toolbars)' },
+  { title: 'No clear focus hierarchy', desc: 'Unstructured information density. Data with different importance looks the same. It is hard to separate signal from noise.' },
+  { title: 'Limited UI scalability', desc: 'Interface does not adapt to different number of active tools and different analysis scenarios.' },
+];
+
+const principles = [
+  { title: 'Data-first interface', desc: 'Design decisions focus on readability and fast data analysis.' },
+  { title: 'System scalability', desc: 'Architecture supports growth of data and features.' },
+  { title: 'Design without manual support', desc: 'Consistency is controlled by rules and components.' },
+  { title: 'Focused on experienced users', desc: 'High information density but still manageable.' },
+];
+
+const horizon = [
+  { n: '01', desc: 'Component-based architecture instead of static screens. Unified rules for complex screens and data.' },
+  { n: '02', desc: 'Flexible structure supports product growth. New features were added without rebuilding core screens.' },
+  { n: '03', desc: 'The system has been used for 4 years. The product continued to grow without constant design support.' },
+];
+
+const impact = [
+  'Product. Scalable without full redesign',
+  'Team. System survives designer changes',
+  'Process. Product grows without manual design control',
+];
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main class="ap">
+    <nav class="container ap-crumb" aria-label="Breadcrumb">
+      <a href="/#work">Main</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Infrastructure UI solution for analytical platform</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="container ap-hero">
+      <div class="ap-hero__lead">
+        <h1>{title}</h1>
+        <p class="ap-hero__sub">{subtitle}</p>
+      </div>
+      <dl class="ap-meta">
+        {meta.map((m) => (
+          <div class="ap-meta__row">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <!-- RTT design showcase -->
+    <section class="container ap-figure">
+      <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
+        width="1440" height="800" loading="lazy" decoding="async" />
+    </section>
+
+    <!-- Context and constraints -->
+    <section class="container ap-section">
+      <h2>Context and Product Constraints</h2>
+      <div class="ap-cards">
+        {contextCards.map((c) => (
+          <article class="ap-card">
+            <h3>{c.title}</h3>
+            <ul>{c.bullets.map((b) => <li>{b}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Problems -->
+    <section class="container ap-split">
+      <h2>Problems of Managing Complex Data</h2>
+      <div class="ap-list">
+        {problems.map((p) => (
+          <div class="ap-list__item">
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Design principles -->
+    <section class="container ap-split">
+      <div class="ap-split__head">
+        <h2>Design Principles</h2>
+        <p class="ap-split__sub">System design for growth without losing control</p>
+      </div>
+      <div class="ap-list">
+        {principles.map((p) => (
+          <div class="ap-list__item">
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Before / after comparison -->
+    <section class="container ap-figure">
+      <h2 class="ap-figure__title">Comparison of versions</h2>
+      <img src="/images/case-analytical/compare.png" alt="Before and after the redesign, shown side by side"
+        width="1440" height="776" loading="lazy" decoding="async" />
+    </section>
+
+    <!-- Adaptive chart system -->
+    <section class="container ap-figure">
+      <div class="ap-figure__lead">
+        <h2 class="ap-figure__title">Adaptive Chart System</h2>
+        <p class="ap-figure__desc">Panels and charts can be moved and combined freely. Typography contrast and grid system help users read data in any layout configuration.</p>
+      </div>
+      <img src="/images/case-analytical/adaptive.png" alt="Adaptive chart system — panels rearranged into a different layout"
+        width="1440" height="942" loading="lazy" decoding="async" />
+    </section>
+
+    <!-- Design system with a 4+ year horizon -->
+    <section class="container ap-split ap-horizon">
+      <h2>Design System with 4+ Year Horizon</h2>
+      <div class="ap-horizon__body">
+        <ol class="ap-horizon__list">
+          {horizon.map((h) => (
+            <li>
+              <span class="ap-horizon__n">{h.n}</span>
+              <p>{h.desc}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="ap-horizon__visual" role="img"
+          aria-label="Design-system components: a chart and an input, each with its properties panel"></div>
+      </div>
+    </section>
+
+    <!-- Product impact -->
+    <section class="container ap-split">
+      <h2>Product Impact</h2>
+      <ul class="ap-impact">
+        {impact.map((i) => (
+          <li>
+            <span class="ap-impact__dot" aria-hidden="true"></span>
+            <span>{i}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Section rhythm — mobile-first; desktop pairs come from the token media query. */
+  .ap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-section-gap);
+    padding-block: var(--space-section-y) var(--space-section-y-lg);
+  }
+  .ap h2 {
+    font-size: var(--text-title-l);
+    font-weight: var(--weight-semibold);
+    line-height: 1.15;
+  }
+  .ap h3 {
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Breadcrumb */
+  .ap-crumb {
+    display: flex;
+    gap: var(--space-2xs-static);
+    align-items: center;
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-crumb a:hover { opacity: var(--opacity-hover); }
+  .ap-crumb [aria-current] { color: var(--color-text-primary); }
+
+  /* Hero */
+  .ap-hero {
+    display: grid;
+    gap: var(--space-block-gap);
+  }
+  .ap-hero h1 {
+    font-size: var(--text-display);
+    font-weight: var(--weight-semibold);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .ap-hero__sub {
+    margin-top: var(--space-md-static);
+    max-width: 34ch;
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-meta {
+    display: grid;
+    gap: 0;
+    margin: 0;
+  }
+  .ap-meta__row {
+    display: grid;
+    gap: var(--space-3xs-static);
+    padding-block: var(--space-md-static);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-meta__row:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-meta dd {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Full-bleed design figures */
+  .ap-figure { display: grid; gap: var(--space-md-static); }
+  .ap-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+  }
+  .ap-figure__title { order: -1; }
+  .ap-figure__desc {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    font-size: var(--text-body);
+  }
+
+  /* Context cards */
+  .ap-section { display: grid; gap: var(--space-block-gap); }
+  .ap-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-grid-gap);
+  }
+  .ap-card {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: var(--space-card-inset);
+    display: grid;
+    gap: var(--space-md-static);
+  }
+  .ap-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-2xs-static);
+  }
+  .ap-card li {
+    position: relative;
+    padding-left: var(--space-sm-static);
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: var(--radius-dot);
+    background: var(--color-accent);
+  }
+
+  /* Heading-left / list-right split sections */
+  .ap-split {
+    display: grid;
+    gap: var(--space-block-gap);
+    align-items: start;
+  }
+  .ap-split__sub {
+    margin-top: var(--space-xs-static);
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-list { display: grid; gap: 0; }
+  .ap-list__item {
+    display: grid;
+    gap: var(--space-2xs-static);
+    padding-block: var(--space-lg-static);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-list__item:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
+
+  /* Design-system horizon */
+  .ap-horizon__body {
+    display: grid;
+    gap: var(--space-block-gap);
+  }
+  .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+  .ap-horizon__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm-static);
+    padding-block: var(--space-lg-static);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-horizon__list li:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
+  .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-horizon__visual {
+    border-radius: var(--radius-card);
+    aspect-ratio: 700 / 560;
+    background:
+      url('/images/case-analytical/designsystem.png') right center / auto 100% no-repeat,
+      var(--color-surface);
+  }
+
+  /* Product impact */
+  .ap-impact { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-md-static); }
+  .ap-impact li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm-static);
+    align-items: center;
+    font-size: var(--text-title-s);
+  }
+  .ap-impact__dot {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+  }
+
+  /* ---- Desktop ---- */
+  @media (min-width: 1024px) {
+    .ap-hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+      gap: var(--space-section-x);
+    }
+    .ap-cards { grid-template-columns: 1fr 1fr; }
+    .ap-split {
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-section-x);
+    }
+    .ap-horizon { align-items: start; }
+    .ap-horizon__body { grid-template-columns: 1fr 1fr; align-items: center; gap: var(--space-section-x); }
+    .ap-figure__lead { display: grid; gap: var(--space-xs-static); }
+  }
+</style>
