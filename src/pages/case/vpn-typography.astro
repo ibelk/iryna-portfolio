@@ -1,0 +1,542 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Ported from Figma "Web-portfolio" / page "VPN" / frame VPN-1920 (260:13642).
+// The three app-mockup illustrations (main hero, desktop app, error/contrast
+// panels) are exported design frames served as images — same pattern as the
+// Analytical Platform case.
+const title = 'Typography and accessibility in VPN';
+const subtitle = 'Infrastructure solution without complete redesign';
+
+const meta = [
+  { label: 'Product', value: 'VPN apps (desktop, mobile, browser extension)' },
+  { label: 'Scale', value: 'Over 10 million users' },
+  { label: 'Localization', value: '60+ languages' },
+  { label: 'Environment', value: 'A living product without pause for redesign' },
+];
+
+const problems = [
+  { title: 'Montserrat was used as a system font without considering localization' },
+  { title: 'Low contrast of key UI elements' },
+  { title: 'Text did not meet WCAG standards' },
+  { title: 'The system has been used for 4 years. The product continued to grow without constant design support.' },
+];
+
+const quoteRows = [
+  {
+    role: 'Translators',
+    icon: 'smallcaps',
+    wrong: "Phrases didn't fit UI components and often lost meaning",
+    effect: 'Incorrect or broken translations in the UI',
+    quote: "German translations don't fit the button again — half the word gets cut off.",
+  },
+  {
+    role: 'Developers',
+    icon: 'setting',
+    wrong: 'Each new language caused layout issues or broken elements',
+    effect: 'Constant fixes slowed down release cycles',
+    quote: 'Every new language feels like a whole new project.',
+  },
+  {
+    role: 'QA Testers',
+    icon: 'danger',
+    wrong: 'Every new locale introduced new bugs during testing',
+    effect: 'Manual re-checking of all localization scenarios each time',
+    quote: 'Something always breaks — guaranteed.',
+  },
+];
+
+const criteria = [
+  { title: 'Localization', desc: 'Full language support (Latin, Cyrillic, CJK, RTL)', icon: 'smallcaps' },
+  { title: 'Scale', desc: 'Stable rendering across operating systems', icon: 'maximize' },
+  { title: 'Accessibility', desc: 'Good readability for small text', icon: 'document' },
+  { title: 'Licensing', desc: 'License suitable for commercial product', icon: 'document' },
+];
+
+const notoReasons = [
+  { title: 'Only font with full language coverage' },
+  { title: 'Consistent behavior across platforms' },
+  { title: 'Suitable for system-level use' },
+  { title: 'OFL license' },
+];
+
+const contrastDesc =
+  'Low contrast makes information harder to read. It increases cognitive load. It directly affects product usability. WCAG compliance is a minimum standard for a product with millions of users.';
+
+const iconEye = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.25 9.14999C18.94 5.51999 15.56 3.42999 12 3.42999C10.22 3.42999 8.49 3.94999 6.91 4.91999C5.33 5.89999 3.91 7.32999 2.75 9.14999C1.75 10.72 1.75 13.27 2.75 14.84C5.06 18.48 8.44 20.56 12 20.56C13.78 20.56 15.51 20.04 17.09 19.07C18.67 18.09 20.09 16.66 21.25 14.84C22.25 13.28 22.25 10.72 21.25 9.14999ZM12 16.04C9.76 16.04 7.96 14.23 7.96 12C7.96 9.76999 9.76 7.95999 12 7.95999C14.24 7.95999 16.04 9.76999 16.04 12C16.04 14.23 14.24 16.04 12 16.04Z" fill="currentColor"/><path d="M11.9999 9.14001C10.4299 9.14001 9.1499 10.42 9.1499 12C9.1499 13.57 10.4299 14.85 11.9999 14.85C13.5699 14.85 14.8599 13.57 14.8599 12C14.8599 10.43 13.5699 9.14001 11.9999 9.14001Z" fill="currentColor"/></svg>`;
+const iconSmallcaps = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.95 4.13C20.66 3.71 20.29 3.34 19.87 3.05C18.92 2.36 17.68 2 16.19 2H7.81C7.61 2 7.41 2.01 7.22 2.03C3.94 2.24 2 4.37 2 7.81V16.19C2 17.68 2.36 18.92 3.05 19.87C3.34 20.29 3.71 20.66 4.13 20.95C4.95 21.55 5.99 21.9 7.22 21.98C7.41 21.99 7.61 22 7.81 22H16.19C19.83 22 22 19.83 22 16.19V7.81C22 6.32 21.64 5.08 20.95 4.13ZM11.39 15.88H8.52C8.11 15.88 7.77 15.54 7.77 15.13C7.77 14.72 8.11 14.38 8.52 14.38H9.52V7.91H6.95C6.84 7.91 6.75 8 6.75 8.11V8.89C6.75 9.3 6.41 9.63 6 9.63C5.59 9.63 5.25 9.3 5.25 8.88V8.1C5.25 7.16 6.01 6.4 6.95 6.4H13.59C14.53 6.4 15.29 7.16 15.29 8.1V8.88C15.29 9.29 14.95 9.63 14.54 9.63C14.13 9.63 13.79 9.29 13.79 8.88V8.1C13.79 7.99 13.7 7.9 13.59 7.9H11.02V14.38H11.39C11.8 14.38 12.14 14.72 12.14 15.13C12.14 15.54 11.8 15.88 11.39 15.88ZM18.75 12.23C18.75 12.64 18.41 12.98 18 12.98C17.59 12.98 17.25 12.64 17.25 12.23V11.9H15.7V16.1H16.05C16.46 16.1 16.8 16.44 16.8 16.85C16.8 17.26 16.46 17.6 16.05 17.6H13.85C13.44 17.6 13.1 17.26 13.1 16.85C13.1 16.44 13.44 16.1 13.85 16.1H14.2V11.9H13.72C13.31 11.9 12.97 11.56 12.97 11.15C12.97 10.74 13.31 10.4 13.72 10.4H17.32C18.11 10.4 18.75 11.04 18.75 11.83V12.23Z" fill="currentColor"/></svg>`;
+const iconSetting = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9401 5.42L13.7701 2.43C12.7801 1.86 11.2301 1.86 10.2401 2.43L5.02008 5.44C2.95008 6.84 2.83008 7.05 2.83008 9.28V14.71C2.83008 16.94 2.95008 17.16 5.06008 18.58L10.2301 21.57C10.7301 21.86 11.3701 22 12.0001 22C12.6301 22 13.2701 21.86 13.7601 21.57L18.9801 18.56C21.0501 17.16 21.1701 16.95 21.1701 14.72V9.28C21.1701 7.05 21.0501 6.84 18.9401 5.42ZM12.0001 15.25C10.2101 15.25 8.75008 13.79 8.75008 12C8.75008 10.21 10.2101 8.75 12.0001 8.75C13.7901 8.75 15.2501 10.21 15.2501 12C15.2501 13.79 13.7901 15.25 12.0001 15.25Z" fill="currentColor"/></svg>`;
+const iconMaximize = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.95 4.13C20.66 3.71 20.29 3.34 19.87 3.05C18.92 2.36 17.68 2 16.19 2H7.81C7.61 2 7.41 2.01 7.22 2.03C3.94 2.24 2 4.37 2 7.81V16.19C2 17.68 2.36 18.92 3.05 19.87C3.34 20.29 3.71 20.66 4.13 20.95C4.95 21.55 5.99 21.9 7.22 21.98C7.41 21.99 7.61 22 7.81 22H16.19C19.83 22 22 19.83 22 16.19V7.81C22 6.32 21.64 5.08 20.95 4.13ZM18.75 10C18.75 10.41 18.41 10.75 18 10.75C17.59 10.75 17.25 10.41 17.25 10V7.81L13.06 12L17.25 16.19V14C17.25 13.59 17.59 13.25 18 13.25C18.41 13.25 18.75 13.59 18.75 14V18C18.75 18.1 18.73 18.19 18.69 18.29C18.61 18.47 18.47 18.62 18.28 18.7C18.19 18.74 18.09 18.76 17.99 18.76H13.99C13.58 18.76 13.24 18.42 13.24 18.01C13.24 17.6 13.58 17.26 13.99 17.26H16.18L12 13.06L7.81 17.25H10C10.41 17.25 10.75 17.59 10.75 18C10.75 18.41 10.41 18.75 10 18.75H6C5.9 18.75 5.8 18.73 5.71 18.69C5.53 18.61 5.38 18.47 5.3 18.28C5.27 18.19 5.25 18.1 5.25 18V14C5.25 13.59 5.59 13.25 6 13.25C6.41 13.25 6.75 13.59 6.75 14V16.19L10.94 12L6.75 7.81V10C6.75 10.41 6.41 10.75 6 10.75C5.59 10.75 5.25 10.41 5.25 10V6C5.25 5.9 5.27 5.81 5.31 5.71C5.39 5.53 5.53 5.38 5.72 5.3C5.81 5.27 5.9 5.25 6 5.25H10C10.41 5.25 10.75 5.59 10.75 6C10.75 6.41 10.41 6.75 10 6.75H7.81L12 10.94L16.19 6.75H14C13.59 6.75 13.25 6.41 13.25 6C13.25 5.59 13.59 5.25 14 5.25H18C18.1 5.25 18.19 5.27 18.29 5.31C18.47 5.39 18.62 5.53 18.7 5.72C18.73 5.81 18.75 5.9 18.75 6V10Z" fill="currentColor"/></svg>`;
+const iconDocument = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM15.75 15.75H8.25C7.84 15.75 7.5 15.41 7.5 15C7.5 14.59 7.84 14.25 8.25 14.25H15.75C16.16 14.25 16.5 14.59 16.5 15C16.5 15.41 16.16 15.75 15.75 15.75ZM15.75 9.75H8.25C7.84 9.75 7.5 9.41 7.5 9C7.5 8.59 7.84 8.25 8.25 8.25H15.75C16.16 8.25 16.5 8.59 16.5 9C16.5 9.41 16.16 9.75 15.75 9.75Z" fill="currentColor"/></svg>`;
+const iconDanger = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.49 0 0 4.49 0 10C0 15.51 4.49 20 10 20C15.51 20 20 15.51 20 10C20 4.49 15.52 0 10 0ZM9.25 6.5C9.25 6.09 9.59 5.75 10 5.75C10.41 5.75 10.75 6.09 10.75 6.5V11C10.75 11.41 10.41 11.75 10 11.75C9.59 11.75 9.25 11.41 9.25 11V6.5ZM10.92 14.33C10.87 14.46 10.8 14.56 10.71 14.66C10.61 14.75 10.5 14.82 10.38 14.87C10.26 14.92 10.13 14.95 10 14.95C9.87 14.95 9.74 14.92 9.62 14.87C9.5 14.82 9.39 14.75 9.29 14.66C9.2 14.56 9.13 14.46 9.08 14.33C9.03 14.21 9 14.08 9 13.95C9 13.82 9.03 13.69 9.08 13.57C9.13 13.45 9.2 13.34 9.29 13.24C9.39 13.15 9.5 13.08 9.62 13.03C9.86 12.93 10.14 12.93 10.38 13.03C10.5 13.08 10.61 13.15 10.71 13.24C10.8 13.34 10.87 13.45 10.92 13.57C10.97 13.69 11 13.82 11 13.95C11 14.08 10.97 14.21 10.92 14.33Z" fill="currentColor"/></svg>`;
+
+const icons: Record<string, string> = {
+  eye: iconEye,
+  smallcaps: iconSmallcaps,
+  setting: iconSetting,
+  maximize: iconMaximize,
+  document: iconDocument,
+  danger: iconDanger,
+};
+
+const impact = [
+  { title: 'Localization and readability issues resolved', icon: 'eye' },
+  { title: 'Typography unified across platforms', icon: 'smallcaps' },
+  { title: 'Reduced the number of fix requests from weekly to once a month', icon: 'setting' },
+];
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main class="ap">
+    <nav class="container ap-crumb" aria-label="Breadcrumb">
+      <a href="/#work">Main</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="container ap-hero">
+      <div class="ap-hero__lead">
+        <h1>{title}</h1>
+        <p class="ap-hero__sub">{subtitle}</p>
+        <p class="ap-nda">
+          <span aria-hidden="true" set:html={iconDanger} />
+          Interfaces reproduced for portfolio via NDA
+        </p>
+      </div>
+      <dl class="ap-meta">
+        {meta.map((m) => (
+          <div class="ap-meta__row">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <!-- Main product showcase -->
+    <section class="container ap-figure ap-figure--lead">
+      <div class="ap-figure__frame">
+        <img src="/images/case-vpn-typography/mobile.png" alt="VPN app screens — server selection and connection status"
+          width="1200" height="680" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Accessibility and Scalability Problem -->
+    <section class="container ap-block">
+      <div class="ap-split">
+        <div class="ap-split__head">
+          <h2>Accessibility and Scalability Problem</h2>
+        </div>
+        <ol class="ap-horizon__list">
+          {problems.map((p, i) => (
+            <li>
+              <span class="ap-horizon__n">{String(i + 1).padStart(2, '0')}</span>
+              <p>{p.title}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="ap-figure__frame ap-split__visual">
+        <img src="/images/case-vpn-typography/desktop.png" alt="VPN desktop app — server list and connection map"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Quote table -->
+    <section class="container ap-block">
+      <div class="ap-quote">
+        <h2 class="ap-quote__title">Why the System Font Choice Became a Problem</h2>
+        <div class="ap-quote__table" role="table">
+          <div class="ap-quote__row ap-quote__row--head" role="row">
+            <span role="columnheader">What went wrong</span>
+            <span role="columnheader">How it affected the product</span>
+            <span role="columnheader">Quote</span>
+          </div>
+          {quoteRows.map((r) => (
+            <div class="ap-quote__row" role="row">
+              <div class="ap-quote__role">
+                <span class="ap-quote__icon" aria-hidden="true" set:html={icons[r.icon]} />
+                <span>{r.role}</span>
+              </div>
+              <p role="cell">{r.wrong}</p>
+              <p role="cell">{r.effect}</p>
+              <p role="cell" class="ap-quote__quote">&ldquo;{r.quote}&rdquo;</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Criteria for choosing a system font -->
+    <section class="container ap-section">
+      <h2>Criteria for Choosing a System Font for a Scalable Product</h2>
+      <div class="ap-criteria">
+        {criteria.map((c) => (
+          <article class="ap-criteria__card">
+            <span class="ap-criteria__icon" aria-hidden="true" set:html={icons[c.icon]} />
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Why Noto Sans -->
+    <section class="container ap-block">
+      <div class="ap-split">
+        <div class="ap-split__head">
+          <h2>Why Noto Sans Became <br />the System Font</h2>
+        </div>
+        <ol class="ap-horizon__list">
+          {notoReasons.map((r, i) => (
+            <li>
+              <span class="ap-horizon__n">{String(i + 1).padStart(2, '0')}</span>
+              <p>{r.title}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="ap-figure__frame ap-split__visual">
+        <img src="/images/case-vpn-typography/error.png" alt="Contrast checker showing poor contrast scores before the fix"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Improving contrast -->
+    <section class="container ap-figure">
+      <div class="ap-figure__lead">
+        <h2 class="ap-figure__title">Improving Contrast</h2>
+        <p class="ap-figure__desc">{contrastDesc}</p>
+      </div>
+      <div class="ap-figure__frame">
+        <img src="/images/case-vpn-typography/contrast.png" alt="Contrast checker showing good contrast scores after the fix"
+          width="1000" height="440" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Product impact -->
+    <section class="container ap-block">
+      <div class="ap-split ap-panel">
+        <h2>Product Impact</h2>
+        <ul class="ap-impact">
+          {impact.map((i) => (
+            <li>
+              <span class="ap-impact__icon" aria-hidden="true" set:html={icons[i.icon]} />
+              <span>{i.title}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Section rhythm — mobile-first; desktop pairs come from the token media query.
+     Sections stack with zero gap between them; each section supplies its own
+     vertical padding (matching the Figma frame, where every block is flush
+     against the next and the visual rhythm comes entirely from each block's
+     own py). */
+  .ap {
+    display: block;
+  }
+  .ap-block { padding-block: var(--space-section-y); }
+  .ap h2 {
+    font-size: var(--text-title-l);
+    font-weight: var(--weight-semibold);
+    line-height: 1.15;
+  }
+  .ap h3 {
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Breadcrumb */
+  .ap-crumb {
+    display: flex;
+    gap: var(--space-3xs-static);
+    align-items: center;
+    padding-block: var(--space-sm-static);
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-crumb a:hover { opacity: var(--opacity-hover); }
+  .ap-crumb [aria-current] {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Hero */
+  .ap-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl-static);
+    padding-block: var(--space-lg-static);
+  }
+  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-hero h1 {
+    font-size: var(--text-display-case);
+    font-weight: var(--weight-semibold);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .ap-hero__sub {
+    max-width: 34ch;
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+  .ap-nda {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs-static);
+    margin-top: var(--space-sm-static);
+    padding: var(--space-sm-static);
+    border-radius: var(--radius-banner);
+    background: rgba(255, 128, 0, 0.27);
+    color: white;
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium, 500);
+  }
+  .ap-nda :global(svg) { width: 20px; height: 20px; flex-shrink: 0; }
+  .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
+  .ap-meta__row { display: grid; gap: var(--space-2xs-static); }
+  .ap-meta__row + .ap-meta__row {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-meta dd {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Full-bleed design figures */
+  .ap-figure {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-section-y);
+    padding-block: var(--space-section-y);
+  }
+  .ap-figure--lead { padding-top: var(--space-section-y-lg); }
+  .ap-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+  }
+  .ap-figure__lead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm-static);
+    text-align: center;
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+  .ap-figure__title { order: -1; }
+  .ap-figure__desc { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-figure__frame { position: relative; }
+
+  /* Heading-left / list-right split sections */
+  .ap-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md-static);
+    align-items: start;
+  }
+  .ap-split__visual { margin-top: var(--space-md-static); }
+
+  /* Numbered list (reused from Analytical Platform's horizon pattern) */
+  .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-horizon__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm-static);
+  }
+  .ap-horizon__list li + li {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
+  .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
+
+  /* Panel background used by the "List bg" blocks (Product Impact) */
+  .ap-panel {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-lg-static);
+  }
+  .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-impact li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm-static);
+    align-items: center;
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-semibold);
+  }
+  .ap-impact li + li {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .ap-impact__icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+  }
+  .ap-impact__icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+    opacity: 0.2;
+  }
+  .ap-impact__icon::after {
+    content: '';
+    position: absolute;
+    inset: 16.6%;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+  }
+  .ap-impact__icon :global(svg) {
+    position: relative;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-primary);
+  }
+
+  /* Quote table */
+  .ap-quote {
+    background: #1e1e20;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .ap-quote__title {
+    padding: var(--space-lg-static);
+    font-size: var(--text-title-l);
+  }
+  .ap-quote__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm-static);
+    padding: var(--space-lg-static);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .ap-quote__row--head { display: none; }
+  .ap-quote__row p { margin: 0; color: #dfdfdf; font-size: var(--text-body); }
+  .ap-quote__quote { font-style: italic; }
+  .ap-quote__role {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs-static);
+    color: #dfdfdf;
+    font-size: var(--text-body);
+  }
+  .ap-quote__icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .ap-quote__icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.2;
+  }
+  .ap-quote__icon::after {
+    content: '';
+    position: absolute;
+    inset: 16.6%;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+  .ap-quote__icon :global(svg) { position: relative; z-index: 1; width: 14px; height: 14px; color: #dfdfdf; }
+
+  /* Criteria cards grid */
+  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
+  .ap-criteria { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  .ap-criteria__card {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: var(--space-card-inset-lg);
+    display: grid;
+    gap: var(--space-lg-static);
+  }
+  .ap-criteria__icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+  }
+  .ap-criteria__icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+    opacity: 0.2;
+  }
+  .ap-criteria__icon::after {
+    content: '';
+    position: absolute;
+    inset: 16.6%;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+  }
+  .ap-criteria__icon :global(svg) { position: relative; z-index: 1; width: 24px; height: 24px; color: var(--color-text-primary); }
+  .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+
+  /* ---- Desktop ---- */
+  @media (min-width: 1024px) {
+    .ap-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-md-static);
+      padding-block: var(--space-section-y-lg);
+    }
+    .ap-hero__lead { gap: var(--space-lg-static); }
+    .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-md-static);
+    }
+    .ap-split__visual { margin-top: 0; }
+    .ap-section { gap: var(--space-card-inset-lg); }
+    .ap-criteria { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .ap-criteria__card { padding: var(--space-card-inset-lg); }
+    .ap-quote__row {
+      grid-template-columns: 222px 1fr 1fr 1fr;
+      align-items: center;
+      padding: 0;
+    }
+    .ap-quote__row--head {
+      display: grid;
+      color: #dfdfdf;
+      font-size: 18px;
+      font-weight: var(--weight-semibold);
+    }
+    .ap-quote__row--head span { padding: var(--space-xl-static); }
+    .ap-quote__row > * { padding: var(--space-xl-static); }
+    .ap-quote__role { padding-left: var(--space-xl-static); }
+    .ap-impact__icon { width: 64px; height: 64px; }
+    .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
+  }
+</style>

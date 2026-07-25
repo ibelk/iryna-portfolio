@@ -11,11 +11,12 @@ import ImpactList from '../../components/ImpactList.astro';
 
 export async function getStaticPaths() {
   const cases = await getCollection('case-studies');
-  // `resonance` is served by the bespoke case/resonance.astro page (richer,
-  // block-based layout ported from Figma); exclude it here to avoid a
-  // duplicate /case/resonance route.
+  // These slugs are served by their own bespoke case/<slug>.astro page
+  // (richer, block-based layout ported from Figma); exclude them here to
+  // avoid duplicate routes.
+  const bespoke = new Set(['resonance', 'vpn-typography']);
   return cases
-    .filter((entry) => entry.slug !== 'resonance')
+    .filter((entry) => !bespoke.has(entry.slug))
     .map((entry) => ({
       params: { slug: entry.slug },
       props: { entry },
