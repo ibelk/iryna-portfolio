@@ -1,0 +1,341 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Ported from Figma "Web-portfolio" / page "Freelancehunt" / frame Freelancehunt-1920 (260:13419).
+const title = 'Freelancer portfolio redesign';
+const subtitle = 'Improving the presentation of expertise and decision-making by the customer on Freelancehunt';
+
+const meta = [
+  { label: 'Product', value: 'Freelance services marketplace' },
+  { label: 'Scale', value: 'Over 2 million registered users' },
+  { label: 'Area of responsibility', value: 'Increasing user competitiveness' },
+  { label: 'Task type', value: 'UX redesign of the key decision-making flow' },
+];
+
+const formalityCards = [
+  { title: 'Portfolio did not help to sell expertise', desc: 'One template ignored different specializations. Strong sides of freelancers were not visible.', icon: 'gallery' },
+  { title: 'Clients chose by rating', desc: 'Because portfolio was weak, clients focused on numbers instead of relevant experience and quality.', icon: 'eye' },
+  { title: 'Limited formats reduced value', desc: 'Some works could not be added. Profiles looked incomplete. It influenced client decisions.', icon: 'document' },
+];
+
+const insightCards = [
+  { title: 'Media limitations reduced case quality', desc: 'Designers had to write long texts to compensate image limits.' },
+  { title: 'Text limitations for complex cases', desc: 'Developers could not structure cases. No headings, lists, or different content types.' },
+  { title: 'Low trust in works', desc: 'Different roles need different presentation, but the platform gave no flexibility.' },
+  { title: 'No control of order reduced conversion', desc: '63% of users re-uploaded works to show strongest projects first.' },
+  { title: 'One template ignored specialization specifics', desc: "Different roles need different formats, but platform didn't support adaptation." },
+  { title: 'Users lacked guidance', desc: 'Especially in niche roles. No clear understanding of which formats and structure work better.' },
+];
+
+const builderSteps = [
+  { title: 'Support of different content formats', desc: 'Images, text, lists, video, links — depending on needs.' },
+  { title: 'Control of order and focus', desc: 'Users can change order of works and blocks without re-uploading content.' },
+  { title: 'Connection with real projects', desc: 'Portfolio is linked to completed platform tasks. This increases trust.' },
+];
+
+const icons: Record<string, string> = {
+  eye: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.25 9.14999C18.94 5.51999 15.56 3.42999 12 3.42999C10.22 3.42999 8.49 3.94999 6.91 4.91999C5.33 5.89999 3.91 7.32999 2.75 9.14999C1.75 10.72 1.75 13.27 2.75 14.84C5.06 18.48 8.44 20.56 12 20.56C13.78 20.56 15.51 20.04 17.09 19.07C18.67 18.09 20.09 16.66 21.25 14.84C22.25 13.28 22.25 10.72 21.25 9.14999ZM12 16.04C9.76 16.04 7.96 14.23 7.96 12C7.96 9.76999 9.76 7.95999 12 7.95999C14.24 7.95999 16.04 9.76999 16.04 12C16.04 14.23 14.24 16.04 12 16.04Z" fill="currentColor"/><path d="M11.9999 9.14001C10.4299 9.14001 9.1499 10.42 9.1499 12C9.1499 13.57 10.4299 14.85 11.9999 14.85C13.5699 14.85 14.8599 13.57 14.8599 12C14.8599 10.43 13.5699 9.14001 11.9999 9.14001Z" fill="currentColor"/></svg>`,
+  document: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM15.75 15.75H8.25C7.84 15.75 7.5 15.41 7.5 15C7.5 14.59 7.84 14.25 8.25 14.25H15.75C16.16 14.25 16.5 14.59 16.5 15C16.5 15.41 16.16 15.75 15.75 15.75ZM15.75 9.75H8.25C7.84 9.75 7.5 9.41 7.5 9C7.5 8.59 7.84 8.25 8.25 8.25H15.75C16.16 8.25 16.5 8.59 16.5 9C16.5 9.41 16.16 9.75 15.75 9.75Z" fill="currentColor"/></svg>`,
+  gallery: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 10.38C10.3144 10.38 11.38 9.31444 11.38 8C11.38 6.68556 10.3144 5.62 9 5.62C7.68556 5.62 6.62 6.68556 6.62 8C6.62 9.31444 7.68556 10.38 9 10.38Z" fill="currentColor"/><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.19C2 17.28 2.19 18.23 2.56 19.03C3.42 20.93 5.26 22 7.81 22H16.19C19.83 22 22 19.83 22 16.19V7.81C22 4.17 19.83 2 16.19 2ZM20.37 12.5C19.59 11.83 18.33 11.83 17.55 12.5L13.39 16.07C12.61 16.74 11.35 16.74 10.57 16.07L10.23 15.79C9.52 15.17 8.39 15.11 7.59 15.65L3.85 18.16C3.63 17.6 3.5 16.95 3.5 16.19V7.81C3.5 4.99 4.99 3.5 7.81 3.5H16.19C19.01 3.5 20.5 4.99 20.5 7.81V12.61L20.37 12.5Z" fill="currentColor"/></svg>`,
+  setting: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9401 5.42L13.7701 2.43C12.7801 1.86 11.2301 1.86 10.2401 2.43L5.02008 5.44C2.95008 6.84 2.83008 7.05 2.83008 9.28V14.71C2.83008 16.94 2.95008 17.16 5.06008 18.58L10.2301 21.57C10.7301 21.86 11.3701 22 12.0001 22C12.6301 22 13.2701 21.86 13.7601 21.57L18.9801 18.56C21.0501 17.16 21.1701 16.95 21.1701 14.72V9.28C21.1701 7.05 21.0501 6.84 18.9401 5.42ZM12.0001 15.25C10.2101 15.25 8.75008 13.79 8.75008 12C8.75008 10.21 10.2101 8.75 12.0001 8.75C13.7901 8.75 15.2501 10.21 15.2501 12C15.2501 13.79 13.7901 15.25 12.0001 15.25Z" fill="currentColor"/></svg>`,
+  profile: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9.38 2 7.25 4.13 7.25 6.75C7.25 9.32 9.26 11.4 11.88 11.49C11.96 11.48 12.04 11.48 12.1 11.49C12.12 11.49 12.13 11.49 12.15 11.49C12.16 11.49 12.16 11.49 12.17 11.49C14.73 11.4 16.74 9.32 16.75 6.75C16.75 4.13 14.62 2 12 2Z" fill="currentColor"/><path d="M17.08 14.15C14.29 12.29 9.73996 12.29 6.92996 14.15C5.65996 15 4.95996 16.15 4.95996 17.38C4.95996 18.61 5.65996 19.75 6.91996 20.59C8.31996 21.53 10.16 22 12 22C13.84 22 15.68 21.53 17.08 20.59C18.34 19.74 19.04 18.6 19.04 17.36C19.03 16.13 18.34 14.99 17.08 14.15Z" fill="currentColor"/></svg>`,
+  chart: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 22.75H3C2.59 22.75 2.25 22.41 2.25 22C2.25 21.59 2.59 21.25 3 21.25H21C21.41 21.25 21.75 21.59 21.75 22C21.75 22.41 21.41 22.75 21 22.75Z" fill="currentColor"/><path d="M5.6 8.38H4C3.45 8.38 3 8.83 3 9.38V18C3 18.55 3.45 19 4 19H5.6C6.15 19 6.6 18.55 6.6 18V9.38C6.6 8.82 6.15 8.38 5.6 8.38Z" fill="currentColor"/><path d="M12.8 5.19H11.2C10.65 5.19 10.2 5.64 10.2 6.19V18C10.2 18.55 10.65 19 11.2 19H12.8C13.35 19 13.8 18.55 13.8 18V6.19C13.8 5.64 13.35 5.19 12.8 5.19Z" fill="currentColor"/><path d="M20 2H18.4C17.85 2 17.4 2.45 17.4 3V18C17.4 18.55 17.85 19 18.4 19H20C20.55 19 21 18.55 21 18V3C21 2.45 20.55 2 20 2Z" fill="currentColor"/></svg>`,
+};
+
+const impact = [
+  { title: 'Portfolio became a decision tool, not just a formality', icon: 'setting' },
+  { title: 'Different specializations received flexible self-presentation', icon: 'profile' },
+  { title: 'Trust in works increased', icon: 'chart' },
+];
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main class="ap">
+    <nav class="container ap-crumb" aria-label="Breadcrumb">
+      <a href="/#work">Main</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="container ap-hero">
+      <div class="ap-hero__lead">
+        <h1>{title}</h1>
+        <p class="ap-hero__sub">{subtitle}</p>
+      </div>
+      <dl class="ap-meta">
+        {meta.map((m) => (
+          <div class="ap-meta__row">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <!-- Freelancer profile showcase -->
+    <section class="container ap-figure ap-figure--lead">
+      <div class="ap-figure__frame">
+        <img src="/images/case-freelancehunt/profile.png" alt="Freelancer profile page with portfolio"
+          width="1200" height="680" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Portfolio as a Formality -->
+    <section class="container ap-section">
+      <h2>Portfolio as a Formality, <br />Not a Decision Tool</h2>
+      <div class="ap-criteria ap-criteria--3col">
+        {formalityCards.map((c) => (
+          <article class="ap-criteria__card">
+            <span class="ap-criteria__icon" aria-hidden="true" set:html={icons[c.icon]} />
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Portfolio page showcase -->
+    <section class="container ap-figure">
+      <div class="ap-figure__frame">
+        <img src="/images/case-freelancehunt/portfolio.png" alt="Redesigned portfolio builder page"
+          width="1200" height="680" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Key Research Insights -->
+    <section class="container ap-section">
+      <h2>Key Research Insights</h2>
+      <div class="ap-criteria ap-criteria--3col ap-criteria--text-only">
+        {insightCards.map((c) => (
+          <article class="ap-criteria__card">
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Portfolio Builder concept -->
+    <section class="container ap-figure">
+      <div class="ap-figure__lead">
+        <h2 class="ap-figure__title">Portfolio Builder Instead of One Template</h2>
+        <p class="ap-figure__desc">Based on research we chose a portfolio builder concept. It is a flexible block system that adapts to specialization content and user experience level. Portfolio became a key tool for selling expertise on the platform.</p>
+      </div>
+      <div class="ap-figure__frame">
+        <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
+          width="1000" height="440" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- How the Builder Works -->
+    <section class="container ap-block">
+      <div class="ap-split">
+        <div class="ap-split__head">
+          <h2>How the Builder Works</h2>
+        </div>
+        <div class="ap-list">
+          {builderSteps.map((s) => (
+            <div class="ap-list__item">
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Before / after comparison -->
+    <section class="container ap-figure">
+      <div class="ap-compare" data-compare role="group" aria-label="Before and after comparison, draggable">
+        <img class="ap-compare__after" src="/images/case-freelancehunt/after.png" alt="After: the redesigned portfolio" draggable="false" loading="lazy" decoding="async" />
+        <div class="ap-compare__before-wrap" data-compare-before-wrap>
+          <img class="ap-compare__before" src="/images/case-freelancehunt/before.png" alt="Before: the original portfolio template" draggable="false" loading="lazy" decoding="async" />
+        </div>
+        <div class="ap-compare__handle" data-compare-handle>
+          <span aria-hidden="true">◂▸</span>
+        </div>
+        <span class="ap-badge ap-badge--corner">Comparison of versions</span>
+        <span class="ap-compare__label ap-compare__label--before">Before</span>
+        <span class="ap-compare__label ap-compare__label--after">After</span>
+      </div>
+    </section>
+
+    <!-- Product impact -->
+    <section class="container ap-block">
+      <div class="ap-split ap-panel">
+        <h2>Product Impact</h2>
+        <ul class="ap-impact">
+          {impact.map((i) => (
+            <li>
+              <span class="ap-impact__icon" aria-hidden="true" set:html={icons[i.icon]} />
+              <span>{i.title}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .ap { display: block; }
+  .ap-block { padding-block: var(--space-section-y); }
+  .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: 1.15; }
+  .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); }
+
+  .ap-crumb {
+    display: flex; gap: var(--space-3xs-static); align-items: center;
+    padding-block: var(--space-sm-static); color: var(--color-text-muted); font-size: var(--text-body);
+  }
+  .ap-crumb a:hover { opacity: var(--opacity-hover); }
+  .ap-crumb [aria-current] { color: var(--color-text-primary); font-weight: var(--weight-semibold); }
+
+  .ap-hero {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
+  }
+  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-hero h1 { font-size: var(--text-display-case); font-weight: var(--weight-semibold); line-height: 1.05; letter-spacing: -0.01em; }
+  .ap-hero__sub { max-width: 34ch; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
+  .ap-meta__row { display: grid; gap: var(--space-2xs-static); }
+  .ap-meta__row + .ap-meta__row { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-meta dd { margin: 0; color: var(--color-text-primary); font-size: var(--text-body); font-weight: var(--weight-semibold); }
+
+  .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
+  .ap-figure--lead { padding-top: var(--space-section-y-lg); }
+  .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure__lead {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-sm-static);
+    text-align: center; max-width: 60ch; margin-inline: auto;
+  }
+  .ap-figure__title { order: -1; }
+  .ap-figure__desc { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-figure__frame { position: relative; }
+
+  .ap-badge {
+    display: inline-flex; align-items: center; padding: var(--space-3xs-static) var(--space-xs-static);
+    border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
+    font-size: var(--text-label); font-weight: var(--weight-semibold); white-space: nowrap;
+  }
+  .ap-badge--corner { position: absolute; top: var(--space-xs-static); right: var(--space-xs-static); }
+
+  .ap-compare {
+    position: relative; width: 100%; aspect-ratio: 1200 / 680; border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card); overflow: hidden; cursor: ew-resize; user-select: none; touch-action: pan-y;
+  }
+  .ap-compare__after, .ap-compare__before {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    -webkit-user-drag: none; user-drag: none; pointer-events: none;
+  }
+  .ap-compare__before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
+  .ap-compare__handle {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--color-surface-inverse);
+    transform: translateX(-1px); display: flex; align-items: center; justify-content: center; pointer-events: none;
+  }
+  .ap-compare__handle span {
+    display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+    border-radius: var(--radius-control); background: var(--color-surface-inverse); color: var(--color-text-inverse);
+    font-size: var(--text-label); letter-spacing: 0.05em;
+  }
+  .ap-compare__label {
+    position: absolute; bottom: var(--space-xs-static); padding: var(--space-3xs-static) var(--space-xs-static);
+    border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
+    font-size: var(--text-label); font-weight: var(--weight-semibold);
+  }
+  .ap-compare__label--before { left: var(--space-xs-static); }
+  .ap-compare__label--after { right: var(--space-xs-static); }
+
+  .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
+  .ap-list { display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-list__item { display: grid; grid-template-columns: 1fr; gap: var(--space-2xs-static); }
+  .ap-list__item + .ap-list__item { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
+
+  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-lg-static); }
+  .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-impact li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
+    font-size: var(--text-title-s); font-weight: var(--weight-semibold);
+  }
+  .ap-impact li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
+  .ap-impact__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
+  .ap-impact__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
+  .ap-impact__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
+  .ap-impact__icon :global(svg) { position: relative; z-index: 1; width: 18px; height: 18px; color: var(--color-text-primary); }
+
+  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
+  .ap-criteria { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  .ap-criteria__card {
+    border: 1px solid var(--color-border-subtle); border-radius: var(--radius-card); padding: var(--space-card-inset-lg);
+    display: grid; gap: var(--space-lg-static);
+  }
+  .ap-criteria__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
+  .ap-criteria__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
+  .ap-criteria__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
+  .ap-criteria__icon :global(svg) { position: relative; z-index: 1; width: 24px; height: 24px; color: var(--color-text-primary); }
+  .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-sm-static); }
+
+  @media (min-width: 1024px) {
+    .ap-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start;
+      gap: var(--space-md-static); padding-block: var(--space-section-y-lg);
+    }
+    .ap-hero__lead { gap: var(--space-lg-static); }
+    .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
+    .ap-section { gap: var(--space-card-inset-lg); }
+    .ap-criteria--3col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ap-criteria__card { padding: var(--space-card-inset-lg); }
+    .ap-impact__icon { width: 64px; height: 64px; }
+    .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
+  }
+</style>
+
+<script>
+  function initCompareSliders() {
+    document.querySelectorAll<HTMLElement>('[data-compare]').forEach((el) => {
+      const wrap = el.querySelector<HTMLElement>('[data-compare-before-wrap]');
+      const handle = el.querySelector<HTMLElement>('[data-compare-handle]');
+      if (!wrap || !handle) return;
+
+      function setPosition(clientX: number) {
+        const rect = el!.getBoundingClientRect();
+        const pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
+        wrap!.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        handle!.style.left = `${pct}%`;
+      }
+
+      let dragging = false;
+      el.addEventListener('dragstart', (e) => e.preventDefault());
+      el.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        el.setPointerCapture(e.pointerId);
+        setPosition(e.clientX);
+        e.preventDefault();
+      });
+      el.addEventListener('pointermove', (e) => {
+        if (dragging) setPosition(e.clientX);
+      });
+      const stop = () => { dragging = false; };
+      el.addEventListener('pointerup', stop);
+      el.addEventListener('pointercancel', stop);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompareSliders);
+  } else {
+    initCompareSliders();
+  }
+</script>

@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   // These slugs are served by their own bespoke case/<slug>.astro page
   // (richer, block-based layout ported from Figma); exclude them here to
   // avoid duplicate routes.
-  const bespoke = new Set(['resonance', 'vpn-typography', 'vpn-premium']);
+  const bespoke = new Set(['resonance', 'vpn-typography', 'vpn-premium', 'freelancehunt']);
   return cases
     .filter((entry) => !bespoke.has(entry.slug))
     .map((entry) => ({
