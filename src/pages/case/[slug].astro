@@ -11,10 +11,15 @@ import ImpactList from '../../components/ImpactList.astro';
 
 export async function getStaticPaths() {
   const cases = await getCollection('case-studies');
-  return cases.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  // `resonance` is served by the bespoke case/resonance.astro page (richer,
+  // block-based layout ported from Figma); exclude it here to avoid a
+  // duplicate /case/resonance route.
+  return cases
+    .filter((entry) => entry.slug !== 'resonance')
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
 }
 
 interface Props {
