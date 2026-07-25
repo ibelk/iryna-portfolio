@@ -86,8 +86,11 @@ const impact = [
 
     <!-- RTT design showcase -->
     <section class="container ap-figure">
-      <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
-        width="1200" height="680" loading="lazy" decoding="async" />
+      <div class="ap-figure__frame">
+        <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
+          width="1200" height="680" loading="lazy" decoding="async" />
+        <span class="ap-badge ap-badge--corner">Example design RTT</span>
+      </div>
     </section>
 
     <!-- Context and constraints -->
@@ -97,7 +100,12 @@ const impact = [
         {contextCards.map((c) => (
           <article class="ap-card">
             <h3>{c.title}</h3>
-            <ul>{c.bullets.map((b) => <li>{b}</li>)}</ul>
+            <ul>{c.bullets.map((b) => (
+              <li>
+                <span class="ap-card__dot" aria-hidden="true"></span>
+                <span>{b}</span>
+              </li>
+            ))}</ul>
           </article>
         ))}
       </div>
@@ -136,7 +144,6 @@ const impact = [
 
     <!-- Before / after comparison -->
     <section class="container ap-figure">
-      <h2 class="ap-figure__title">Comparison of versions</h2>
       <div class="ap-compare" data-compare role="group" aria-label="Before and after comparison, draggable">
         <img class="ap-compare__after" src="/images/case-analytical/after.png" alt="After: the redesigned chart interface" loading="lazy" decoding="async" />
         <div class="ap-compare__before-wrap" data-compare-before-wrap>
@@ -145,6 +152,7 @@ const impact = [
         <div class="ap-compare__handle" data-compare-handle>
           <span aria-hidden="true">◂▸</span>
         </div>
+        <span class="ap-badge ap-badge--corner">Comparison of versions</span>
         <span class="ap-compare__label ap-compare__label--before">Before</span>
         <span class="ap-compare__label ap-compare__label--after">After</span>
       </div>
@@ -156,14 +164,16 @@ const impact = [
         <h2 class="ap-figure__title">Adaptive Chart System</h2>
         <p class="ap-figure__desc">Panels and charts can be moved and combined freely. Typography contrast and grid system help users read data in any layout configuration.</p>
       </div>
-      <img src="/images/case-analytical/adaptive.png" alt="Adaptive chart system — panels rearranged into a different layout"
-        width="1200" height="680" loading="lazy" decoding="async" />
+      <div class="ap-figure__frame">
+        <img src="/images/case-analytical/adaptive.png" alt="Adaptive chart system — panels rearranged into a different layout"
+          width="1200" height="680" loading="lazy" decoding="async" />
+        <span class="ap-badge ap-badge--corner">Example design FTT</span>
+      </div>
     </section>
 
-    <!-- Design system with a 4+ year horizon — Figma has this as two EQUAL
-         columns (title+list together on the left, visual alone on the
-         right), unlike the title-alone/content 1:1.4 split used elsewhere,
-         so it gets its own grid rather than reusing .ap-split. -->
+    <!-- Design system with a 4+ year horizon — title+list together on the
+         left, visual alone on the right, so it gets its own grid rather
+         than reusing .ap-split (which pairs a lone heading with a list). -->
     <section class="container ap-horizon">
       <div class="ap-horizon__left">
         <h2>Design System with 4+ Year Horizon</h2>
@@ -257,9 +267,8 @@ const impact = [
     display: grid;
     gap: var(--space-3xs-static);
     padding-block: var(--space-md-static);
-    border-top: 1px solid var(--color-border-subtle);
   }
-  .ap-meta__row:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-meta__row + .ap-meta__row { border-top: 1px solid var(--color-border-subtle); }
   .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-meta dd {
     margin: 0;
@@ -280,6 +289,28 @@ const impact = [
     color: var(--color-text-muted);
     max-width: 60ch;
     font-size: var(--text-body);
+  }
+  .ap-figure__frame { position: relative; }
+
+  /* Pill badge overlaid on design showcase images — matches the Figma
+     "Example design" / "Comparison of versions" callouts. */
+  .ap-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2xs-static) var(--space-sm-static);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    color: var(--color-text-primary);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+  }
+  .ap-badge--corner {
+    position: absolute;
+    top: var(--space-md-static);
+    right: var(--space-md-static);
   }
 
   /* Before / after comparison slider */
@@ -362,28 +393,36 @@ const impact = [
     display: grid;
     gap: var(--space-md-static);
   }
+  .ap-card h3 { font-size: var(--text-title-m); }
   .ap-card ul {
     margin: 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: var(--space-2xs-static);
+    gap: var(--space-sm-static);
   }
   .ap-card li {
-    position: relative;
-    padding-left: var(--space-sm-static);
+    display: flex;
+    align-items: flex-start;
     color: var(--color-text-muted);
     font-size: var(--text-body);
   }
-  .ap-card li::before {
+  .ap-card__dot {
+    position: relative;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+  .ap-card__dot::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 4px;
-    height: 4px;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
     border-radius: var(--radius-dot);
     background: var(--color-accent);
+    transform: translate(-50%, -50%);
   }
 
   /* Heading-left / list-right split sections */
@@ -402,9 +441,8 @@ const impact = [
     display: grid;
     gap: var(--space-2xs-static);
     padding-block: var(--space-lg-static);
-    border-top: 1px solid var(--color-border-subtle);
   }
-  .ap-list__item:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-list__item + .ap-list__item { border-top: 1px solid var(--color-border-subtle); }
   .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
 
   /* Design-system horizon — two equal columns on desktop (title+list, visual) */
@@ -422,9 +460,8 @@ const impact = [
     grid-template-columns: auto 1fr;
     gap: var(--space-sm-static);
     padding-block: var(--space-lg-static);
-    border-top: 1px solid var(--color-border-subtle);
   }
-  .ap-horizon__list li:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+  .ap-horizon__list li + li { border-top: 1px solid var(--color-border-subtle); }
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual {
@@ -491,7 +528,7 @@ const impact = [
     }
     .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     .ap-split {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--space-section-x);
     }
     .ap-horizon {
