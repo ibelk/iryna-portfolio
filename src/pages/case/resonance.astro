@@ -258,17 +258,12 @@ const impact = [
     color: var(--color-text-muted);
     font-size: var(--text-body);
   }
-  .ap-meta {
-    display: grid;
-    gap: 0;
-    margin: 0;
+  .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
+  .ap-meta__row { display: grid; gap: var(--space-3xs-static); }
+  .ap-meta__row + .ap-meta__row {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
   }
-  .ap-meta__row {
-    display: grid;
-    gap: var(--space-3xs-static);
-    padding-block: var(--space-md-static);
-  }
-  .ap-meta__row + .ap-meta__row { border-top: 1px solid var(--color-border-subtle); }
   .ap-meta dt { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-meta dd {
     margin: 0;
@@ -284,10 +279,18 @@ const impact = [
     height: auto;
     border-radius: var(--radius-card);
   }
+  .ap-figure__lead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg-static);
+    text-align: center;
+    max-width: 60ch;
+    margin-inline: auto;
+  }
   .ap-figure__title { order: -1; }
   .ap-figure__desc {
     color: var(--color-text-muted);
-    max-width: 60ch;
     font-size: var(--text-body);
   }
   .ap-figure__frame { position: relative; }
@@ -391,7 +394,7 @@ const impact = [
     border-radius: var(--radius-card);
     padding: var(--space-card-inset);
     display: grid;
-    gap: var(--space-md-static);
+    gap: var(--space-lg-static);
   }
   .ap-card h3 { font-size: var(--text-title-m); }
   .ap-card ul {
@@ -432,17 +435,16 @@ const impact = [
     align-items: start;
   }
   .ap-split__sub {
-    margin-top: var(--space-xs-static);
+    margin-top: var(--space-lg-static);
     color: var(--color-text-muted);
     font-size: var(--text-body);
   }
-  .ap-list { display: grid; gap: 0; }
-  .ap-list__item {
-    display: grid;
-    gap: var(--space-2xs-static);
-    padding-block: var(--space-lg-static);
+  .ap-list { display: flex; flex-direction: column; gap: var(--space-md); }
+  .ap-list__item { display: grid; gap: var(--space-2xs-static); }
+  .ap-list__item + .ap-list__item {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
   }
-  .ap-list__item + .ap-list__item { border-top: 1px solid var(--color-border-subtle); }
   .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
 
   /* Design-system horizon — two equal columns on desktop (title+list, visual) */
@@ -452,16 +454,18 @@ const impact = [
   }
   .ap-horizon__left {
     display: grid;
-    gap: var(--space-block-gap);
+    gap: var(--space-lg-static);
   }
-  .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+  .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-horizon__list li {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: var(--space-sm-static);
-    padding-block: var(--space-lg-static);
   }
-  .ap-horizon__list li + li { border-top: 1px solid var(--color-border-subtle); }
+  .ap-horizon__list li + li {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
+  }
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual {
@@ -479,7 +483,7 @@ const impact = [
   }
 
   /* Product impact — icon-in-halo marker, not a plain dot */
-  .ap-impact { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-md-static); }
+  .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -487,6 +491,10 @@ const impact = [
     align-items: center;
     font-size: var(--text-title-s);
     font-weight: var(--weight-semibold);
+  }
+  .ap-impact li + li {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
   }
   .ap-impact__icon {
     position: relative;
@@ -522,21 +530,22 @@ const impact = [
     .ap-hero {
       /* minmax(0, ...) so a long dd value or unbreakable word can't force a
          track wider than its fr share and push the grid past the viewport */
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       align-items: start;
-      gap: var(--space-section-x);
+      gap: var(--space-md-static);
     }
     .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .ap-card { padding: 42px; }
     .ap-split {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: var(--space-section-x);
+      gap: var(--space-md-static);
     }
+    .ap-panel { padding: 60px; }
     .ap-horizon {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       align-items: center;
       gap: var(--space-md-static);
     }
-    .ap-figure__lead { display: grid; gap: var(--space-xs-static); }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
   }
