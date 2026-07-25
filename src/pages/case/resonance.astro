@@ -253,10 +253,10 @@ const impact = [
   .ap-hero {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-block-gap);
-    padding-block: var(--space-section-y-lg);
+    gap: var(--space-xl-static);
+    padding-block: var(--space-lg-static);
   }
-  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-lg-static); }
+  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-hero h1 {
     font-size: var(--text-display-case);
     font-weight: var(--weight-semibold);
@@ -318,20 +318,20 @@ const impact = [
   .ap-badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-2xs-static) var(--space-sm-static);
+    padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control);
     background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     color: var(--color-text-primary);
-    font-size: var(--text-body);
+    font-size: var(--text-label);
     font-weight: var(--weight-semibold);
     white-space: nowrap;
   }
   .ap-badge--corner {
     position: absolute;
-    top: var(--space-xl-static);
-    right: var(--space-xl-static);
+    top: var(--space-xs-static);
+    right: var(--space-xs-static);
   }
 
   /* Before / after comparison slider — same 1200×680 frame size as the other
@@ -390,8 +390,8 @@ const impact = [
   }
   .ap-compare__label {
     position: absolute;
-    bottom: var(--space-xl-static);
-    padding: var(--space-2xs-static) var(--space-sm-static);
+    bottom: var(--space-xs-static);
+    padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control);
     background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
     backdrop-filter: blur(28px);
@@ -400,8 +400,8 @@ const impact = [
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
   }
-  .ap-compare__label--before { left: var(--space-xl-static); }
-  .ap-compare__label--after { right: var(--space-xl-static); }
+  .ap-compare__label--before { left: var(--space-xs-static); }
+  .ap-compare__label--after { right: var(--space-xs-static); }
 
   /* Context cards */
   .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
@@ -454,11 +454,15 @@ const impact = [
   .ap-split {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-block-gap);
+    gap: var(--space-md-static);
     align-items: start;
   }
+  /* Problems/Impact's panel-bg variant uses a wider title↔list gap on mobile
+     (24px) than Principles' plain split (20px) — both converge to 20px on
+     desktop, handled in the desktop media query below. */
+  .ap-split.ap-panel { gap: var(--space-lg-static); }
   .ap-split__sub {
-    margin-top: var(--space-lg-static);
+    margin-top: var(--space-sm-static);
     color: var(--color-text-muted);
     font-size: var(--text-body);
   }
@@ -508,7 +512,7 @@ const impact = [
   .ap-panel {
     background: var(--color-surface);
     border-radius: var(--radius-card);
-    padding: var(--space-card-inset);
+    padding: var(--space-lg-static);
   }
 
   /* Product impact — icon-in-halo marker, not a plain dot */
@@ -563,14 +567,32 @@ const impact = [
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       align-items: start;
       gap: var(--space-md-static);
+      padding-block: var(--space-section-y-lg);
     }
+    .ap-hero__lead { gap: var(--space-lg-static); }
     .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     .ap-card { padding: var(--space-card-inset-lg); }
     .ap-split {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--space-md-static);
     }
+    .ap-split.ap-panel { gap: var(--space-md-static); }
+    .ap-split__sub { margin-top: var(--space-lg-static); }
     .ap-panel { padding: var(--space-panel-inset); }
+    .ap-badge {
+      padding: var(--space-xs-static) var(--space-sm-static);
+      font-size: var(--text-body);
+    }
+    .ap-badge--corner {
+      top: var(--space-xl-static);
+      right: var(--space-xl-static);
+    }
+    .ap-compare__label {
+      bottom: var(--space-xl-static);
+      padding: var(--space-xs-static) var(--space-sm-static);
+    }
+    .ap-compare__label--before { left: var(--space-xl-static); }
+    .ap-compare__label--after { right: var(--space-xl-static); }
     .ap-horizon {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       align-items: center;

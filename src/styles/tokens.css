@@ -140,7 +140,7 @@
   --space-card-inset-sm: var(--size-12); /* compact card (experiments) same */
   --space-card-inset-md: var(--size-20); /* writing card content   same */
   --space-card-inset-lg: var(--size-42); /* Block/Cards/Card padding  same */
-  --space-panel-inset: var(--size-60); /* Block/Text "List bg" panel same */
+  --space-panel-inset: var(--size-24); /* Block/Text "List bg" panel desktop 60 */
   --space-card-gap: var(--size-12); /* stacked card parts    desktop 20 */
   --space-card-stack: var(--size-24); /* text block ↔ tag row  same */
   --space-card-text-gap: var(--size-20); /* title ↔ subtitle    desktop 24 */
@@ -254,6 +254,7 @@
 
     /* GROUP 3 — INSIDE CARDS */
     --space-card-inset: var(--size-48);
+    --space-panel-inset: var(--size-60);
     --space-card-gap: var(--size-20);
     --space-card-text-gap: var(--size-24);
     --size-thumb: var(--size-120);
