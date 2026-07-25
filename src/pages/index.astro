@@ -47,7 +47,11 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
       <div class="grid grid--two">
         {
           experiments.map((entry) => (
-            <ExperimentCard title={entry.data.title} image={entry.data.image} href="/experiments" />
+            <ExperimentCard
+              title={entry.data.title}
+              image={entry.data.image}
+              href={`/experiments/${entry.slug}/`}
+            />
           ))
         }
       </div>

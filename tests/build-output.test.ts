@@ -62,9 +62,9 @@ describe('home page', () => {
     }
   });
 
-  it('links to both Experiments and Writing', () => {
+  it('links into the experiment detail pages and to Writing', () => {
     const html = readFileSync('dist/index.html', 'utf-8');
-    expect(html).toContain('href="/experiments"');
+    expect(html).toContain('href="/experiments/');
     expect(html).toContain('href="/writing"');
   });
 
@@ -76,9 +76,9 @@ describe('home page', () => {
   });
 });
 
-describe('experiments page', () => {
-  it('builds and lists every experiment category', () => {
-    const html = readFileSync('dist/experiments/index.html', 'utf-8');
+describe('experiments section on the home page', () => {
+  it('lists every experiment category', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
     for (const title of ['3D', 'Figma AI', 'Claude Code', 'UI Practice']) {
       expect(html).toContain(title);
     }
@@ -95,11 +95,24 @@ describe('experiment detail pages', () => {
     }
   });
 
-  it('the listing links to each detail page', () => {
-    const html = readFileSync('dist/experiments/index.html', 'utf-8');
+  it('the home page links straight to each detail page', () => {
+    const html = readFileSync('dist/index.html', 'utf-8');
     for (const slug of slugs) {
       expect(html).toContain(`href="/experiments/${slug}/"`);
     }
+  });
+
+  it('has no duplicate experiments listing page', () => {
+    expect(existsSync('dist/experiments/index.html')).toBe(false);
+  });
+
+  it('the 3D and UI Practice galleries show real images, not placeholders', () => {
+    const threeD = readFileSync('dist/experiments/3d/index.html', 'utf-8');
+    expect(threeD).toContain('/images/3d/');
+    expect(threeD).not.toContain('/images/3d/placeholder');
+
+    const uiPractice = readFileSync('dist/experiments/ui-practice/index.html', 'utf-8');
+    expect(uiPractice).toContain('/images/ui-practice/');
   });
 
   it('the Figma AI page lists the tool write-ups and links them out', () => {
@@ -115,9 +128,14 @@ describe('experiment detail pages', () => {
   });
 
   it('pages without finished content are marked work in progress', () => {
-    for (const slug of ['ui-practice', 'claude-code']) {
+    const html = readFileSync('dist/experiments/claude-code/index.html', 'utf-8');
+    expect(html).toContain('Work in progress');
+  });
+
+  it('pages that do have content are not marked work in progress', () => {
+    for (const slug of ['3d', 'figma-ai', 'ui-practice']) {
       const html = readFileSync(`dist/experiments/${slug}/index.html`, 'utf-8');
-      expect(html).toContain('Work in progress');
+      expect(html).not.toContain('Work in progress');
     }
   });
 

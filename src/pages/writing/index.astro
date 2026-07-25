@@ -38,10 +38,12 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
 </BaseLayout>
 
 <style>
+  /* 24px under the title, matching the design: cap-height trimming removes the
+     font's own leading, so a smaller gap reads as collapsed. */
   .page-head {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs-static);
+    gap: var(--space-lg-static);
     padding-block: var(--space-section-y);
   }
 

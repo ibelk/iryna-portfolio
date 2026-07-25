@@ -48,6 +48,16 @@ const experimentEntry = z.object({
   href: z.string().url().optional(),
 });
 
+const galleryItem = z.object({
+  src: z.string(),
+  alt: z.string(),
+  // Some pieces are mounted on a coloured card in the design rather than
+  // bleeding to the page background.
+  background: z.string().optional(),
+  // `tall` pieces get a full-width row of their own.
+  tall: z.boolean().default(false),
+});
+
 const experiments = defineCollection({
   type: 'content',
   schema: z.object({
@@ -61,6 +71,7 @@ const experiments = defineCollection({
     status: z.enum(['live', 'wip']).default('live'),
     meta: z.array(metaItem).default([]),
     entries: z.array(experimentEntry).default([]),
+    gallery: z.array(galleryItem).default([]),
     // When true the detail page lists the posts collection instead of `entries`,
     // so the Figma-tool write-ups live in exactly one place.
     listsPosts: z.boolean().default(false),
@@ -71,7 +82,9 @@ const posts = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    excerpt: z.string(),
+    // Optional: the cards show title and tags only, so a post can go live from
+    // its Figma design before its summary has been written.
+    excerpt: z.string().optional(),
     linkedinUrl: z.string().url(),
     image: z.string(),
     order: z.number(),

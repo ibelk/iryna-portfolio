@@ -15,7 +15,7 @@ interface Props {
   entry: CollectionEntry<'experiments'>;
 }
 const { entry } = Astro.props;
-const { title, subtitle, intro, status, meta, entries, listsPosts } = entry.data;
+const { title, subtitle, intro, status, meta, entries, gallery, listsPosts } = entry.data;
 
 // The Figma-tool write-ups live in the posts collection; this page lists them
 // rather than duplicating their text.
@@ -29,7 +29,7 @@ const posts = listsPosts
 
   <main>
     <section class="container page-head">
-      <Breadcrumbs parentLabel="Experiments" parentHref="/experiments" current={title} />
+      <Breadcrumbs parentLabel="Experiments" parentHref="/#experiments" current={title} />
       <div class="page-head__text">
         <h1 class="page-head__title">{title}</h1>
         <p class="page-head__subtitle">{subtitle}</p>
@@ -91,7 +91,22 @@ const posts = listsPosts
     }
 
     {
-      entries.length === 0 && posts.length === 0 && (
+      gallery.length > 0 && (
+        <section class="container gallery">
+          {gallery.map((item) => (
+            <figure
+              class:list={['piece', { 'piece--wide': item.tall }]}
+              style={item.background ? `background:${item.background}` : undefined}
+            >
+              <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      entries.length === 0 && posts.length === 0 && gallery.length === 0 && (
         <section class="container">
           <p class="empty">Selected pieces are being written up.</p>
         </section>
@@ -110,11 +125,13 @@ const posts = listsPosts
     padding-block: var(--space-section-y);
   }
 
+  /* 24px between title and subtitle, matching the design — cap-height trimming
+     removes the font's own leading, so a smaller gap reads as collapsed. */
   .page-head__text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-xs-static);
+    gap: var(--space-lg-static);
   }
 
   .page-head__title {
@@ -223,6 +240,42 @@ const posts = listsPosts
   .empty {
     color: var(--color-text-muted);
     padding-block: var(--space-section-y);
+  }
+
+  .gallery {
+    display: grid;
+    gap: var(--space-xl-static);
+    padding-block: var(--space-section-y);
+  }
+
+  .piece {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+
+  /* A piece mounted on a coloured card is inset so the colour frames it; a
+     full-bleed piece fills its own row. */
+  .piece[style] {
+    padding: var(--space-xl-static);
+  }
+
+  .piece img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-media);
+  }
+
+  @media (min-width: 1024px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .piece--wide {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (min-width: 1024px) {
