@@ -85,7 +85,7 @@ const impact = [
     </header>
 
     <!-- RTT design showcase -->
-    <section class="container ap-figure">
+    <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
         <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
           width="1200" height="680" loading="lazy" decoding="async" />
@@ -112,7 +112,7 @@ const impact = [
     </section>
 
     <!-- Problems — Figma "List bg" type: split content sits on a raised panel -->
-    <section class="container">
+    <section class="container ap-block">
       <div class="ap-split ap-panel">
         <h2>Problems of Managing Complex Data</h2>
         <div class="ap-list">
@@ -127,18 +127,20 @@ const impact = [
     </section>
 
     <!-- Design principles -->
-    <section class="container ap-split">
-      <div class="ap-split__head">
-        <h2>Design Principles</h2>
-        <p class="ap-split__sub">System design for growth without losing control</p>
-      </div>
-      <div class="ap-list">
-        {principles.map((p) => (
-          <div class="ap-list__item">
-            <h3>{p.title}</h3>
-            <p>{p.desc}</p>
-          </div>
-        ))}
+    <section class="container ap-block">
+      <div class="ap-split">
+        <div class="ap-split__head">
+          <h2>Design Principles</h2>
+          <p class="ap-split__sub">System design for growth without losing control</p>
+        </div>
+        <div class="ap-list">
+          {principles.map((p) => (
+            <div class="ap-list__item">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -194,7 +196,7 @@ const impact = [
     <!-- Product impact — Figma "List bg" type: split content on a raised panel,
          each item marked with a real icon (category/profile/cursor) in a halo,
          not a generic dot. -->
-    <section class="container">
+    <section class="container ap-block">
       <div class="ap-split ap-panel">
         <h2>Product Impact</h2>
         <ul class="ap-impact">
@@ -213,13 +215,15 @@ const impact = [
 </BaseLayout>
 
 <style>
-  /* Section rhythm — mobile-first; desktop pairs come from the token media query. */
+  /* Section rhythm — mobile-first; desktop pairs come from the token media query.
+     Sections stack with zero gap between them; each section supplies its own
+     vertical padding (matching the Figma frame, where every block is flush
+     against the next and the visual rhythm comes entirely from each block's
+     own py). */
   .ap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-section-gap);
-    padding-block: var(--space-section-y) var(--space-section-y-lg);
+    display: block;
   }
+  .ap-block { padding-block: var(--space-section-y); }
   .ap h2 {
     font-size: var(--text-title-l);
     font-weight: var(--weight-semibold);
@@ -235,6 +239,7 @@ const impact = [
     display: flex;
     gap: var(--space-2xs-static);
     align-items: center;
+    padding-block: var(--space-sm-static);
     color: var(--color-text-muted);
     font-size: var(--text-body);
   }
@@ -244,8 +249,11 @@ const impact = [
   /* Hero */
   .ap-hero {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-block-gap);
+    padding-block: var(--space-section-y-lg);
   }
+  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-lg-static); }
   .ap-hero h1 {
     font-size: var(--text-display);
     font-weight: var(--weight-semibold);
@@ -253,7 +261,6 @@ const impact = [
     letter-spacing: -0.01em;
   }
   .ap-hero__sub {
-    margin-top: var(--space-md-static);
     max-width: 34ch;
     color: var(--color-text-muted);
     font-size: var(--text-body);
@@ -273,7 +280,15 @@ const impact = [
   }
 
   /* Full-bleed design figures */
-  .ap-figure { display: grid; gap: var(--space-md-static); }
+  .ap-figure {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-section-y);
+    padding-block: var(--space-section-y);
+  }
+  /* RTT — directly follows the hero, so it inherits the hero's larger
+     bottom-of-block spacing on top instead of the standard section padding. */
+  .ap-figure--lead { padding-top: var(--space-section-y-lg); }
   .ap-figure img {
     width: 100%;
     height: auto;
@@ -316,14 +331,14 @@ const impact = [
     right: var(--space-md-static);
   }
 
-  /* Before / after comparison slider */
+  /* Before / after comparison slider — same 1200×680 frame size as the other
+     design showcases, with a visible outline (the only one of the three
+     that has one in the Figma source). */
   .ap-compare {
     position: relative;
-    order: -1;
     width: 100%;
-    aspect-ratio: 600 / 632;
-    max-width: 600px;
-    margin-inline: auto;
+    aspect-ratio: 1200 / 680;
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
     overflow: hidden;
     cursor: ew-resize;
@@ -383,7 +398,7 @@ const impact = [
   .ap-compare__label--after { right: var(--space-md-static); }
 
   /* Context cards */
-  .ap-section { display: grid; gap: var(--space-block-gap); }
+  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
   .ap-cards {
     display: grid;
     grid-template-columns: 1fr;
@@ -394,6 +409,7 @@ const impact = [
     border-radius: var(--radius-card);
     padding: var(--space-card-inset);
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-lg-static);
   }
   .ap-card h3 { font-size: var(--text-title-m); }
@@ -431,6 +447,7 @@ const impact = [
   /* Heading-left / list-right split sections */
   .ap-split {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-block-gap);
     align-items: start;
   }
@@ -440,7 +457,7 @@ const impact = [
     font-size: var(--text-body);
   }
   .ap-list { display: flex; flex-direction: column; gap: var(--space-md); }
-  .ap-list__item { display: grid; gap: var(--space-2xs-static); }
+  .ap-list__item { display: grid; grid-template-columns: 1fr; gap: var(--space-2xs-static); }
   .ap-list__item + .ap-list__item {
     padding-top: var(--space-md);
     border-top: 1px solid var(--color-border-subtle);
@@ -450,10 +467,13 @@ const impact = [
   /* Design-system horizon — two equal columns on desktop (title+list, visual) */
   .ap-horizon {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-block-gap);
+    padding-block: var(--space-section-y);
   }
   .ap-horizon__left {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-lg-static);
   }
   .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
