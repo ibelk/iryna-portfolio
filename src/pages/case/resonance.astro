@@ -266,7 +266,7 @@ const impact = [
     font-size: var(--text-body);
   }
   .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
-  .ap-meta__row { display: grid; gap: var(--space-3xs-static); }
+  .ap-meta__row { display: grid; gap: var(--space-2xs-static); }
   .ap-meta__row + .ap-meta__row {
     padding-top: var(--space-md);
     border-top: 1px solid var(--color-border-subtle);
@@ -463,6 +463,9 @@ const impact = [
     border-top: 1px solid var(--color-border-subtle);
   }
   .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
+  /* Problems' list sits on the panel and uses a slightly wider title↔text
+     gap (12px) than Principles' label/value rows (8px). */
+  .ap-panel .ap-list__item { gap: var(--space-xs-static); }
 
   /* Design-system horizon — two equal columns on desktop (title+list, visual) */
   .ap-horizon {
@@ -480,7 +483,7 @@ const impact = [
   .ap-horizon__list li {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: var(--space-sm-static);
+    gap: var(--space-2xs-static);
   }
   .ap-horizon__list li + li {
     padding-top: var(--space-md);
