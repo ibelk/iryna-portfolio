@@ -254,6 +254,18 @@ const impact = [
   .ap-compare__label--before { left: var(--space-xs-static); }
   .ap-compare__label--after { right: var(--space-xs-static); }
 
+  /* The 1200x680 desktop screenshot shrinks a lot on narrow viewports, but
+     these overlay badges keep desktop font-size/padding — on mobile the
+     corner badge alone was wider than half the slider. Scale them down to
+     match the shrunk image instead of overwhelming it. */
+  @media (max-width: 1023px) {
+    .ap-compare .ap-badge,
+    .ap-compare__label {
+      padding: 2px var(--space-3xs-static);
+      font-size: 10px;
+    }
+  }
+
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
   .ap-list { display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-list__item { display: grid; grid-template-columns: 1fr; gap: var(--space-2xs-static); }
