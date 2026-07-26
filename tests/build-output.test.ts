@@ -116,7 +116,7 @@ describe('experiment detail pages', () => {
 
   it('the Figma AI page lists the tool write-ups as cards linking to on-site articles', () => {
     const html = readFileSync('dist/experiments/figma-ai/index.html', 'utf-8');
-    expect(html).toContain('Testing Figma Make');
+    expect(html).toContain('How far can I push Figma Make');
     expect(html).toContain('/experiments/articles/figma-make/');
   });
 

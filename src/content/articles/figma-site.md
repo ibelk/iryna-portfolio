@@ -1,5 +1,5 @@
 ---
-title: "Testing Figma Sites with a Product Concept"
+title: "Can I publish a website without leaving Figma?"
 order: 2
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"

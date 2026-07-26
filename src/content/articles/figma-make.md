@@ -1,5 +1,5 @@
 ---
-title: "Testing Figma Make with a Product Concept"
+title: "How far can I push Figma Make before I need to design by hand?"
 order: 3
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
