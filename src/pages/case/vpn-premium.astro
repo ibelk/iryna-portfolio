@@ -29,10 +29,10 @@ const problems = [
 ];
 
 const changeCards = [
-  { title: 'Separation of selection and payment', desc: 'Pricing page and payment page became two steps. User focuses on one decision at a time.' },
+  { title: 'Separation of selection  and payment', desc: 'Pricing page and payment page became two steps. User focuses on one decision at a time.' },
   { title: 'Shift of focus  to Premium', desc: 'Primary buttons now lead to purchase. Free option is still available but no longer dominant.' },
   { title: 'Value instead  of illustrations', desc: 'Removed decorative blocks. Added clear list of Premium features. User sees what they pay for.' },
-  { title: 'Subscription period repositioning', desc: 'Plan selection moved to the top. Communication starts from the lowest monthly price.' },
+  { title: 'Subscription period  repositioning', desc: 'Plan selection moved to the top. Communication starts from the lowest monthly price.' },
   { title: 'Transparency at checkout', desc: 'User sees full order details, discounts and savings.' },
   { title: 'Promo code support', desc: 'Added clear entry point for promo code. No interface overload.' },
 ];
@@ -146,7 +146,14 @@ const impact = [
       <div class="ap-criteria ap-criteria--3col ap-criteria--text-only">
         {changeCards.map((c) => (
           <article class="ap-criteria__card">
-            <h3>{c.title}</h3>
+            <h3>
+              {c.title.split('  ').map((line, i, arr) => (
+                <>
+                  {line}
+                  {i < arr.length - 1 && <br />}
+                </>
+              ))}
+            </h3>
             <p>{c.desc}</p>
           </article>
         ))}
