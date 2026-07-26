@@ -14,7 +14,8 @@ interface Props {
   entry: CollectionEntry<'articles'>;
 }
 const { entry } = Astro.props;
-const { title, parentLabel, parentHref, intro, blocks } = entry.data;
+const { title, heroTitle, parentLabel, parentHref, intro, blocks } = entry.data;
+const displayTitle = heroTitle ?? title;
 ---
 
 <BaseLayout title={`${title} — Iryna Belkova`}>
@@ -22,11 +23,11 @@ const { title, parentLabel, parentHref, intro, blocks } = entry.data;
 
   <main class="article">
     <div class="container article__crumb">
-      <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={title} />
+      <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={displayTitle} />
     </div>
 
     <header class="container article__hero">
-      <h1>{title}</h1>
+      <h1>{displayTitle}</h1>
       {intro.map((p) => <p class="article__intro">{p}</p>)}
     </header>
 

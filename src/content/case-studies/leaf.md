@@ -1,5 +1,5 @@
 ---
-title: "Leaf"
+title: "Solo-built eco-habit mobile app"
 subtitle: "Solo-designed end-to-end — from user research to Google Play, with 130+ original 3D illustrations"
 tag: "Consumer Mobile / 0→1"
 tags: ["B2C", "Mobile", "User Survey", "Solo project"]

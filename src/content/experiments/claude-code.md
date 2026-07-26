@@ -8,6 +8,9 @@ intro: "This portfolio is itself the test case: designed in Figma, built with an
 meta: []
 entries: []
 listsPosts: true
+wipCards:
+  - title: "Design System AI Agent (WIP)"
+    image: "/images/articles/claude-code-cover.png"
 ---
 
 Building real products with an AI coding agent — including this site.

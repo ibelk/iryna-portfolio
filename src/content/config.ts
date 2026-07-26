@@ -75,6 +75,10 @@ const experiments = defineCollection({
     // When true the detail page lists the posts collection instead of `entries`,
     // so the Figma-tool write-ups live in exactly one place.
     listsPosts: z.boolean().default(false),
+    // Not-yet-written cards shown alongside the real write-ups in the same
+    // row — Figma renders these dimmed with a "WIP" label instead of linking
+    // out, so they can announce upcoming work without a live page yet.
+    wipCards: z.array(z.object({ title: z.string(), image: z.string() })).default([]),
   }),
 });
 
@@ -121,6 +125,12 @@ const articles = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    // The h1 + breadcrumb "current" shown on the article page itself — Figma
+    // gives each write-up a plain working title ("Testing Figma Sites with a
+    // Product Concept") distinct from the catchier question used as its
+    // writing-card teaser everywhere else. Defaults to `title` for entries
+    // where Figma uses the same text in both places.
+    heroTitle: z.string().optional(),
     order: z.number(),
     // Breadcrumb + the writing card that links here from the experiment page.
     parentLabel: z.string(),

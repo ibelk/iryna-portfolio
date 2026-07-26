@@ -1,10 +1,10 @@
 ---
 title: "Can I publish a website without leaving Figma?"
+heroTitle: "Testing Figma Sites with a Product Concept"
 order: 2
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
 cardImage: "/images/articles/figma-site-cover.png"
-crossListedIn: ["claude-code"]
 intro:
   - "Figma added a new tool called Sites. I wanted to see if it could be more than just a design tool. Could I build a landing page without using Framer or Webflow?"
   - "For this test, I used Backstage. This is a fictional event platform I made for this series of Figma tests."

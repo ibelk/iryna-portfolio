@@ -1,5 +1,6 @@
 ---
 title: "How far can I push Figma Make before I need to design by hand?"
+heroTitle: "Testing Figma Make with a Product Concept"
 order: 3
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
@@ -28,12 +29,12 @@ blocks:
       - "The biggest plus was speed."
       - "Instead of building every screen by hand, I could make a working prototype in a few minutes and keep improving it."
       - "I also liked the loop of prompt, result, then refine. It made testing ideas much faster than normal design work."
-  - type: "gallery"
-    images:
-      - src: "/images/articles/figma-make-2.png"
-        alt: "Figma Make generated event detail screen"
-      - src: "/images/articles/figma-make-3.png"
-        alt: "Figma Make generated event detail screen, alternate state"
+  - type: "image"
+    src: "/images/articles/figma-make-2.png"
+    alt: "Figma Make generated event detail screen"
+  - type: "image"
+    src: "/images/articles/figma-make-3.png"
+    alt: "Figma Make generated event detail screen, alternate state"
   - type: "text"
     heading: "What is still missing"
     paragraphs:

@@ -1,6 +1,6 @@
 ---
 title: "Figma AI"
-subtitle: "Seven days, seven Figma tools, one fictional product"
+subtitle: "Testing Figma's AI-native tools on one invented product"
 image: "/images/experiments/figma-ai.png"
 order: 2
 status: "live"

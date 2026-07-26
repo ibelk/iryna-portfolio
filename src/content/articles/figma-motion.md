@@ -1,5 +1,6 @@
 ---
 title: "Can AI animate a real product UI?"
+heroTitle: "Testing Figma Motion on a Real Product Concept"
 order: 1
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"

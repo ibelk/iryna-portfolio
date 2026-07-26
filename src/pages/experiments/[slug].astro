@@ -15,7 +15,7 @@ interface Props {
   entry: CollectionEntry<'experiments'>;
 }
 const { entry } = Astro.props;
-const { title, subtitle, intro, status, meta, entries, gallery, listsPosts } = entry.data;
+const { title, subtitle, intro, status, meta, entries, gallery, listsPosts, wipCards } = entry.data;
 
 // Each tool write-up is its own on-site article; this page just links out to
 // the ones that belong to it (matched by parentHref) as writing cards.
@@ -57,7 +57,7 @@ const articles = listsPosts
     }
 
     {
-      articles.length > 0 && (
+      (articles.length > 0 || wipCards.length > 0) && (
         <section class="container entries entries--cards">
           {articles.map((article) => (
             <WritingCard
@@ -66,6 +66,17 @@ const articles = listsPosts
               href={`/experiments/articles/${article.slug}/`}
               tags={[]}
             />
+          ))}
+          {wipCards.map((card) => (
+            <div class="wip-card">
+              <div class="wip-card__media">
+                <img src={card.image} alt="" loading="lazy" decoding="async" />
+              </div>
+              <div class="wip-card__body">
+                <span class="wip-card__tag">WIP</span>
+                <h3 class="wip-card__title">{card.title}</h3>
+              </div>
+            </div>
           ))}
         </section>
       )
@@ -87,7 +98,7 @@ const articles = listsPosts
     }
 
     {
-      entries.length === 0 && articles.length === 0 && gallery.length === 0 && (
+      entries.length === 0 && articles.length === 0 && wipCards.length === 0 && gallery.length === 0 && (
         <section class="container">
           <p class="empty">Selected pieces are being written up.</p>
         </section>
@@ -103,7 +114,15 @@ const articles = listsPosts
     display: flex;
     flex-direction: column;
     gap: var(--space-lg-static);
-    padding-block: var(--space-section-y);
+    padding-block-start: var(--space-section-y);
+    padding-block-end: var(--space-block-gap);
+  }
+
+  /* Figma keeps the hero-to-cards gap at a fixed 36px (space-block-gap) on
+     both sides of the seam, not the larger section-to-section rhythm — the
+     cards row reads as part of the hero, not a new section. */
+  .page-head + section {
+    padding-top: var(--space-block-gap);
   }
 
   /* 24px between title and subtitle, matching the design — cap-height trimming
@@ -221,6 +240,61 @@ const articles = listsPosts
   .empty {
     color: var(--color-text-muted);
     padding-block: var(--space-section-y);
+  }
+
+  /* Not-yet-written card — same shape as WritingCard, but dimmed and
+     unlinked, matching Figma's "Design System AI Agent (WIP)" placeholder. */
+  .wip-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-8);
+    padding: var(--space-card-padding);
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+  }
+
+  .wip-card__media {
+    height: 232px;
+    overflow: hidden;
+    border-radius: var(--radius-media-post);
+    filter: blur(2px) grayscale(0.3);
+    opacity: 0.5;
+  }
+
+  .wip-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wip-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-card-text-gap);
+    padding: var(--space-card-inset-md);
+  }
+
+  .wip-card__tag {
+    width: fit-content;
+    padding: var(--space-tag-y) var(--space-tag-x);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-subtle);
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .wip-card__title {
+    font-size: var(--text-title-s);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-component);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 1024px) {
+    .wip-card__media {
+      height: 263px;
+    }
   }
 
   .gallery {
