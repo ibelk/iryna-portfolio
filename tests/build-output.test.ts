@@ -121,10 +121,10 @@ describe('experiment detail pages', () => {
     expect(html).toContain('linkedin.com');
   });
 
-  it('the 3D page carries its real scale figure', () => {
+  it('the 3D page gallery renders every image full width, matching Figma', () => {
     const html = readFileSync('dist/experiments/3d/index.html', 'utf-8');
-    expect(html).toContain('130+ original assets');
-    expect(html).toContain('Cinema 4D');
+    expect(html).toContain('/images/3d/01-vector.png');
+    expect(html).not.toContain('130+ original assets');
   });
 
   it('pages without finished content are marked work in progress', () => {

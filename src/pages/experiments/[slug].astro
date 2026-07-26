@@ -35,21 +35,7 @@ const posts = listsPosts
         <p class="page-head__subtitle">{subtitle}</p>
         {status === 'wip' && <span class="wip">Work in progress</span>}
       </div>
-      <p class="page-head__intro">{intro}</p>
     </section>
-
-    {
-      meta.length > 0 && (
-        <section class="container meta">
-          {meta.map((row) => (
-            <div class="meta__row">
-              <span class="meta__label">{row.label}</span>
-              <span class="meta__value">{row.value}</span>
-            </div>
-          ))}
-        </section>
-      )
-    }
 
     {
       entries.length > 0 && (
@@ -266,16 +252,6 @@ const posts = listsPosts
     width: 100%;
     height: auto;
     border-radius: var(--radius-media);
-  }
-
-  @media (min-width: 1024px) {
-    .gallery {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .piece--wide {
-      grid-column: 1 / -1;
-    }
   }
 
   @media (min-width: 1024px) {
