@@ -1,7 +1,7 @@
 ---
 title: "Figma AI"
 subtitle: "Seven days, seven Figma tools, one fictional product"
-image: "/images/experiments/figma-ai.svg"
+image: "/images/experiments/figma-ai.png"
 order: 2
 status: "live"
 listsPosts: true

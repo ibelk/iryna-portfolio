@@ -1,7 +1,7 @@
 ---
 title: "UI Practice"
 subtitle: "Interface studies outside client work"
-image: "/images/experiments/ui-practice.svg"
+image: "/images/experiments/ui-practice.png"
 order: 4
 status: "live"
 intro: "Screens built to try a pattern, a layout system or a visual direction without a brief attached — the work that keeps craft sharp between projects."

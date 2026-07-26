@@ -91,6 +91,14 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
     padding-block: var(--space-section-y);
   }
 
+  /* `.container`'s `margin-inline: auto` defeats this flex column's
+     align-items: stretch (auto margins absorb stretched space instead of
+     letting the box grow), so every card shrinks to its own content width.
+     Force it back to full width explicitly. */
+  .work__item {
+    width: 100%;
+  }
+
   /* Desktop card stack: each card sticks a little lower than the one before, so
      the next card scrolls up over it and the edge of each stays visible.
      Pure CSS — no scroll listener, nothing to fall out of sync. */
