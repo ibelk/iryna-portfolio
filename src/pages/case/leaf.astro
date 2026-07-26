@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // Ported from Figma "Web-portfolio" / page "Leaf" / frame Leaf-1920 (269:17542).
 // This case has no clean "Type=Image" slot per section (each illustration is a
@@ -44,11 +45,9 @@ const results = [
   <Header />
 
   <main class="ap">
-    <nav class="container ap-crumb" aria-label="Breadcrumb">
-      <a href="/#work">Main</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{title}</span>
-    </nav>
+    <div class="container ap-crumb">
+      <Breadcrumbs parentLabel="Main" parentHref="/#work" current={title} />
+    </div>
 
     <!-- Hero -->
     <header class="container ap-hero">
@@ -162,12 +161,7 @@ const results = [
   .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
   .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); }
 
-  .ap-crumb {
-    display: flex; gap: var(--space-3xs-static); align-items: center;
-    padding-block: var(--space-sm-static); color: var(--color-text-muted); font-size: var(--text-body);
-  }
-  .ap-crumb a:hover { opacity: var(--opacity-hover); }
-  .ap-crumb [aria-current] { color: var(--color-text-primary); font-weight: var(--weight-semibold); }
+  .ap-crumb { padding-block: var(--space-sm-static); }
 
   .ap-hero {
     display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);

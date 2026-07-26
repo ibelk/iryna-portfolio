@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // Ported from Figma "Web-portfolio" / page "VPN" / frame VPN-1920 (260:13642).
 // The three app-mockup illustrations (main hero, desktop app, error/contrast
@@ -92,11 +93,9 @@ const impact = [
   <Header />
 
   <main class="ap">
-    <nav class="container ap-crumb" aria-label="Breadcrumb">
-      <a href="/#work">Main</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{title}</span>
-    </nav>
+    <div class="container ap-crumb">
+      <Breadcrumbs parentLabel="Main" parentHref="/#work" current={title} />
+    </div>
 
     <!-- Hero -->
     <header class="container ap-hero">
@@ -260,19 +259,7 @@ const impact = [
   }
 
   /* Breadcrumb */
-  .ap-crumb {
-    display: flex;
-    gap: var(--space-3xs-static);
-    align-items: center;
-    padding-block: var(--space-sm-static);
-    color: var(--color-text-muted);
-    font-size: var(--text-body);
-  }
-  .ap-crumb a:hover { opacity: var(--opacity-hover); }
-  .ap-crumb [aria-current] {
-    color: var(--color-text-primary);
-    font-weight: var(--weight-semibold);
-  }
+  .ap-crumb { padding-block: var(--space-sm-static); }
 
   /* Hero */
   .ap-hero {
@@ -424,7 +411,7 @@ const impact = [
 
   /* Quote table */
   .ap-quote {
-    background: #1e1e20;
+    background: var(--color-surface-quote);
     border-radius: var(--radius-card);
     overflow: hidden;
   }
@@ -440,12 +427,12 @@ const impact = [
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
   .ap-quote__row--head { display: none; }
-  .ap-quote__row p { margin: 0; color: #dfdfdf; font-size: var(--text-body); }
+  .ap-quote__row p { margin: 0; color: var(--color-text-quote); font-size: var(--text-body); }
   .ap-quote__role {
     display: flex;
     align-items: center;
     gap: var(--space-xs-static);
-    color: #dfdfdf;
+    color: var(--color-text-quote);
     font-size: var(--text-body);
   }
   .ap-quote__icon {
@@ -471,7 +458,7 @@ const impact = [
     border-radius: 50%;
     background: var(--color-accent);
   }
-  .ap-quote__icon :global(svg) { position: relative; z-index: 1; width: 14px; height: 14px; color: #dfdfdf; }
+  .ap-quote__icon :global(svg) { position: relative; z-index: 1; width: 14px; height: 14px; color: var(--color-text-quote); }
 
   /* Criteria cards grid */
   .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
@@ -533,7 +520,7 @@ const impact = [
     }
     .ap-quote__row--head {
       display: grid;
-      color: #dfdfdf;
+      color: var(--color-text-quote);
       font-size: 18px;
       font-weight: var(--weight-semibold);
     }

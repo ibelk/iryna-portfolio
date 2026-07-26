@@ -19,8 +19,11 @@
   --brand-orange-500: #ff5e3a;
 
   --neutral-0: #ffffff;
-  --neutral-850: #222222;
-  --neutral-950: #0a0a0a;
+  --neutral-200: #dfdfdf;
+  --neutral-700: #414144;
+  --neutral-800: #282829;
+  --neutral-900: #1e1e20;
+  --neutral-950: #09090b;
 
   /* White alpha ramp — every translucent surface/text in the design */
   --white-a90: rgba(255, 255, 255, 0.9);
@@ -30,7 +33,7 @@
   --white-a10: rgba(255, 255, 255, 0.1);
 
   /* Ink alpha ramp — text on light surfaces (the "View all work" CTA card) */
-  --ink-a90: rgba(10, 10, 10, 0.9);
+  --ink-a90: rgba(30, 30, 32, 0.9); /* neutral-900 @ 90% */
 
   /* ---------------------------------------------------------------------------
      1. PRIMITIVES — SPACE (4px base scale)
@@ -81,7 +84,10 @@
      2. SEMANTIC — COLOR   (no mobile/desktop pair: identical on both)
      ========================================================================= */
   --color-bg: var(--neutral-950);
-  --color-surface: var(--neutral-850);
+  --color-surface: var(--neutral-800);
+  --color-surface-quote: var(--neutral-900);
+  --color-border-quote: var(--neutral-700);
+  --color-text-quote: var(--neutral-200);
   --color-surface-inverse: var(--neutral-0); /* CTA card */
   --color-surface-subtle: var(--white-a15); /* tag / chip background */
   --color-surface-raised: var(--white-a20); /* lang toggle track */
