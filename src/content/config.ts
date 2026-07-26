@@ -110,6 +110,13 @@ const articleGalleryBlock = z.object({
   images: z.array(z.object({ src: z.string(), alt: z.string() })),
 });
 
+// A segmented progress bar over a row of step labels — the "Development
+// Process" pattern reused inside an article body (e.g. a workflow loop).
+const articleProgressBlock = z.object({
+  type: z.literal('progress'),
+  steps: z.array(z.string()),
+});
+
 const articles = defineCollection({
   type: 'content',
   schema: z.object({
@@ -124,7 +131,14 @@ const articles = defineCollection({
     // up on the Claude Code page) — list those experiment slugs here.
     crossListedIn: z.array(z.string()).default([]),
     intro: z.array(z.string()),
-    blocks: z.array(z.discriminatedUnion('type', [articleTextBlock, articleImageBlock, articleGalleryBlock])),
+    blocks: z.array(
+      z.discriminatedUnion('type', [
+        articleTextBlock,
+        articleImageBlock,
+        articleGalleryBlock,
+        articleProgressBlock,
+      ]),
+    ),
   }),
 });
 

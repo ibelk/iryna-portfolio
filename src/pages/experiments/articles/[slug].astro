@@ -49,6 +49,18 @@ const { title, parentLabel, parentHref, intro, blocks } = entry.data;
               </div>
             );
           }
+          if (block.type === 'progress') {
+            return (
+              <div class="article__progress">
+                <div class="article__progress-bar">
+                  {block.steps.map(() => <span class="article__progress-segment" />)}
+                </div>
+                <div class="article__progress-steps">
+                  {block.steps.map((step) => <span>{step}</span>)}
+                </div>
+              </div>
+            );
+          }
           return (
             <section class="article__section">
               {block.heading && <h2>{block.heading}</h2>}
@@ -156,6 +168,38 @@ const { title, parentLabel, parentHref, intro, blocks } = entry.data;
     font-size: var(--text-body);
   }
 
+  /* Segmented progress bar over a row of step labels — same pattern as the
+     Development Process section, reused here for a workflow loop. */
+  .article__progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm-static);
+  }
+
+  .article__progress-bar {
+    display: flex;
+    gap: 10px;
+  }
+
+  .article__progress-segment {
+    flex: 1;
+    height: 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  .article__progress-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm-static);
+  }
+
+  .article__progress-steps span {
+    color: var(--color-text-muted);
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+  }
+
   @media (min-width: 1024px) {
     .article__hero {
       padding-block: var(--space-section-y-lg) var(--space-xl-static);
@@ -163,6 +207,10 @@ const { title, parentLabel, parentHref, intro, blocks } = entry.data;
 
     .article__gallery {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .article__progress-steps {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
     }
   }
 </style>
