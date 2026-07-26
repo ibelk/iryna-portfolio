@@ -29,8 +29,36 @@ const { slug, title, subtitle, tags, heroImage } = Astro.props;
   </div>
   <div class="case-card__media">
     <img src={heroImage} alt={title} loading="lazy" decoding="async" />
+    <span class="case-card__tooltip" aria-hidden="true">See Project</span>
   </div>
 </a>
+
+<script>
+  // Cursor-follow "See Project" tooltip — event delegation so it works for
+  // every CaseCard instance on the page from one listener.
+  const medias = document.querySelectorAll<HTMLElement>('.case-card__media');
+
+  medias.forEach((media) => {
+    const tooltip = media.querySelector<HTMLElement>('.case-card__tooltip');
+    if (!tooltip) return;
+
+    media.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      media.classList.add('case-card__media--hovered');
+    });
+
+    media.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const rect = media.getBoundingClientRect();
+      tooltip.style.left = `${e.clientX - rect.left}px`;
+      tooltip.style.top = `${e.clientY - rect.top}px`;
+    });
+
+    media.addEventListener('pointerleave', () => {
+      media.classList.remove('case-card__media--hovered');
+    });
+  });
+</script>
 
 <style>
   .case-card {
@@ -82,6 +110,7 @@ const { slug, title, subtitle, tags, heroImage } = Astro.props;
   }
 
   .case-card__media {
+    position: relative;
     height: 232px;
     border-radius: var(--radius-media);
     overflow: hidden;
@@ -91,6 +120,30 @@ const { slug, title, subtitle, tags, heroImage } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Cursor-follow "See Project" tooltip — desktop hover only, positioned via
+     JS to track the pointer inside the media frame. */
+  .case-card__tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    padding: var(--space-2xs-static) var(--space-sm-static);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity var(--motion-fast) var(--motion-ease);
+  }
+
+  .case-card__media--hovered .case-card__tooltip {
+    opacity: 1;
   }
 
   @media (min-width: 1024px) {
