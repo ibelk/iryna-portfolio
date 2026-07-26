@@ -5,8 +5,8 @@ parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
 cardImage: "/images/articles/figma-motion-cover.png"
 intro:
-  - "After Figma introduced Motion, I wanted to test it in a real product workflow instead of creating simple demo animations."
-  - "For this experiment, I used Backstage — a fictional event management platform that I created for this series of Figma experiments."
+  - "Figma added a new tool called Motion. I wanted to test it on a real product, not just a simple demo animation."
+  - "For this test, I used Backstage. This is a fictional event platform I made for this series of Figma tests."
 blocks:
   - type: "image"
     src: "/images/articles/figma-motion-hero.png"
@@ -14,28 +14,28 @@ blocks:
   - type: "text"
     heading: "What I tested"
     paragraphs:
-      - "I tried three different workflows:"
+      - "I tried three ways to work with Motion:"
     bullets:
-      - "creating animations manually and asking AI to improve them"
-      - "generating animations from prompts"
+      - "making animations by hand, then asking AI to improve them"
+      - "creating animations from text prompts"
       - "editing animations using only text prompts"
     # continues below the bullets
   - type: "text"
     paragraphs:
-      - "I tested Motion on UI cards, the hero section, and product illustrations."
+      - "I tested Motion on UI cards, the hero section, and product pictures."
   - type: "text"
     heading: "What I liked"
     paragraphs:
-      - "The biggest surprise was how well Motion understood my prompts. In most cases, I only needed a few prompts to get the result I wanted."
-      - "I also liked the built-in spring presets. They make it much easier to create natural animations without editing easing curves manually."
-      - "Another useful feature is the React animation output, which could help designers explain animations more clearly to developers."
+      - "The biggest surprise was how well Motion understood my prompts. Most of the time, I only needed a few tries to get what I wanted."
+      - "I also liked the built-in spring presets. They make natural animations easy, without editing curves by hand."
+      - "Another good feature is the React animation output. This can help designers show developers exactly how an animation should work."
   - type: "text"
     heading: "What is still missing"
     paragraphs:
-      - "The main limitation was not Motion itself, but its integration with Figma Sites. Loop animations work well, but more advanced triggers, like starting an animation when a user scrolls to an element, are still limited."
+      - "The main problem was not Motion itself. It was how Motion works with Figma Sites. Loop animations work well. But bigger triggers, like starting an animation on scroll, still don't work well."
   - type: "text"
     heading: "Final thoughts"
     paragraphs:
-      - "Figma Motion was much better than I expected. It makes creating UI animations faster and easier, especially in the early design stage. For product concepts, presentations, and communicating interaction ideas, it is already a very useful tool."
+      - "Figma Motion was better than I expected. It makes UI animation faster and easier, especially early in a project. It is already a useful tool for product concepts, presentations, and showing how an interaction should feel."
       - "So far, Motion is my favorite new AI feature in Figma."
 ---
