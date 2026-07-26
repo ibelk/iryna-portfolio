@@ -132,13 +132,8 @@ describe('experiment detail pages', () => {
     expect(html).not.toContain('130+ original assets');
   });
 
-  it('pages without finished content are marked work in progress', () => {
-    const html = readFileSync('dist/experiments/claude-code/index.html', 'utf-8');
-    expect(html).toContain('Work in progress');
-  });
-
   it('pages that do have content are not marked work in progress', () => {
-    for (const slug of ['3d', 'figma-ai', 'ui-practice']) {
+    for (const slug of ['3d', 'figma-ai', 'ui-practice', 'claude-code']) {
       const html = readFileSync(`dist/experiments/${slug}/index.html`, 'utf-8');
       expect(html).not.toContain('Work in progress');
     }

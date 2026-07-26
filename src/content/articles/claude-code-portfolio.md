@@ -3,7 +3,7 @@ title: "Building Portfolio with Claude Code"
 order: 4
 parentLabel: "Claude Code"
 parentHref: "/experiments/claude-code"
-cardImage: "/images/experiments/claude-code.png"
+cardImage: "/images/articles/claude-code-cover.png"
 intro:
   - "My portfolio started as a Figma prototype, but I quickly realized its limitations. It only existed in a single viewport, loaded slowly, couldn't adapt to different screen sizes, and interactive animations were limited by the prototyping tools."
   - "I wanted a portfolio that behaved like a real product instead of a design mockup."

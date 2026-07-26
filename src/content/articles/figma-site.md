@@ -3,7 +3,7 @@ title: "Testing Figma Sites with a Product Concept"
 order: 2
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
-cardImage: "/images/articles/figma-site-hero.png"
+cardImage: "/images/articles/figma-site-cover.png"
 crossListedIn: ["claude-code"]
 intro:
   - "After Figma introduced Sites, I wanted to see if it could be more than just a design tool. My goal was to find out if I could create a landing page without using tools like Framer or Webflow."

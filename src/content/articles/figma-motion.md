@@ -3,7 +3,7 @@ title: "Testing Figma Motion on a Real Product Concept"
 order: 1
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
-cardImage: "/images/articles/figma-motion-hero.png"
+cardImage: "/images/articles/figma-motion-cover.png"
 intro:
   - "After Figma introduced Motion, I wanted to test it in a real product workflow instead of creating simple demo animations."
   - "For this experiment, I used Backstage — a fictional event management platform that I created for this series of Figma experiments."

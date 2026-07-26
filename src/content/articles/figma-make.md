@@ -3,7 +3,7 @@ title: "Testing Figma Make with a Product Concept"
 order: 3
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
-cardImage: "/images/articles/figma-make-hero.png"
+cardImage: "/images/articles/figma-make-cover.png"
 intro:
   - "After Figma introduced Make, I wanted to see if AI could do more than generate UI screens. My goal was to find out if it could help create interactive prototypes for real product ideas."
   - "For this experiment, I used Backstage — a fictional event management platform that I created for this series of Figma experiments."
