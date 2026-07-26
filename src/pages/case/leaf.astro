@@ -73,17 +73,28 @@ const results = [
       </div>
     </section>
 
-    <!-- Development Process -->
-    <section class="container ap-section">
-      <h2>Development Process</h2>
-      <p class="ap-section__desc">{processDesc}</p>
-      <div class="ap-stages">
-        {stages.map((s) => (
-          <div class="ap-stages__col">
-            <h3>{s.title}</h3>
-            <ul>{s.items.map((item) => <li>{item}</li>)}</ul>
+    <!-- Development Process — Figma wraps this in a dark card with the title
+         and description side by side, a segmented progress bar above the
+         5-column step list, not a bare heading + stacked description. -->
+    <section class="container ap-block">
+      <div class="ap-process-card">
+        <div class="ap-process-card__head">
+          <h2>Development Process</h2>
+          <p class="ap-process-card__desc">{processDesc}</p>
+        </div>
+        <div class="ap-progress">
+          <div class="ap-progress__bar">
+            {stages.map(() => <span class="ap-progress__segment" />)}
           </div>
-        ))}
+          <div class="ap-stages">
+            {stages.map((s) => (
+              <div class="ap-stages__col">
+                <h3>{s.title}</h3>
+                <ul>{s.items.map((item) => <li>{item}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -168,7 +179,7 @@ const results = [
   }
   .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-hero h1 { font-size: var(--text-display-case); font-weight: var(--weight-semibold); line-height: var(--leading-heading); letter-spacing: -0.01em; }
-  .ap-hero__sub { max-width: 34ch; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-hero__sub { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-meta { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; }
   .ap-meta__row { display: grid; gap: var(--space-2xs-static); }
   .ap-meta__row + .ap-meta__row { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
@@ -178,12 +189,12 @@ const results = [
   .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
   .ap-figure--lead { padding-top: var(--space-section-y-lg); }
   .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
-  .ap-figure__lead {
-    display: flex; flex-direction: column; align-items: center; gap: var(--space-sm-static);
-    text-align: center; max-width: 60ch; margin-inline: auto;
-  }
-  .ap-figure__title { order: -1; }
-  .ap-figure__desc { color: var(--color-text-muted); font-size: var(--text-body); }
+  /* Figma sits the section title and its description side by side (a
+     "Title and Description" row), not centered and stacked — the centered
+     treatment made the description read as sitting under the title instead
+     of beside it. */
+  .ap-figure__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-figure__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-figure__frame { position: relative; }
 
   /* UI Design — title+description live inside the same gradient panel as the
@@ -206,15 +217,24 @@ const results = [
   .ap-impact__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
   .ap-impact__icon :global(svg) { position: relative; z-index: 1; width: 18px; height: 18px; color: var(--color-text-primary); }
 
-  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); padding-block: var(--space-section-y); }
-  .ap-section__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); max-width: 70ch; }
-  .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
-  .ap-stages__col {
-    border-top: 2px solid var(--color-accent); padding-top: var(--space-sm-static);
-    display: grid; gap: var(--space-sm-static);
+  /* Development Process card — dark surface wrapping the title/description
+     row and the progress bar + steps. 64px padding and the card's own
+     48px internal gap are fixed values straight from Figma, not part of
+     the shared spacing ladder. */
+  .ap-process-card {
+    background: var(--color-surface-quote); border-radius: var(--radius-24);
+    padding: var(--space-lg-static); display: grid; gap: var(--space-lg-static);
   }
-  .ap-stages__col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2xs-static); }
-  .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-process-card__head { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-process-card__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-progress { display: grid; gap: var(--space-lg-static); }
+  .ap-progress__bar { display: flex; gap: 10px; }
+  .ap-progress__segment { flex: 1; height: 20px; border-radius: var(--radius-pill); background: var(--color-accent); }
+  .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
+  .ap-stages__col { display: grid; gap: var(--space-lg-static); }
+  .ap-stages__col h3 { font-size: var(--text-label); font-weight: var(--weight-semibold); }
+  .ap-stages__col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-sm-static); }
+  .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-label); }
 
   @media (min-width: 1024px) {
     .ap-hero {
@@ -222,8 +242,12 @@ const results = [
       gap: var(--space-md-static); padding-block: var(--space-section-y-lg);
     }
     .ap-hero__lead { gap: var(--space-lg-static); }
-    .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-figure__lead { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
+    .ap-figure__title, .ap-figure__desc { flex: 1 0 0; min-width: 0; }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
+    .ap-process-card { padding: 64px; }
+    .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
+    .ap-process-card__head h2, .ap-process-card__desc { flex: 1 0 0; min-width: 0; }
     .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); }
     .ap-figure-overlay { position: relative; }
     .ap-figure-overlay__text {
