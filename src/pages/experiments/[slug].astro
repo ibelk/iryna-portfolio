@@ -21,7 +21,11 @@ const { title, subtitle, intro, status, meta, entries, gallery, listsPosts } = e
 // the ones that belong to it (matched by parentHref) as writing cards.
 const articles = listsPosts
   ? (await getCollection('articles'))
-      .filter((a) => a.data.parentHref === `/experiments/${entry.slug}`)
+      .filter(
+        (a) =>
+          a.data.parentHref === `/experiments/${entry.slug}` ||
+          a.data.crossListedIn.includes(entry.slug),
+      )
       .sort((a, b) => a.data.order - b.data.order)
   : [];
 ---

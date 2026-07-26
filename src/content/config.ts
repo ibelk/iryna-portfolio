@@ -119,6 +119,10 @@ const articles = defineCollection({
     parentLabel: z.string(),
     parentHref: z.string(),
     cardImage: z.string(),
+    // Figma sometimes reuses one write-up's card across more than one
+    // experiment's writing-cards row (e.g. the Figma Site article also shows
+    // up on the Claude Code page) — list those experiment slugs here.
+    crossListedIn: z.array(z.string()).default([]),
     intro: z.array(z.string()),
     blocks: z.array(z.discriminatedUnion('type', [articleTextBlock, articleImageBlock, articleGalleryBlock])),
   }),

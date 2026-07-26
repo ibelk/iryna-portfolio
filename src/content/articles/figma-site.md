@@ -4,6 +4,7 @@ order: 2
 parentLabel: "Figma AI"
 parentHref: "/experiments/figma-ai"
 cardImage: "/images/articles/figma-site-hero.png"
+crossListedIn: ["claude-code"]
 intro:
   - "After Figma introduced Sites, I wanted to see if it could be more than just a design tool. My goal was to find out if I could create a landing page without using tools like Framer or Webflow."
   - "For this experiment, I used Backstage — a fictional event management platform that I created for this series of Figma experiments."
