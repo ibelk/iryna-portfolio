@@ -17,6 +17,9 @@ gallery:
   - src: "/images/ui-practice/shot-5.png"
     alt: "Interface study"
     tall: true
+  - src: "/images/ui-practice/diabetes-m.png"
+    alt: "Diabetes:M app UI study — statistics dashboard and navigation menu"
+    tall: true
 ---
 
 Interface studies and craft exercises outside client work.
