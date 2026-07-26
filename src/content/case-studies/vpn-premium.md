@@ -1,6 +1,6 @@
 ---
 title: "Premium purchase flow redesign"
-subtitle: "Increased conversion to payment through changes in the purchase flow"
+subtitle: "Redesigned checkout flow that lifted conversion 21% — from 0.28% to 0.34%"
 tag: "Consumer / Growth"
 tags: ["B2C", "Web", "Product design", "Microsoft Clarity"]
 order: 1

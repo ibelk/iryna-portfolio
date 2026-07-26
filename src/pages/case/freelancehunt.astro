@@ -86,7 +86,7 @@ const impact = [
 
     <!-- Portfolio as a Formality -->
     <section class="container ap-section">
-      <h2>Portfolio as a Formality, <br />Not a Decision Tool</h2>
+      <h2>Portfolio as a Formality, Not a Decision Tool</h2>
       <div class="ap-criteria ap-criteria--3col">
         {formalityCards.map((c) => (
           <article class="ap-criteria__card">
@@ -307,9 +307,9 @@ const impact = [
   /* Icon ↔ title+desc group stays at the card's outer gap (24px); the title
      and its own description sit closer together at 16px, matching Figma's
      nested Title/Text frame — a flat single `gap` collapsed both to 24px. */
-  .ap-criteria__body { display: grid; gap: var(--space-sm-static); }
+  .ap-criteria__body { display: grid; gap: var(--space-md); }
   .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
-  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-sm-static); }
+  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-md); }
 
   @media (min-width: 1024px) {
     .ap-hero {

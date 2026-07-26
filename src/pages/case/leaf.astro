@@ -10,7 +10,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 // combined image per section instead of following the shared Block/Image/Main
 // pattern used by the other cases.
 const title = 'Leaf';
-const subtitle = 'The app helps users build positive eco-friendly habits';
+const subtitle = 'Solo-designed end-to-end — from user research to Google Play, with 130+ original 3D illustrations';
 
 const meta = [
   { label: 'Product', value: 'B2C Startup' },
@@ -69,7 +69,7 @@ const results = [
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
         <img src="/images/case-leaf/hero-full.png" alt="Leaf app screens — product view, schedule, and recycling point details"
-          width="1440" height="776" loading="lazy" decoding="async" />
+          width="2400" height="1360" loading="lazy" decoding="async" />
       </div>
     </section>
 
@@ -208,7 +208,7 @@ const results = [
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
-    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
+    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: start;
     font-size: var(--text-title-s); font-weight: var(--weight-semibold);
   }
   .ap-impact li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
@@ -233,8 +233,9 @@ const results = [
   .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
   .ap-stages__col { display: grid; gap: var(--space-lg-static); }
   .ap-stages__col h3 { font-size: var(--text-label); font-weight: var(--weight-semibold); }
-  .ap-stages__col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-sm-static); }
+  .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: grid; gap: var(--space-2xs-static); }
   .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-label); }
+  .ap-stages__col li::marker { color: var(--color-text-muted); }
 
   @media (min-width: 1024px) {
     .ap-hero {

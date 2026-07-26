@@ -9,7 +9,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 // panels) are exported design frames served as images — same pattern as the
 // Analytical Platform case.
 const title = 'Typography and accessibility in VPN';
-const subtitle = 'Infrastructure solution without complete redesign';
+const subtitle = 'Unified typography across 60+ languages — fix requests dropped from weekly to monthly';
 
 const meta = [
   { label: 'Product', value: 'VPN apps (desktop, mobile, browser extension)' },
@@ -22,7 +22,6 @@ const problems = [
   { title: 'Montserrat was used as a system font without considering localization' },
   { title: 'Low contrast of key UI elements' },
   { title: 'Text did not meet WCAG standards' },
-  { title: 'The system has been used for 4 years. The product continued to grow without constant design support.' },
 ];
 
 const quoteRows = [
@@ -520,12 +519,12 @@ const impact = [
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--space-md-static);
     }
-    .ap-horizon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--space-md-static); }
+    .ap-horizon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--space-xl-static); }
     .ap-section { gap: var(--space-card-inset-lg); }
     .ap-criteria { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .ap-criteria__card { padding: var(--space-card-inset-lg); }
     .ap-quote__row {
-      grid-template-columns: 222px 1fr 1fr 1fr;
+      grid-template-columns: 222px 350px 340px 1fr;
       align-items: center;
       padding: 0;
     }

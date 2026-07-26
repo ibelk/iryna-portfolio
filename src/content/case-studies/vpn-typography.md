@@ -1,6 +1,6 @@
 ---
 title: "Typography and accessibility in VPN"
-subtitle: "Infrastructure solution without complete redesign"
+subtitle: "Unified typography across 60+ languages — fix requests dropped from weekly to monthly"
 tag: "Accessibility / Infrastructure"
 tags: ["B2C", "Mobile", "Desktop", "Browser extensions", "Product design", "Design system"]
 order: 2

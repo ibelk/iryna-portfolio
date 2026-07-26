@@ -6,7 +6,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // Ported from Figma "Web-portfolio" / page "Premium" / frame Premium-1920 (269:16414).
 const title = 'Premium purchase flow redesign';
-const subtitle = 'Increased conversion to payment through changes in the purchase flow';
+const subtitle = 'Redesigned checkout flow that lifted conversion 21% — from 0.28% to 0.34%';
 
 const meta = [
   { label: 'Product', value: 'B2C product' },
@@ -48,9 +48,9 @@ const icons: Record<string, string> = {
 };
 
 const impact = [
-  { title: 'Shift in user focus from "Download" to "Buy Premium"', icon: 'eye' },
-  { title: 'Ready for A/B testing', icon: 'cube' },
-  { title: 'Conversion increased from 0.28% to 0.34%', icon: 'chart' },
+  { title: 'Shifted focus from "Download" to "Buy Premium" as the primary action', icon: 'eye' },
+  { title: 'Rebuilt decision architecture — ready for continuous A/B testing', icon: 'cube' },
+  { title: 'Conversion up 21%, from 0.28% to 0.34% in the first two weeks', icon: 'chart' },
 ];
 ---
 
@@ -268,7 +268,7 @@ const impact = [
      nested Title/Text frame — a flat single `gap` collapsed both to 24px. */
   .ap-criteria__body { display: grid; gap: var(--space-sm-static); }
   .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
-  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-sm-static); }
+  .ap-criteria--text-only .ap-criteria__card { gap: var(--space-md); }
 
   @media (min-width: 1024px) {
     .ap-hero {

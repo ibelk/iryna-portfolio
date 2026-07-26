@@ -25,7 +25,7 @@ describe('case study pages', () => {
 
   it('the VPN premium page shows the verified conversion stat', () => {
     const html = readFileSync('dist/case/vpn-premium/index.html', 'utf-8');
-    expect(html).toContain('Conversion increased from 0.28% to 0.34%');
+    expect(html).toContain('0.28% to 0.34%');
   });
 
   it('both VPN pages show the NDA disclosure', () => {
