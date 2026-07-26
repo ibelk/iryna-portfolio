@@ -101,11 +101,15 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
 
   /* Desktop card stack: each card sticks a little lower than the one before, so
      the next card scrolls up over it and the edge of each stays visible.
-     Pure CSS — no scroll listener, nothing to fall out of sync. */
+     Pure CSS — no scroll listener, nothing to fall out of sync.
+
+     The first card must clear the sticky header (~88px) plus a 36px gap
+     before it starts sticking, so the header never gets covered while the
+     stack scrolls — --stack-top alone (48px) sat under the header. */
   @media (min-width: 1024px) {
     .work__item {
       position: sticky;
-      top: calc(var(--stack-top) + var(--stack-index) * var(--stack-step));
+      top: calc(88px + 36px + var(--stack-index) * var(--stack-step));
     }
 
     /* The card recedes as the next one covers it. The scroll island writes the
