@@ -112,15 +112,16 @@ const results = [
       </div>
     </section>
 
-    <!-- UI Design -->
-    <section class="container ap-figure">
-      <div class="ap-figure__lead">
-        <h2 class="ap-figure__title">UI Design</h2>
-        <p class="ap-figure__desc">A minimalist interface focused on quick access to key features: a recycling point map, a material catalog with 3D illustrations, and a beginner's guide. The onboarding experience was designed based on real user questions identified during the research phase.</p>
-      </div>
-      <div class="ap-figure__frame">
+    <!-- UI Design — Figma has the title+description living inside the same
+         gradient panel as the phone mockups, not stacked above a bare image. -->
+    <section class="container ap-block">
+      <div class="ap-figure-overlay">
         <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
           width="1240" height="580" loading="lazy" decoding="async" />
+        <div class="ap-figure-overlay__text">
+          <h2>UI Design</h2>
+          <p>A minimalist interface focused on quick access to key features: a recycling point map, a material catalog with 3D illustrations, and a beginner's guide. The onboarding experience was designed based on real user questions identified during the research phase.</p>
+        </div>
       </div>
     </section>
 
@@ -191,6 +192,14 @@ const results = [
   .ap-figure__desc { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-figure__frame { position: relative; }
 
+  /* UI Design — title+description live inside the same gradient panel as the
+     phone mockups (mobile: stacked plainly above the image; desktop: overlaid
+     on the left, matching the Figma layout). */
+  .ap-figure-overlay { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-figure-overlay img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure-overlay__text h2 { order: -1; }
+  .ap-figure-overlay__text p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
@@ -222,6 +231,17 @@ const results = [
     .ap-figure__lead { gap: var(--space-lg-static); }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .ap-figure-overlay { position: relative; }
+    .ap-figure-overlay__text {
+      position: absolute;
+      top: 50%;
+      left: var(--space-panel-inset);
+      transform: translateY(-50%);
+      max-width: 42%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm-static);
+    }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
   }
