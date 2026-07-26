@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import Tag from '../../components/Tag.astro';
+import WritingCard from '../../components/WritingCard.astro';
 
 export async function getStaticPaths() {
   const items = await getCollection('experiments');
@@ -17,10 +17,12 @@ interface Props {
 const { entry } = Astro.props;
 const { title, subtitle, intro, status, meta, entries, gallery, listsPosts } = entry.data;
 
-// The Figma-tool write-ups live in the posts collection; this page lists them
-// rather than duplicating their text.
-const posts = listsPosts
-  ? (await getCollection('posts')).sort((a, b) => a.data.order - b.data.order)
+// Each tool write-up is its own on-site article; this page just links out to
+// the ones that belong to it (matched by parentHref) as writing cards.
+const articles = listsPosts
+  ? (await getCollection('articles'))
+      .filter((a) => a.data.parentHref === `/experiments/${entry.slug}`)
+      .sort((a, b) => a.data.order - b.data.order)
   : [];
 ---
 
@@ -51,26 +53,15 @@ const posts = listsPosts
     }
 
     {
-      posts.length > 0 && (
-        <section class="container entries">
-          {posts.map((post) => (
-            <a
-              class="entry entry--link"
-              href={post.data.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {post.data.tags.length > 0 && (
-                <div class="entry__tags">
-                  {post.data.tags.map((label) => (
-                    <Tag label={label} />
-                  ))}
-                </div>
-              )}
-              <h2 class="entry__title">{post.data.title}</h2>
-              <p class="entry__description">{post.data.excerpt}</p>
-              <span class="entry__cta">Read on LinkedIn →</span>
-            </a>
+      articles.length > 0 && (
+        <section class="container entries entries--cards">
+          {articles.map((article) => (
+            <WritingCard
+              title={article.data.title}
+              image={article.data.cardImage}
+              href={`/experiments/articles/${article.slug}/`}
+              tags={[]}
+            />
           ))}
         </section>
       )
@@ -92,7 +83,7 @@ const posts = listsPosts
     }
 
     {
-      entries.length === 0 && posts.length === 0 && gallery.length === 0 && (
+      entries.length === 0 && articles.length === 0 && gallery.length === 0 && (
         <section class="container">
           <p class="empty">Selected pieces are being written up.</p>
         </section>
@@ -257,6 +248,10 @@ const posts = listsPosts
   @media (min-width: 1024px) {
     .entries {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .entries--cards {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>

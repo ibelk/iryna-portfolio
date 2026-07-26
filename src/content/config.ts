@@ -92,8 +92,41 @@ const posts = defineCollection({
   }),
 });
 
+const articleTextBlock = z.object({
+  type: z.literal('text'),
+  heading: z.string().optional(),
+  paragraphs: z.array(z.string()).default([]),
+  bullets: z.array(z.string()).default([]),
+});
+
+const articleImageBlock = z.object({
+  type: z.literal('image'),
+  src: z.string(),
+  alt: z.string(),
+});
+
+const articleGalleryBlock = z.object({
+  type: z.literal('gallery'),
+  images: z.array(z.object({ src: z.string(), alt: z.string() })),
+});
+
+const articles = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    // Breadcrumb + the writing card that links here from the experiment page.
+    parentLabel: z.string(),
+    parentHref: z.string(),
+    cardImage: z.string(),
+    intro: z.array(z.string()),
+    blocks: z.array(z.discriminatedUnion('type', [articleTextBlock, articleImageBlock, articleGalleryBlock])),
+  }),
+});
+
 export const collections = {
   'case-studies': caseStudies,
   experiments,
   posts,
+  articles,
 };

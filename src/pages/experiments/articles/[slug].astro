@@ -1,0 +1,168 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('articles');
+  return items.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+}
+const { entry } = Astro.props;
+const { title, parentLabel, parentHref, intro, blocks } = entry.data;
+---
+
+<BaseLayout title={`${title} — Iryna Belkova`}>
+  <Header />
+
+  <main class="article">
+    <div class="container article__crumb">
+      <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={title} />
+    </div>
+
+    <header class="container article__hero">
+      <h1>{title}</h1>
+      {intro.map((p) => <p class="article__intro">{p}</p>)}
+    </header>
+
+    <div class="container article__body">
+      {
+        blocks.map((block) => {
+          if (block.type === 'image') {
+            return (
+              <figure class="article__figure">
+                <img src={block.src} alt={block.alt} loading="lazy" decoding="async" />
+              </figure>
+            );
+          }
+          if (block.type === 'gallery') {
+            return (
+              <div class="article__gallery">
+                {block.images.map((img) => (
+                  <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+                ))}
+              </div>
+            );
+          }
+          return (
+            <section class="article__section">
+              {block.heading && <h2>{block.heading}</h2>}
+              {block.paragraphs.map((p) => <p>{p}</p>)}
+              {block.bullets.length > 0 && (
+                <ul>
+                  {block.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+              )}
+            </section>
+          );
+        })
+      }
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article {
+    display: block;
+  }
+
+  .article__crumb {
+    padding-block: var(--space-sm-static);
+  }
+
+  .article__hero {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm-static);
+    max-width: 70ch;
+    padding-block: var(--space-lg-static) var(--space-xl-static);
+  }
+
+  .article__hero h1 {
+    font-size: var(--text-display-case);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-heading);
+    letter-spacing: -0.01em;
+  }
+
+  .article__intro {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+
+  .article__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl-static);
+    padding-bottom: var(--space-section-y);
+  }
+
+  .article__figure {
+    margin: 0;
+  }
+
+  .article__figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+  }
+
+  .article__gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md-static);
+  }
+
+  .article__gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+  }
+
+  .article__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm-static);
+    max-width: 70ch;
+  }
+
+  .article__section h2 {
+    font-size: var(--text-title-l);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-heading);
+  }
+
+  .article__section p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+
+  .article__section ul {
+    margin: 0;
+    padding-left: var(--space-md-static);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs-static);
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+
+  @media (min-width: 1024px) {
+    .article__hero {
+      padding-block: var(--space-section-y-lg) var(--space-xl-static);
+    }
+
+    .article__gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

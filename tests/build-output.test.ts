@@ -115,10 +115,16 @@ describe('experiment detail pages', () => {
     expect(uiPractice).toContain('/images/ui-practice/');
   });
 
-  it('the Figma AI page lists the tool write-ups and links them out', () => {
+  it('the Figma AI page lists the tool write-ups as cards linking to on-site articles', () => {
     const html = readFileSync('dist/experiments/figma-ai/index.html', 'utf-8');
-    expect(html).toContain('Figma Make');
-    expect(html).toContain('linkedin.com');
+    expect(html).toContain('Testing Figma Make');
+    expect(html).toContain('/experiments/articles/figma-make/');
+  });
+
+  it('the Figma Make article renders its full write-up', () => {
+    const html = readFileSync('dist/experiments/articles/figma-make/index.html', 'utf-8');
+    expect(html).toContain('What is still missing');
+    expect(html).toContain('Final thoughts');
   });
 
   it('the 3D page gallery renders every image full width, matching Figma', () => {
