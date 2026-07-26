@@ -359,13 +359,18 @@ const impact = [
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual { width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; }
 
-  /* Panel background used by the "List bg" / full-bleed figure blocks */
+  /* Panel background used by the "List bg" / full-bleed figure blocks.
+     The screenshot already bakes in its own browser-mockup chrome and dark
+     backdrop, so it must render flush and unrounded — an extra border-radius
+     here double-clips it against that baked-in shape. Bottom padding is 0 in
+     Figma: the image sits flush with the panel's bottom edge. */
   .ap-panel-figure {
     background: var(--color-surface);
     border-radius: var(--radius-card);
-    padding: var(--space-panel-inset);
+    padding: var(--space-panel-inset) var(--space-panel-inset) 0;
   }
   .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
+  .ap-panel-figure .ap-figure__frame img { border-radius: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid;
