@@ -13,7 +13,12 @@ const { title, body, linkLabel, href } = Astro.props;
     <h3 class="writing-cta__title">{title}</h3>
     <p class="writing-cta__body">{body}</p>
   </div>
-  <span class="writing-cta__link">{linkLabel}</span>
+  <span class="writing-cta__link">
+    {linkLabel}
+    <svg class="writing-cta__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M13.43 5.93 19.5 12l-6.07 6.07M4.5 12H19.33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </span>
 </a>
 
 <style>
@@ -43,19 +48,28 @@ const { title, body, linkLabel, href } = Astro.props;
   .writing-cta__title {
     font-size: var(--text-title-m);
     font-weight: var(--weight-semibold);
-    line-height: var(--leading-normal);
+    line-height: var(--leading-component);
   }
 
   .writing-cta__body {
     font-size: var(--text-body);
     font-weight: var(--weight-regular);
-    line-height: var(--leading-normal);
+    line-height: var(--leading-body);
     color: var(--color-text-inverse-secondary);
   }
 
   .writing-cta__link {
+    display: flex;
+    align-items: center;
+    gap: var(--size-8);
     font-size: var(--text-body);
     font-weight: var(--weight-semibold);
-    line-height: var(--leading-normal);
+    line-height: var(--leading-component);
+  }
+
+  .writing-cta__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
   }
 </style>

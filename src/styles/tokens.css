@@ -60,8 +60,10 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  --leading-normal: normal; /* Figma `leading-[normal]` */
-  --leading-snug: 1.35; /* Figma `leading-[1.35]` — nav, tags */
+  /* Figma 3-tier line-height system: 125% headings / 140% body copy / 135% component chrome (nav, tags, card titles, labels) */
+  --leading-heading: 1.25;
+  --leading-body: 1.4;
+  --leading-component: 1.35;
 
   /* ---------------------------------------------------------------------------
      1. PRIMITIVES — RADIUS
