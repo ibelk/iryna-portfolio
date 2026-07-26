@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import WritingCard from '../../components/WritingCard.astro';
 
 const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.data.order);
@@ -12,11 +13,14 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
   <Header />
 
   <main>
+    <div class="container page-crumb">
+      <Breadcrumbs parentLabel="Main" parentHref="/" current="Writing" />
+    </div>
+
     <section class="container page-head">
       <h1 class="page-head__title">Writing</h1>
       <p class="page-head__intro">
         Notes on testing new tools and on troubleshooting design problems inside live products.
-        Each one links out to the original post.
       </p>
     </section>
 
@@ -53,8 +57,11 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
     line-height: var(--leading-heading);
   }
 
+  .page-crumb {
+    padding-block: var(--space-sm-static);
+  }
+
   .page-head__intro {
-    max-width: 60ch;
     color: var(--color-text-muted);
   }
 
