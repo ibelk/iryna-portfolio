@@ -105,12 +105,12 @@ const impact = [
       </div>
     </section>
 
-    <!-- Why users don't reach payment -->
-    <section class="container ap-block">
-      <div class="ap-split">
-        <div class="ap-split__head">
-          <h2>Why Users don't <br />Reach Payment</h2>
-        </div>
+    <!-- Why users don't reach payment — title+list together on the left,
+         visual alone on the right, so it gets its own grid rather than
+         reusing .ap-split (which pairs a lone heading with a list). -->
+    <section class="container ap-horizon">
+      <div class="ap-horizon__left">
+        <h2>Why Users don't <br />Reach Payment</h2>
         <ol class="ap-horizon__list">
           {problems.map((p, i) => (
             <li>
@@ -120,21 +120,24 @@ const impact = [
           ))}
         </ol>
       </div>
-      <div class="ap-figure__frame ap-split__visual">
-        <img src="/images/case-vpn-premium/mobile.png" alt="Heatmap showing users clicking away from the Premium button"
-          width="590" height="520" loading="lazy" decoding="async" />
-      </div>
+      <img class="ap-horizon__visual" src="/images/case-vpn-premium/mobile.png"
+        alt="Heatmap showing users clicking away from the Premium button"
+        width="590" height="520" loading="lazy" decoding="async" />
     </section>
 
-    <!-- Rebuilding the decision architecture -->
-    <section class="container ap-figure">
-      <div class="ap-figure__lead">
-        <h2 class="ap-figure__title">Rebuilding the Decision Architecture</h2>
-        <p class="ap-figure__desc">We rebuilt the upgrade logic. Before: one screen with many elements. After: structured decision flow. The goal was to guide the user step by step to a clear purchase decision.</p>
-      </div>
-      <div class="ap-figure__frame">
-        <img src="/images/case-vpn-premium/plan.png" alt="New pricing plan selection screen"
-          width="1000" height="440" loading="lazy" decoding="async" />
+    <!-- Rebuilding the decision architecture — Figma wraps title, description
+         and screenshot together in one panel (bg + 60px inset), not a bare
+         full-bleed image with text floating above it. -->
+    <section class="container ap-block">
+      <div class="ap-figure ap-panel-figure">
+        <div class="ap-figure__lead">
+          <h2 class="ap-figure__title">Rebuilding the Decision Architecture</h2>
+          <p class="ap-figure__desc">We rebuilt the upgrade logic. Before: one screen with many elements. After: structured decision flow. The goal was to guide the user step by step to a clear purchase decision.</p>
+        </div>
+        <div class="ap-figure__frame">
+          <img src="/images/case-vpn-premium/plan.png" alt="New pricing plan selection screen"
+            width="1000" height="440" loading="lazy" decoding="async" />
+        </div>
       </div>
     </section>
 
@@ -191,6 +194,7 @@ const impact = [
   .ap-hero__sub { max-width: 34ch; color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-nda {
     display: flex; align-items: center; gap: var(--space-2xs-static); margin-top: var(--space-sm-static);
+    align-self: flex-start; width: fit-content;
     padding: var(--space-sm-static); border-radius: var(--radius-banner); background: rgba(255, 128, 0, 0.27);
     color: white; font-size: var(--text-label); font-weight: var(--weight-medium, 500);
   }
@@ -213,15 +217,20 @@ const impact = [
   .ap-figure__frame { position: relative; }
 
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
-  .ap-split__visual { margin-top: var(--space-md-static); }
 
+  /* Design-system-style horizon — two equal columns on desktop (title+list, visual) */
+  .ap-horizon { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
+  .ap-horizon__left { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
   .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
-  .ap-horizon__list li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); }
+  .ap-horizon__list li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-2xs-static); }
   .ap-horizon__list li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-horizon__visual { width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; }
 
-  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-lg-static); }
+  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-panel-inset); }
+  .ap-panel-figure { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-panel-inset); }
+  .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
@@ -254,7 +263,7 @@ const impact = [
     .ap-hero__lead { gap: var(--space-lg-static); }
     .ap-figure__lead { gap: var(--space-lg-static); }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
-    .ap-split__visual { margin-top: 0; }
+    .ap-horizon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--space-md-static); }
     .ap-section { gap: var(--space-card-inset-lg); }
     .ap-criteria--2col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .ap-criteria--3col { grid-template-columns: repeat(3, minmax(0, 1fr)); }

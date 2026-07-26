@@ -120,15 +120,18 @@ const impact = [
       </div>
     </section>
 
-    <!-- Portfolio Builder concept -->
-    <section class="container ap-figure">
-      <div class="ap-figure__lead">
-        <h2 class="ap-figure__title">Portfolio Builder Instead of One Template</h2>
-        <p class="ap-figure__desc">Based on research we chose a portfolio builder concept. It is a flexible block system that adapts to specialization content and user experience level. Portfolio became a key tool for selling expertise on the platform.</p>
-      </div>
-      <div class="ap-figure__frame">
-        <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
-          width="1000" height="440" loading="lazy" decoding="async" />
+    <!-- Portfolio Builder concept — Figma wraps title, description and the
+         block-system screenshot together in one panel (bg + 60px inset). -->
+    <section class="container ap-block">
+      <div class="ap-figure ap-panel-figure">
+        <div class="ap-figure__lead">
+          <h2 class="ap-figure__title">Portfolio Builder Instead of One Template</h2>
+          <p class="ap-figure__desc">Based on research we chose a portfolio builder concept. It is a flexible block system that adapts to specialization content and user experience level. Portfolio became a key tool for selling expertise on the platform.</p>
+        </div>
+        <div class="ap-figure__frame">
+          <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
+            width="1000" height="440" loading="lazy" decoding="async" />
+        </div>
       </div>
     </section>
 
@@ -261,7 +264,9 @@ const impact = [
   .ap-list__item + .ap-list__item { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
   .ap-list__item p { color: var(--color-text-muted); font-size: var(--text-body); max-width: 52ch; }
 
-  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-lg-static); }
+  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-panel-inset); }
+  .ap-panel-figure { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-panel-inset); }
+  .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;

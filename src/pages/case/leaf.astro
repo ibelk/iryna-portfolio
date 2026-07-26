@@ -138,7 +138,7 @@ const results = [
 
     <!-- Results -->
     <section class="container ap-block">
-      <div class="ap-split ap-panel">
+      <div class="ap-split">
         <h2>Results</h2>
         <ul class="ap-impact">
           {results.map((r) => (
@@ -192,7 +192,6 @@ const results = [
   .ap-figure__frame { position: relative; }
 
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
-  .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-lg-static); }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
