@@ -64,8 +64,17 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
     padding-block: var(--space-section-y);
   }
 
+  /* Figma has both this section and the hero above it padding by a fixed
+     36px, not the standard 48px section rhythm — using --space-section-y
+     here stacked 48+48px of gap between the intro and the card grid where
+     Figma has 36+36px. */
   @media (min-width: 1024px) {
+    .page-head {
+      padding-block: 36px;
+    }
+
     .grid {
+      padding-block: 36px 48px;
       grid-template-columns: repeat(3, 1fr);
     }
   }
