@@ -37,7 +37,20 @@ const navLinks = [
         }
       </nav>
 
-      <a class="site-header__contact" href="mailto:iryn.belkova@gmail.com">Contact me</a>
+      <div class="site-header__contact-wrap">
+        <a class="site-header__contact" href="mailto:iryn.belkova@gmail.com" id="contact-trigger">Contact me</a>
+        <div class="contact-popover" id="contact-popover" hidden>
+          <span class="contact-popover__caret" aria-hidden="true"></span>
+          <div class="contact-popover__head">
+            <span class="contact-popover__label">Email</span>
+            <button class="contact-popover__close" type="button" aria-label="Close">×</button>
+          </div>
+          <div class="contact-popover__row">
+            <input class="contact-popover__input" type="text" value="iryn.belkova@gmail.com" readonly />
+            <button class="contact-popover__copy" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -58,6 +71,59 @@ const navLinks = [
   };
   updateScrolled();
   window.addEventListener('scroll', updateScrolled, { passive: true });
+
+  // Some visitors have no mail client registered for mailto:, so clicking
+  // "Contact me" silently does nothing. Show the address in a small popover
+  // with a copy button instead of relying on the OS to handle the link.
+  const trigger = document.querySelector<HTMLAnchorElement>('#contact-trigger');
+  const popover = document.querySelector<HTMLElement>('#contact-popover');
+  const closeBtn = popover?.querySelector<HTMLButtonElement>('.contact-popover__close');
+  const copyBtn = popover?.querySelector<HTMLButtonElement>('.contact-popover__copy');
+  const input = popover?.querySelector<HTMLInputElement>('.contact-popover__input');
+
+  const openPopover = () => {
+    popover?.removeAttribute('hidden');
+  };
+  const closePopover = () => {
+    popover?.setAttribute('hidden', '');
+  };
+
+  trigger?.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (popover?.hasAttribute('hidden')) {
+      openPopover();
+    } else {
+      closePopover();
+    }
+  });
+
+  closeBtn?.addEventListener('click', closePopover);
+
+  copyBtn?.addEventListener('click', async () => {
+    const email = input?.value ?? '';
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      input?.select();
+      document.execCommand('copy');
+    }
+    const original = copyBtn.textContent;
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => {
+      copyBtn.textContent = original;
+    }, 1500);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!popover || popover.hasAttribute('hidden')) return;
+    const target = event.target as Node;
+    if (popover.contains(target) || trigger?.contains(target)) return;
+    closePopover();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closePopover();
+  });
 </script>
 
 <style>
@@ -159,6 +225,115 @@ const navLinks = [
     opacity: 0.8;
   }
 
+  .site-header__contact-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__contact-wrap {
+      width: auto;
+    }
+  }
+
+  .contact-popover {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    z-index: 60;
+    width: 260px;
+    max-width: calc(100vw - 32px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-8);
+    padding: var(--size-16);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-control);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .contact-popover__caret {
+    position: absolute;
+    top: -6px;
+    right: 18px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border-subtle);
+    border-top: 1px solid var(--color-border-subtle);
+    transform: rotate(45deg);
+    border-radius: 2px 0 0 0;
+  }
+
+  .contact-popover__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contact-popover__label {
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .contact-popover__close {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-control);
+    color: var(--color-text-muted);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--motion-fast) var(--motion-ease);
+  }
+
+  .contact-popover__close:hover {
+    color: var(--color-text-primary);
+  }
+
+  .contact-popover__row {
+    display: flex;
+    gap: var(--size-8);
+  }
+
+  .contact-popover__input {
+    flex: 1 0 0;
+    min-width: 0;
+    padding: var(--size-8) var(--size-12);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-control);
+    color: var(--color-text-primary);
+    font-size: var(--text-label);
+    font-family: inherit;
+  }
+
+  .contact-popover__copy {
+    flex: none;
+    padding: var(--size-8) var(--size-16);
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    border: 0;
+    border-radius: var(--radius-control);
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: opacity var(--motion-fast) var(--motion-ease);
+  }
+
+  .contact-popover__copy:hover {
+    opacity: 0.8;
+  }
+
   .site-header__toggle {
     display: grid;
     place-items: center;
@@ -224,12 +399,15 @@ const navLinks = [
       display: flex;
     }
 
+    .site-header__pill--open .site-header__contact-wrap {
+      margin-top: auto;
+    }
+
     .site-header__pill--open .site-header__contact {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      margin-top: auto;
       padding: var(--size-16);
     }
 
