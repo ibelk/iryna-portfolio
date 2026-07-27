@@ -109,10 +109,13 @@ const articles = listsPosts
 </BaseLayout>
 
 <style>
+  /* Breadcrumb-to-title gap is 52px in Figma (the Breadcrumb Row's own 16px
+     bottom padding plus the Hero row's 36px top padding stacking at the
+     seam between them) — not the 24px spacing-ladder step. */
   .page-head {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg-static);
+    gap: 52px;
     padding-block-start: var(--space-section-y);
     padding-block-end: var(--space-block-gap);
   }

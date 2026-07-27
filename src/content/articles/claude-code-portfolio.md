@@ -8,6 +8,9 @@ intro:
   - "My portfolio started as a Figma prototype, but I soon saw its limits. It only worked in one screen size, loaded slowly, could not adapt to different devices, and animations were limited by the prototyping tools."
   - "I wanted a portfolio that worked like a real product, not a design mockup."
 blocks:
+  - type: "image"
+    src: "/images/articles/claude-code-portfolio-hero.png"
+    alt: "The finished portfolio homepage, built with Claude Code"
   - type: "text"
     heading: "Why I Moved Beyond Figma"
     paragraphs:
