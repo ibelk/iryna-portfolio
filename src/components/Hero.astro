@@ -21,8 +21,11 @@ const { headline, location } = Astro.props;
 <script>
   const wrap = document.querySelector<HTMLElement>('[data-hero-invert]');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Desktop-only: touch devices have no real cursor to follow, and pointer
+  // events on tap would just leave the circle stuck at the last tap point.
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
-  if (wrap && !prefersReducedMotion) {
+  if (wrap && !prefersReducedMotion && isDesktop) {
     const setPosition = (x: number, y: number) => {
       const rect = wrap.getBoundingClientRect();
       wrap.style.setProperty('--hero-mx', `${x - rect.left}px`);
@@ -111,6 +114,15 @@ const { headline, location } = Astro.props;
   .hero__invert--active .hero__headline--top {
     clip-path: circle(calc(var(--hero-invert-size) / 2) at var(--hero-mx, -9999px) var(--hero-my, -9999px));
     opacity: 1;
+  }
+
+  /* Desktop-only effect: hide the circle and its clipped text layer below
+     1024px regardless of JS, since touch has no cursor to drive them. */
+  @media (max-width: 1023px) {
+    .hero__invert-circle,
+    .hero__headline--top {
+      display: none;
+    }
   }
 
   @media (min-width: 1024px) {
