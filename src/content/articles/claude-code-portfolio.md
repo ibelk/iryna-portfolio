@@ -5,7 +5,7 @@ parentLabel: "Claude Code"
 parentHref: "/experiments/claude-code"
 cardImage: "/images/articles/claude-code-cover.png"
 intro:
-  - "My portfolio started as a Figma prototype. It worked on one screen size, loaded slowly, and could not adapt to different devices."
+  - "My portfolio started as a Figma prototype. Over time, I found real problems with it."
   - "I wanted a real website, not just a design mockup."
 blocks:
   - type: "image"
@@ -51,18 +51,12 @@ blocks:
     heading: "The Biggest Discovery"
     paragraphs:
       - "At first, I thought Claude Code would only help me build a website faster."
-      - "But the biggest discovery was not about writing code. It changed how I think about design and development."
-  - type: "text"
-    heading: "What Surprised Me"
-    paragraphs:
-      - "Before this project, design and building felt like two separate steps. Now I see them as one process."
-      - "I do not wait until a design is \"finished.\" I test ideas right away and improve them from real feedback."
+      - "But the real discovery was different. Before this project, design and building felt like two separate steps. Now I see them as one process. I do not wait until a design is \"finished\" — I test ideas right away and improve them from real feedback."
   - type: "text"
     heading: "What I Learned"
     bullets:
       - "AI works best as a partner, not a replacement."
       - "Real products show problems that prototypes cannot."
-      - "Work is much faster when design and code grow together."
       - "The workflow is often worth more than the tool itself."
   - type: "text"
     paragraphs:
