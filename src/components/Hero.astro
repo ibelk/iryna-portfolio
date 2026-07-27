@@ -7,12 +7,40 @@ const { headline, location } = Astro.props;
 ---
 
 <section class="hero container" data-reveal>
-  <h1 class="hero__headline">{headline}</h1>
+  <div class="hero__invert" data-hero-invert>
+    <h1 class="hero__headline hero__headline--base">{headline}</h1>
+    <div class="hero__invert-circle" aria-hidden="true"></div>
+    <h1 class="hero__headline hero__headline--top" aria-hidden="true">{headline}</h1>
+  </div>
   <p class="hero__meta">
     <span class="hero__dot" aria-hidden="true"></span>
     {location}
   </p>
 </section>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>('[data-hero-invert]');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (wrap && !prefersReducedMotion) {
+    const setPosition = (x: number, y: number) => {
+      const rect = wrap.getBoundingClientRect();
+      wrap.style.setProperty('--hero-mx', `${x - rect.left}px`);
+      wrap.style.setProperty('--hero-my', `${y - rect.top}px`);
+    };
+
+    wrap.addEventListener('pointermove', (event) => {
+      setPosition(event.clientX, event.clientY);
+    });
+    wrap.addEventListener('pointerenter', (event) => {
+      setPosition(event.clientX, event.clientY);
+      wrap.classList.add('hero__invert--active');
+    });
+    wrap.addEventListener('pointerleave', () => {
+      wrap.classList.remove('hero__invert--active');
+    });
+  }
+</script>
 
 <style>
   .hero {
@@ -23,10 +51,65 @@ const { headline, location } = Astro.props;
     padding-block: var(--space-section-y-lg);
   }
 
+  /* Cursor-follow circle that swaps the headline to the page background
+     color wherever it overlaps — same trick as a color-invert hover, but
+     with a circle instead of a straight bar. Three stacked layers: the
+     normal headline, an orange circle riding the cursor, and a duplicate
+     headline (in the bg color) clipped to that same circle so it only
+     reads inside it. */
+  .hero__invert {
+    position: relative;
+    --hero-invert-size: 160px;
+  }
+
   .hero__headline {
     font-size: var(--text-display);
     font-weight: var(--weight-semibold);
     line-height: var(--leading-heading);
+  }
+
+  .hero__headline--base {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__invert-circle {
+    position: absolute;
+    z-index: 2;
+    top: var(--hero-my, -9999px);
+    left: var(--hero-mx, -9999px);
+    width: var(--hero-invert-size);
+    height: var(--hero-invert-size);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity var(--motion-normal) var(--motion-ease);
+    pointer-events: none;
+  }
+
+  .hero__headline--top {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    color: var(--color-bg);
+    pointer-events: none;
+    clip-path: circle(0px at var(--hero-mx, -9999px) var(--hero-my, -9999px));
+    transition: clip-path var(--motion-normal) var(--motion-ease);
+  }
+
+  .hero__invert--active .hero__invert-circle {
+    opacity: 1;
+  }
+
+  .hero__invert--active .hero__headline--top {
+    clip-path: circle(calc(var(--hero-invert-size) / 2) at var(--hero-mx, -9999px) var(--hero-my, -9999px));
+  }
+
+  @media (min-width: 1024px) {
+    .hero__invert {
+      --hero-invert-size: 220px;
+    }
   }
 
   /* The Figma design shows this in pure white, not the muted tone an earlier
