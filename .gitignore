@@ -4,3 +4,6 @@ dist/
 .vercel/
 
 .superpowers/
+
+# raw/source asset dump — public/ holds the copies actually used by the site
+img/

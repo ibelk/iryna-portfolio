@@ -178,12 +178,17 @@ const displayTitle = heroTitle ?? title;
     color: var(--color-accent);
   }
 
-  /* Segmented progress bar over a row of step labels — same pattern as the
-     Development Process section, reused here for a workflow loop. */
+  /* Segmented progress bar over a row of step labels, wrapped in the same
+     dark card shell as the Development Process section on the Leaf case
+     study — Figma puts the bar and steps inside a padded surface panel,
+     not bare on the page background. */
   .article__progress {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-panel-inset);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm-static);
+    gap: var(--space-md);
   }
 
   .article__progress-bar {
@@ -198,6 +203,13 @@ const displayTitle = heroTitle ?? title;
     background: var(--color-accent);
   }
 
+  /* Figma fades the bar from the earliest step (dimmest) to the current one
+     (full opacity), all on the same accent fill. */
+  .article__progress-segment:nth-child(1) { opacity: 0.4; }
+  .article__progress-segment:nth-child(2) { opacity: 0.5; }
+  .article__progress-segment:nth-child(3) { opacity: 0.8; }
+  .article__progress-segment:nth-child(n+4) { opacity: 0.9; }
+
   .article__progress-steps {
     display: grid;
     grid-template-columns: 1fr;
@@ -205,9 +217,10 @@ const displayTitle = heroTitle ?? title;
   }
 
   .article__progress-steps span {
-    color: var(--color-text-muted);
-    font-size: var(--text-label);
+    color: var(--color-text-primary);
+    font-size: 16px;
     font-weight: var(--weight-semibold);
+    line-height: var(--leading-component);
   }
 
   @media (min-width: 1024px) {
@@ -221,6 +234,7 @@ const displayTitle = heroTitle ?? title;
 
     .article__progress-steps {
       grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: var(--space-xs-static);
     }
   }
 </style>

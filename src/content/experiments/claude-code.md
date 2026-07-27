@@ -10,7 +10,7 @@ entries: []
 listsPosts: true
 wipCards:
   - title: "Design System AI Agent (WIP)"
-    image: "/images/articles/claude-code-cover.png"
+    image: "/images/articles/design-system-ai-agent-cover.png"
 ---
 
 Building real products with an AI coding agent — including this site.

@@ -73,7 +73,6 @@ const articles = listsPosts
                 <img src={card.image} alt="" loading="lazy" decoding="async" />
               </div>
               <div class="wip-card__body">
-                <span class="wip-card__tag">WIP</span>
                 <h3 class="wip-card__title">{card.title}</h3>
               </div>
             </div>
@@ -272,16 +271,6 @@ const articles = listsPosts
     flex-direction: column;
     gap: var(--space-card-text-gap);
     padding: var(--space-card-inset-md);
-  }
-
-  .wip-card__tag {
-    width: fit-content;
-    padding: var(--space-tag-y) var(--space-tag-x);
-    border-radius: var(--radius-control);
-    background: var(--color-surface-subtle);
-    font-size: var(--text-label);
-    font-weight: var(--weight-semibold);
-    color: var(--color-text-muted);
   }
 
   .wip-card__title {

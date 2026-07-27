@@ -10,14 +10,8 @@ intro:
   - "For this test, I used Backstage. This is a fictional event platform I made for this series of Figma tests."
 blocks:
   - type: "image"
-    src: "/images/articles/figma-motion-calendar.gif"
-    alt: "Backstage live schedule — animated calendar view generated with Figma Motion"
-  - type: "gallery"
-    images:
-      - src: "/images/articles/figma-motion-number-1.gif"
-        alt: "Animated stat counter card, first version"
-      - src: "/images/articles/figma-motion-number-2.gif"
-        alt: "Animated stat counter card, second version"
+    src: "/images/articles/figma-motion-all.gif"
+    alt: "Backstage product concept — venue map, live schedule, and stat counters animated with Figma Motion"
   - type: "text"
     heading: "What I tested"
     paragraphs:
@@ -36,9 +30,6 @@ blocks:
       - "The biggest surprise was how well Motion understood my prompts. Most of the time, I only needed a few tries to get what I wanted."
       - "I also liked the built-in spring presets. They make natural animations easy, without editing curves by hand."
       - "Another good feature is the React animation output. This can help designers show developers exactly how an animation should work."
-  - type: "image"
-    src: "/images/articles/figma-motion-mobile-screen.gif"
-    alt: "Mobile screen transition animated with Figma Motion"
   - type: "text"
     heading: "What is still missing"
     paragraphs:
