@@ -226,8 +226,8 @@ const results = [
     padding: var(--space-lg-static); display: grid; gap: var(--space-lg-static);
   }
   .ap-process-card__head { display: flex; flex-direction: column; gap: var(--space-sm-static); }
-  .ap-process-card__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
-  .ap-progress { display: grid; gap: var(--space-lg-static); }
+  .ap-process-card__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); line-height: var(--leading-component); }
+  .ap-progress { display: grid; gap: var(--space-xl-static); }
   .ap-progress__bar { display: flex; gap: 10px; }
   .ap-progress__segment { flex: 1; height: 20px; border-radius: var(--radius-pill); background: var(--color-accent); }
   /* Figma fades the bar from the earliest stage (dimmest) to the current one
@@ -240,7 +240,7 @@ const results = [
   .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
   .ap-stages__col { display: grid; gap: var(--space-lg-static); }
   .ap-stages__col h3 { font-size: 16px; font-weight: var(--weight-semibold); line-height: var(--leading-component); }
-  .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: grid; gap: var(--space-sm-static); }
+  .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: grid; gap: var(--space-2xs-static); }
   .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-label); line-height: var(--leading-component); }
   .ap-stages__col li::marker { color: var(--color-text-muted); }
 
@@ -253,10 +253,10 @@ const results = [
     .ap-figure__lead { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
     .ap-figure__title, .ap-figure__desc { flex: 1 0 0; min-width: 0; }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
-    .ap-process-card { padding: 64px; }
+    .ap-process-card { padding: 64px; gap: var(--size-48); }
     .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
     .ap-process-card__head h2, .ap-process-card__desc { flex: 1 0 0; min-width: 0; }
-    .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-xs-static); }
     .ap-figure-overlay { position: relative; }
     .ap-figure-overlay__text {
       position: absolute;
