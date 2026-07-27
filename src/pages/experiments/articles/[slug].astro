@@ -91,13 +91,13 @@ const displayTitle = heroTitle ?? title;
   }
 
   /* Figma's text column is a fixed 800px frame centered inside the wider
-     1200px page content area, not flush with the breadcrumb above it. */
+     1200px page content area at desktop, not flush with the breadcrumb
+     above it. Mobile keeps the standard page gutter (no fixed-width column
+     in the Figma source below 1024px). */
   .article__hero {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm-static);
-    max-width: 800px;
-    margin-inline: auto;
     padding-block: var(--space-lg-static) var(--space-xl-static);
   }
 
@@ -225,6 +225,9 @@ const displayTitle = heroTitle ?? title;
 
   @media (min-width: 1024px) {
     .article__hero {
+      max-width: 800px;
+      margin-inline: auto;
+      padding-inline: 0;
       padding-block: var(--space-section-y-lg) var(--space-xl-static);
     }
 
