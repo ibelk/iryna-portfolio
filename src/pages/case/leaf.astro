@@ -237,10 +237,17 @@ const results = [
   .ap-progress__segment:nth-child(3) { opacity: 0.8; }
   .ap-progress__segment:nth-child(4) { opacity: 0.9; }
   .ap-progress__segment:nth-child(5) { opacity: 0.9; }
-  .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
-  .ap-stages__col { display: grid; gap: var(--space-lg-static); }
+  .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); align-items: start; }
+  /* flex, not grid: a grid container's implicit auto rows stretch to fill
+     any extra block-size handed down by the outer `.ap-stages` grid (its
+     `align-content` default computes to "stretch" for auto tracks), which
+     spread the title/list gap and the list's own item gap on every column
+     shorter than the tallest one. Flex's column axis never does that — rows
+     just pack at the top with exactly the declared gap regardless of how
+     tall the column box is stretched. */
+  .ap-stages__col { display: flex; flex-direction: column; gap: var(--space-lg-static); }
   .ap-stages__col h3 { font-size: 16px; font-weight: var(--weight-semibold); line-height: var(--leading-component); }
-  .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: grid; gap: var(--space-2xs-static); }
+  .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: flex; flex-direction: column; gap: var(--space-2xs-static); }
   .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-label); line-height: var(--leading-component); }
   .ap-stages__col li::marker { color: var(--color-text-muted); }
 
