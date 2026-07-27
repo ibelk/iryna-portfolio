@@ -59,7 +59,7 @@ const { headline, location } = Astro.props;
      reads inside it. */
   .hero__invert {
     position: relative;
-    --hero-invert-size: 160px;
+    --hero-invert-size: 200px;
   }
 
   .hero__headline {
@@ -94,8 +94,14 @@ const { headline, location } = Astro.props;
     z-index: 3;
     color: var(--color-bg);
     pointer-events: none;
+    /* No transition here: the circle must track the cursor in real time.
+       Transitioning clip-path smooths its position along with its radius,
+       so the mask would visibly trail behind the solid circle underneath
+       instead of moving with it. Opacity (below) still fades the reveal
+       in and out, so it doesn't just snap on/off. */
     clip-path: circle(0px at var(--hero-mx, -9999px) var(--hero-my, -9999px));
-    transition: clip-path var(--motion-normal) var(--motion-ease);
+    opacity: 0;
+    transition: opacity var(--motion-normal) var(--motion-ease);
   }
 
   .hero__invert--active .hero__invert-circle {
@@ -104,11 +110,12 @@ const { headline, location } = Astro.props;
 
   .hero__invert--active .hero__headline--top {
     clip-path: circle(calc(var(--hero-invert-size) / 2) at var(--hero-mx, -9999px) var(--hero-my, -9999px));
+    opacity: 1;
   }
 
   @media (min-width: 1024px) {
     .hero__invert {
-      --hero-invert-size: 220px;
+      --hero-invert-size: 300px;
     }
   }
 
