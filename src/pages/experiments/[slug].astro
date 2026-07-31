@@ -34,8 +34,10 @@ const articles = listsPosts
   <Header />
 
   <main>
-    <section class="container page-head">
+    <div class="container page-crumb">
       <Breadcrumbs parentLabel="Experiments" parentHref="/#experiments" current={title} />
+    </div>
+    <section class="container page-head">
       <div class="page-head__text">
         <h1 class="page-head__title">{title}</h1>
         <p class="page-head__subtitle">{subtitle}</p>
@@ -109,14 +111,22 @@ const articles = listsPosts
 </BaseLayout>
 
 <style>
-  /* Breadcrumb-to-title gap is 52px in Figma (the Breadcrumb Row's own 16px
-     bottom padding plus the Hero row's 36px top padding stacking at the
-     seam between them) — not the 24px spacing-ladder step. */
+  /* Breadcrumb row sits right under the header with the same 16px padding
+     used on every other page (case studies included) — it was previously
+     folded into .page-head's own padding-block-start, which used the much
+     larger --space-section-y and pushed the crumb noticeably lower than it
+     sits everywhere else on the site. */
+  .page-crumb {
+    padding-block: var(--space-sm-static);
+  }
+
+  /* Hero's own top padding (36px, Figma's Hero row) stacks with the crumb's
+     16px bottom padding above for a 52px seam — not the 24px spacing-ladder
+     step. */
   .page-head {
     display: flex;
     flex-direction: column;
-    gap: 52px;
-    padding-block-start: var(--space-section-y);
+    padding-block-start: var(--space-block-gap);
     padding-block-end: var(--space-block-gap);
   }
 
@@ -255,12 +265,13 @@ const articles = listsPosts
     border-radius: var(--radius-card);
   }
 
+  /* The cover image already has the blur/soft-focus and "WIP" watermark
+     baked in — a CSS blur+grayscale+opacity on top of that (as before)
+     pushed it past legible into a near-solid color block. */
   .wip-card__media {
     height: 232px;
     overflow: hidden;
     border-radius: var(--radius-media-post);
-    filter: blur(2px) grayscale(0.3);
-    opacity: 0.5;
   }
 
   .wip-card__media img {

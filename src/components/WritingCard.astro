@@ -71,7 +71,15 @@ const { title, image, href, tags } = Astro.props;
     gap: var(--space-tag-gap);
   }
 
+  /* Card titles are full questions/sentences in some articles (Figma AI
+     write-ups) — clamp to one line with an ellipsis instead of letting a
+     long one wrap and blow out the card's height relative to its siblings. */
   .writing-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
     font-size: var(--text-title-s);
     font-weight: var(--weight-semibold);
     line-height: var(--leading-component);
