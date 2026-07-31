@@ -28,7 +28,7 @@ const posts = (await getCollection('posts')).sort((a, b) => a.data.order - b.dat
       {
         posts.map((post) => (
           <WritingCard
-            title={post.data.title}
+            title={post.data.heroTitle ?? post.data.title}
             image={post.data.image}
             href={post.data.linkedinUrl}
             tags={post.data.tags}

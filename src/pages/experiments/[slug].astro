@@ -63,7 +63,7 @@ const articles = listsPosts
         <section class="container entries entries--cards">
           {articles.map((article) => (
             <WritingCard
-              title={article.data.title}
+              title={article.data.heroTitle ?? article.data.title}
               image={article.data.cardImage}
               href={`/experiments/articles/${article.slug}/`}
               tags={[]}

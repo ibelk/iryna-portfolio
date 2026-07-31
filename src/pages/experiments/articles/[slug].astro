@@ -113,6 +113,14 @@ const displayTitle = heroTitle ?? title;
     .article__hero h1 {
       font-size: 42px;
     }
+
+    /* The hero title needs the full page width to fit on one line, but body
+       copy at that width reads as an unbroken 1200px line — keep the intro
+       paragraphs at Figma's 800px column while the title above stays full
+       width. */
+    .article__intro {
+      max-width: 800px;
+    }
   }
 
   .article__intro {

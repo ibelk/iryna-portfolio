@@ -86,6 +86,10 @@ const posts = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    // Shorter working title shown on the card itself, for posts whose `title`
+    // is the long question-form teaser (matches the on-site article's own
+    // heroTitle where one exists). Falls back to `title` when unset.
+    heroTitle: z.string().optional(),
     // Optional: the cards show title and tags only, so a post can go live from
     // its Figma design before its summary has been written.
     excerpt: z.string().optional(),
