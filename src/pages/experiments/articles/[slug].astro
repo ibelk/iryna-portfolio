@@ -16,6 +16,23 @@ interface Props {
 const { entry } = Astro.props;
 const { title, heroTitle, parentLabel, parentHref, intro, blocks } = entry.data;
 const displayTitle = heroTitle ?? title;
+
+// Desktop hero title stays as close to the case-study display size (54px)
+// as it can while still fitting one line in the 800px column — only shrunk
+// as much as each specific title needs, not a single blanket size for all
+// of them. Manrope SemiBold measures ~0.5 * font-size per character on
+// average (measured directly at 54px: "Building Portfolio with Claude Code"
+// 35 chars -> 921px; the 3 Figma AI question-titles, 41-46 chars -> 1124-
+// 1259px) — close enough for a sizing estimate with a small margin.
+const HERO_MAX_SIZE = 54;
+const HERO_MIN_SIZE = 28;
+const HERO_TARGET_WIDTH = 780; // 20px safety margin under the 800px column
+const CHAR_WIDTH_RATIO = 0.5;
+const estimatedWidthAtMax = displayTitle.length * CHAR_WIDTH_RATIO * HERO_MAX_SIZE;
+const heroFontSize = Math.max(
+  HERO_MIN_SIZE,
+  Math.min(HERO_MAX_SIZE, Math.floor((HERO_TARGET_WIDTH / estimatedWidthAtMax) * HERO_MAX_SIZE)),
+);
 ---
 
 <BaseLayout title={`${title} — Iryna Belkova`}>
@@ -26,7 +43,7 @@ const displayTitle = heroTitle ?? title;
       <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={displayTitle} />
     </div>
 
-    <header class="container article__hero">
+    <header class="container article__hero" style={`--hero-title-size: ${heroFontSize}px`}>
       <h1>{displayTitle}</h1>
       {intro.map((p) => <p class="article__intro">{p}</p>)}
     </header>
@@ -97,10 +114,6 @@ const displayTitle = heroTitle ?? title;
     padding-block: var(--space-lg-static) var(--space-xl-static);
   }
 
-  /* Smaller than the case-study display size (54px): these hero titles are
-     full questions/sentences, not 1-3 word headings. At the Figma-spec 800px
-     column, 32px is the largest size that keeps every current title on one
-     line (confirmed: the longest measures ~746px at 32px vs 1259px at 54px). */
   .article__hero h1 {
     font-size: var(--text-display-case);
     font-weight: var(--weight-semibold);
@@ -115,8 +128,12 @@ const displayTitle = heroTitle ?? title;
       padding-inline: 0;
     }
 
+    /* Per-article size computed in the frontmatter: short titles ("Building
+       Portfolio with Claude Code") stay at the full 54px case-study display
+       size, long question-form ones (the Figma AI write-ups) scale down only
+       as much as needed to still fit one line in the 800px column. */
     .article__hero h1 {
-      font-size: 32px;
+      font-size: var(--hero-title-size, 32px);
     }
   }
 
