@@ -16,23 +16,6 @@ interface Props {
 const { entry } = Astro.props;
 const { title, heroTitle, parentLabel, parentHref, intro, blocks } = entry.data;
 const displayTitle = heroTitle ?? title;
-
-// Desktop hero title stays as close to the case-study display size (54px)
-// as it can while still fitting one line in the 800px column — only shrunk
-// as much as each specific title needs, not a single blanket size for all
-// of them. Manrope SemiBold measures ~0.5 * font-size per character on
-// average (measured directly at 54px: "Building Portfolio with Claude Code"
-// 35 chars -> 921px; the 3 Figma AI question-titles, 41-46 chars -> 1124-
-// 1259px) — close enough for a sizing estimate with a small margin.
-const HERO_MAX_SIZE = 54;
-const HERO_MIN_SIZE = 28;
-const HERO_TARGET_WIDTH = 780; // 20px safety margin under the 800px column
-const CHAR_WIDTH_RATIO = 0.5;
-const estimatedWidthAtMax = displayTitle.length * CHAR_WIDTH_RATIO * HERO_MAX_SIZE;
-const heroFontSize = Math.max(
-  HERO_MIN_SIZE,
-  Math.min(HERO_MAX_SIZE, Math.floor((HERO_TARGET_WIDTH / estimatedWidthAtMax) * HERO_MAX_SIZE)),
-);
 ---
 
 <BaseLayout title={`${title} — Iryna Belkova`}>
@@ -43,7 +26,7 @@ const heroFontSize = Math.max(
       <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={displayTitle} />
     </div>
 
-    <header class="container article__hero" style={`--hero-title-size: ${heroFontSize}px`}>
+    <header class="container article__hero">
       <h1>{displayTitle}</h1>
       {intro.map((p) => <p class="article__intro">{p}</p>)}
     </header>
@@ -127,14 +110,6 @@ const heroFontSize = Math.max(
       margin-inline: auto;
       padding-inline: 0;
     }
-
-    /* Per-article size computed in the frontmatter: short titles ("Building
-       Portfolio with Claude Code") stay at the full 54px case-study display
-       size, long question-form ones (the Figma AI write-ups) scale down only
-       as much as needed to still fit one line in the 800px column. */
-    .article__hero h1 {
-      font-size: var(--hero-title-size, 32px);
-    }
   }
 
   .article__intro {
@@ -181,8 +156,10 @@ const heroFontSize = Math.max(
     width: 100%;
   }
 
+  /* Fixed 32px per Figma — not --text-title-l, which is 42px at desktop for
+     its other (section/case-card title) uses elsewhere on the site. */
   .article__section h2 {
-    font-size: var(--text-title-l);
+    font-size: 32px;
     font-weight: var(--weight-semibold);
     line-height: var(--leading-heading);
   }
