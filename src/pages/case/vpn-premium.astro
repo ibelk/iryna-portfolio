@@ -255,18 +255,24 @@ const impact = [
 
   .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
   .ap-criteria { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  /* flex, not grid: a grid card stretched taller by its row (to match a
+     taller sibling elsewhere in the same `.ap-criteria` grid row) spreads
+     that extra height across its own auto rows via `align-content`'s grid
+     default of "stretch" — inflating the heading's own box even when its
+     text is a single line. Flex packs children at the start regardless of
+     how tall the card itself gets stretched. */
   .ap-criteria__card {
     border: 1px solid var(--color-border-subtle); border-radius: var(--radius-card); padding: var(--space-card-inset-lg);
-    display: grid; gap: var(--space-lg-static);
+    display: flex; flex-direction: column; gap: var(--space-lg-static);
   }
-  .ap-criteria__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
+  .ap-criteria__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; flex: none; }
   .ap-criteria__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
   .ap-criteria__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
   .ap-criteria__icon :global(svg) { position: relative; z-index: 1; width: 24px; height: 24px; color: var(--color-text-primary); }
   /* Icon ↔ title+desc group stays at the card's outer gap (24px); the title
      and its own description sit closer together at 16px, matching Figma's
      nested Title/Text frame — a flat single `gap` collapsed both to 24px. */
-  .ap-criteria__body { display: grid; gap: var(--space-sm-static); }
+  .ap-criteria__body { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-criteria__card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-criteria--text-only .ap-criteria__card { gap: var(--space-md); }
 
