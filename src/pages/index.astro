@@ -63,7 +63,7 @@ const posts = (await getCollection('posts')).sort(byOrder).slice(0, 2);
         {
           posts.map((entry) => (
             <WritingCard
-              title={entry.data.heroTitle ?? entry.data.title}
+              title={entry.data.title}
               image={entry.data.image}
               href={entry.data.linkedinUrl}
               tags={entry.data.tags}
