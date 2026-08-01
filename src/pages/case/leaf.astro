@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DonutChart from '../../components/DonutChart.astro';
 
 // Ported from Figma "Web-portfolio" / page "Leaf" / frame Leaf-1920 (269:17542).
 // This case has no clean "Type=Image" slot per section (each illustration is a
@@ -21,6 +22,41 @@ const meta = [
 
 const processDesc =
   'This was a solo project from the first idea to the Google Play release. I independently completed every stage — from user research and app publishing to creating over 130 3D illustrations for marketing.';
+
+// Research findings — built as real charts/cards (DonutChart.astro) instead
+// of an exported screenshot, since this section is data, not a photo of a
+// design surface. Order matches the ring drawing order in DonutChart: the
+// dominant answer first (full accent), the smaller one second (dimmed).
+const surveyCharts = [
+  {
+    question: 'Do you have experience with waste sorting or would you like to start?',
+    segments: [
+      { label: 'No', value: 74, callout: 'bottom-left' },
+      { label: 'Yes', value: 26, dim: true, callout: 'top-right' },
+    ],
+  },
+  {
+    question: 'What apps or resources do you use to help with waste sorting?',
+    segments: [
+      { label: "I don't know any", value: 79, callout: 'bottom-left' },
+      { label: 'I know and use them', value: 21, dim: true, callout: 'top-right' },
+    ],
+  },
+];
+
+const interviewReplies = {
+  question: 'What challenges have you faced? Do you still experience them today?',
+  replies: [
+    'There is no space for separate plastic and glass waste collection where I live. There is only one general waste bin.',
+    "Some waste contains both organic and non-organic materials. I'm not sure how to sort it correctly.",
+    'Before I start, I need to fully understand what can be recycled and what cannot.',
+  ],
+};
+
+const interviewTags = {
+  question: 'What influenced your choice? Which features or information were the most valuable?',
+  tags: ['Planning Calendar', "Beginner's Guide", 'Recycling Collection Point Map', 'Knowledge Library'],
+};
 
 const stages = [
   { title: 'Research', items: ['User surveys', 'User interviews', 'Competitor analysis', 'Mood board'] },
@@ -107,12 +143,34 @@ const results = [
         <h2 class="ap-figure__title">Research</h2>
         <p class="ap-figure__desc">User behavior and waste management habits were explored through in-depth research. Understanding users' needs and motivations became the foundation for creating a user-centered solution.</p>
       </div>
-      <div class="ap-figure__frame">
-        <picture>
-          <source media="(max-width: 1023px)" srcset="/images/case-leaf/research-mobile.png" />
-          <img src="/images/case-leaf/research.png" alt="User research findings — survey results and interview insights"
-            width="1200" height="1220" loading="lazy" decoding="async" />
-        </picture>
+      <div class="ap-research-grid">
+        {surveyCharts.map((chart) => (
+          <div class="ap-research-card">
+            <p class="ap-research-card__question">{chart.question}</p>
+            <div class="ap-donut">
+              <DonutChart segments={chart.segments} />
+              {chart.segments.map((s) => (
+                <span class:list={['ap-donut__callout', `ap-donut__callout--${s.callout}`]}>
+                  <strong>{s.label}</strong>
+                  <span>{s.value}%</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div class="ap-research-card">
+          <p class="ap-research-card__question">{interviewReplies.question}</p>
+          <div class="ap-research-replies">
+            {interviewReplies.replies.map((r) => <p>{r}</p>)}
+          </div>
+          <span class="ap-research-more" aria-hidden="true">•••</span>
+        </div>
+        <div class="ap-research-card">
+          <p class="ap-research-card__question">{interviewTags.question}</p>
+          <div class="ap-research-tags">
+            {interviewTags.tags.map((t) => <span>{t}</span>)}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -135,15 +193,15 @@ const results = [
          gradient panel as the phone mockups, not stacked above a bare image. -->
     <section class="container ap-block">
       <div class="ap-figure-overlay">
-        <picture>
-          <source media="(max-width: 1023px)" srcset="/images/case-leaf/ui-design-mobile.png" />
-          <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
-            width="1240" height="580" loading="lazy" decoding="async" />
-        </picture>
         <div class="ap-figure-overlay__text">
           <h2>UI Design</h2>
           <p>A minimalist interface focused on quick access to key features: a recycling point map, a material catalog with 3D illustrations, and a beginner's guide. The onboarding experience was designed based on real user questions identified during the research phase.</p>
         </div>
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/ui-design-showcase-mobile.png" />
+          <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
+            width="1240" height="580" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -220,14 +278,76 @@ const results = [
   .ap-figure__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-figure__frame { position: relative; }
 
+  /* Research — real chart/card grid, not an exported screenshot. Mobile
+     stacks all four cards in one column; desktop pairs them 2x2. */
+  .ap-research-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  .ap-research-card {
+    background: var(--color-surface-quote);
+    border-radius: var(--radius-card);
+    padding: var(--space-lg-static);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg-static);
+  }
+  .ap-research-card__question { margin: 0; color: var(--color-text-primary); font-size: var(--text-body); font-weight: var(--weight-semibold); }
+  .ap-donut { position: relative; align-self: center; }
+  .ap-donut__callout {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--color-surface);
+    border-radius: var(--radius-12);
+    padding: var(--space-xs-static) var(--space-sm-static);
+    line-height: var(--leading-component);
+  }
+  .ap-donut__callout strong { font-size: var(--text-body); font-weight: var(--weight-semibold); color: var(--color-text-primary); }
+  .ap-donut__callout span { font-size: var(--text-label); color: var(--color-text-muted); }
+  .ap-donut__callout--top-right { top: 15%; right: -8%; }
+  .ap-donut__callout--bottom-left { bottom: 10%; left: -8%; }
+  .ap-research-replies { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  .ap-research-replies p {
+    margin: 0;
+    background: var(--color-surface);
+    border-radius: var(--radius-12);
+    padding: var(--space-sm-static);
+    color: var(--color-text-muted);
+    font-size: var(--text-label);
+    line-height: var(--leading-component);
+  }
+  .ap-research-more { color: var(--color-text-muted); letter-spacing: 0.2em; }
+  .ap-research-tags { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm-static); }
+  .ap-research-tags span {
+    background: var(--color-surface);
+    border-radius: var(--radius-12);
+    padding: var(--space-sm-static);
+    color: var(--color-text-primary);
+    font-size: var(--text-label);
+    line-height: var(--leading-component);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
   /* UI Design — title+description live inside the same gradient panel as the
-     phone mockups (mobile: stacked plainly above the image; desktop: overlaid
-     on the left, matching the Figma layout). */
-  .ap-figure-overlay { display: flex; flex-direction: column; gap: var(--space-sm-static); }
-  .ap-figure-overlay img { width: 100%; height: auto; border-radius: var(--radius-card); }
+     phone mockups. Mobile: the gradient is real CSS on this wrapper (Figma's
+     linear-gradient fill), text stacks above a transparent phone-screens
+     cutout. Desktop: the exported image already bakes in the gradient
+     edge-to-edge, so the wrapper's own background/padding reset to nothing
+     and the text overlays on top instead — see the desktop override below. */
+  .ap-figure-overlay {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg-static);
+    background: linear-gradient(135deg, #96c5e9 0%, #8c01cc 100%);
+    border-radius: var(--radius-card);
+    padding: var(--space-lg-static);
+  }
+  .ap-figure-overlay img { width: 100%; height: auto; display: block; }
   .ap-figure-overlay picture { display: block; width: 100%; }
   .ap-figure-overlay__text h2 { order: -1; }
-  .ap-figure-overlay__text p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
+  .ap-figure-overlay__text p { margin: 0; color: var(--color-text-secondary); font-size: var(--text-body); }
 
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
@@ -287,6 +407,7 @@ const results = [
     .ap-hero__lead { gap: var(--space-lg-static); }
     .ap-figure__lead { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
     .ap-figure__title, .ap-figure__desc { flex: 1 0 0; min-width: 0; }
+    .ap-research-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md-static); }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-process-card { padding: 64px; gap: var(--size-48); }
     .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
@@ -294,7 +415,13 @@ const results = [
     .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-xs-static); }
     .ap-stages__row { flex-direction: column; gap: var(--space-2xs-static); }
     .ap-progress__segment { width: 100%; height: 20px; }
-    .ap-figure-overlay { position: relative; }
+    .ap-figure-overlay {
+      position: relative;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .ap-figure-overlay img { border-radius: var(--radius-card); }
     .ap-figure-overlay__text {
       position: absolute;
       top: 50%;
@@ -305,6 +432,7 @@ const results = [
       flex-direction: column;
       gap: var(--space-sm-static);
     }
+    .ap-figure-overlay__text p { color: var(--color-text-muted); }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
   }
