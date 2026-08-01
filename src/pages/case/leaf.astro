@@ -68,8 +68,11 @@ const results = [
     <!-- Main product showcase -->
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
-        <img src="/images/case-leaf/hero-full.png" alt="Leaf app screens — product view, schedule, and recycling point details"
-          width="2400" height="1360" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/hero-full-mobile.png" />
+          <img src="/images/case-leaf/hero-full.png" alt="Leaf app screens — product view, schedule, and recycling point details"
+            width="2400" height="1360" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -83,14 +86,14 @@ const results = [
           <p class="ap-process-card__desc">{processDesc}</p>
         </div>
         <div class="ap-progress">
-          <div class="ap-progress__bar">
-            {stages.map(() => <span class="ap-progress__segment" />)}
-          </div>
           <div class="ap-stages">
             {stages.map((s) => (
-              <div class="ap-stages__col">
-                <h3>{s.title}</h3>
-                <ul>{s.items.map((item) => <li>{item}</li>)}</ul>
+              <div class="ap-stages__row">
+                <span class="ap-progress__segment" />
+                <div class="ap-stages__col">
+                  <h3>{s.title}</h3>
+                  <ul>{s.items.map((item) => <li>{item}</li>)}</ul>
+                </div>
               </div>
             ))}
           </div>
@@ -105,8 +108,11 @@ const results = [
         <p class="ap-figure__desc">User behavior and waste management habits were explored through in-depth research. Understanding users' needs and motivations became the foundation for creating a user-centered solution.</p>
       </div>
       <div class="ap-figure__frame">
-        <img src="/images/case-leaf/research.png" alt="User research findings — survey results and interview insights"
-          width="1200" height="1220" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/research-mobile.png" />
+          <img src="/images/case-leaf/research.png" alt="User research findings — survey results and interview insights"
+            width="1200" height="1220" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -117,8 +123,11 @@ const results = [
         <p class="ap-figure__desc">Based on the insights gathered during the research phase, I designed prototypes to evaluate the usability and effectiveness of the application.</p>
       </div>
       <div class="ap-figure__frame">
-        <img src="/images/case-leaf/prototyping.png" alt="Low-fidelity prototypes for the recycling planner and onboarding flow"
-          width="1200" height="1240" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/prototyping-mobile.png" />
+          <img src="/images/case-leaf/prototyping.png" alt="Low-fidelity prototypes for the recycling planner and onboarding flow"
+            width="1200" height="1240" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -126,8 +135,11 @@ const results = [
          gradient panel as the phone mockups, not stacked above a bare image. -->
     <section class="container ap-block">
       <div class="ap-figure-overlay">
-        <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
-          width="1240" height="580" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/ui-design-mobile.png" />
+          <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
+            width="1240" height="580" loading="lazy" decoding="async" />
+        </picture>
         <div class="ap-figure-overlay__text">
           <h2>UI Design</h2>
           <p>A minimalist interface focused on quick access to key features: a recycling point map, a material catalog with 3D illustrations, and a beginner's guide. The onboarding experience was designed based on real user questions identified during the research phase.</p>
@@ -142,8 +154,11 @@ const results = [
         <p class="ap-figure__desc">All illustrations were created in Cinema 4D, with over 130 unique 3D assets designed for different material types and recycling scenarios. The distinctive 3D visual style helps LEAF stand out from typical flat-design eco apps.</p>
       </div>
       <div class="ap-figure__frame">
-        <img src="/images/case-leaf/illustrations.png" alt="3D illustrations created in Cinema 4D for material types and recycling scenarios"
-          width="1200" height="610" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-leaf/illustrations-mobile.png" />
+          <img src="/images/case-leaf/illustrations.png" alt="3D illustrations created in Cinema 4D for material types and recycling scenarios"
+            width="1200" height="610" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -172,7 +187,11 @@ const results = [
   .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
   .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
 
-  .ap-crumb { padding-block: var(--space-sm-static); }
+  .ap-crumb { padding-block: 0; }
+
+  @media (min-width: 1024px) {
+    .ap-crumb { padding-block: var(--space-sm-static); }
+  }
 
   .ap-hero {
     display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
@@ -189,6 +208,10 @@ const results = [
   .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
   .ap-figure--lead { padding-top: var(--space-section-y-lg); }
   .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  /* <picture> is inline by default and won't pick up the width:100% aimed
+     at its <img> — the mobile/desktop art-directed sources collapse to
+     zero width without this. */
+  .ap-figure picture { display: block; width: 100%; }
   /* Figma sits the section title and its description side by side (a
      "Title and Description" row), not centered and stacked — the centered
      treatment made the description read as sitting under the title instead
@@ -202,6 +225,7 @@ const results = [
      on the left, matching the Figma layout). */
   .ap-figure-overlay { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-figure-overlay img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure-overlay picture { display: block; width: 100%; }
   .ap-figure-overlay__text h2 { order: -1; }
   .ap-figure-overlay__text p { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); }
 
@@ -228,16 +252,20 @@ const results = [
   .ap-process-card__head { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-process-card__desc { margin: 0; color: var(--color-text-muted); font-size: var(--text-body); line-height: var(--leading-component); }
   .ap-progress { display: grid; gap: var(--space-xl-static); }
-  .ap-progress__bar { display: flex; gap: 10px; }
-  .ap-progress__segment { flex: 1; height: 20px; border-radius: var(--radius-pill); background: var(--color-accent); }
+  .ap-progress__segment { flex-shrink: 0; width: 4px; border-radius: var(--radius-pill); background: var(--color-accent); align-self: stretch; }
   /* Figma fades the bar from the earliest stage (dimmest) to the current one
      (full opacity), all on the same accent fill — not five solid blocks. */
-  .ap-progress__segment:nth-child(1) { opacity: 0.4; }
-  .ap-progress__segment:nth-child(2) { opacity: 0.5; }
-  .ap-progress__segment:nth-child(3) { opacity: 0.8; }
-  .ap-progress__segment:nth-child(4) { opacity: 0.9; }
-  .ap-progress__segment:nth-child(5) { opacity: 0.9; }
+  .ap-stages__row:nth-child(1) .ap-progress__segment { opacity: 0.4; }
+  .ap-stages__row:nth-child(2) .ap-progress__segment { opacity: 0.5; }
+  .ap-stages__row:nth-child(3) .ap-progress__segment { opacity: 0.8; }
+  .ap-stages__row:nth-child(4) .ap-progress__segment { opacity: 0.9; }
+  .ap-stages__row:nth-child(5) .ap-progress__segment { opacity: 0.9; }
   .ap-stages { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); align-items: start; }
+  /* Mobile: each stage is a row — the accent bar beside the heading+list,
+     stretched to match the column's own content height. Desktop reflows
+     the row into a column so the bar sits above as a horizontal segment,
+     matching the original 5-column layout. */
+  .ap-stages__row { display: flex; flex-direction: row; align-items: stretch; gap: var(--space-sm-static); }
   /* flex, not grid: a grid container's implicit auto rows stretch to fill
      any extra block-size handed down by the outer `.ap-stages` grid (its
      `align-content` default computes to "stretch" for auto tracks), which
@@ -245,7 +273,7 @@ const results = [
      shorter than the tallest one. Flex's column axis never does that — rows
      just pack at the top with exactly the declared gap regardless of how
      tall the column box is stretched. */
-  .ap-stages__col { display: flex; flex-direction: column; gap: var(--space-lg-static); }
+  .ap-stages__col { display: flex; flex-direction: column; gap: var(--space-lg-static); flex: 1 0 0; min-width: 0; }
   .ap-stages__col h3 { font-size: 16px; font-weight: var(--weight-semibold); line-height: var(--leading-component); }
   .ap-stages__col ul { margin: 0; padding-left: 14px; list-style: disc; display: flex; flex-direction: column; gap: var(--space-2xs-static); }
   .ap-stages__col li { color: var(--color-text-muted); font-size: var(--text-label); line-height: var(--leading-component); }
@@ -264,6 +292,8 @@ const results = [
     .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
     .ap-process-card__head h2, .ap-process-card__desc { flex: 1 0 0; min-width: 0; }
     .ap-stages { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-xs-static); }
+    .ap-stages__row { flex-direction: column; gap: var(--space-2xs-static); }
+    .ap-progress__segment { width: 100%; height: 20px; }
     .ap-figure-overlay { position: relative; }
     .ap-figure-overlay__text {
       position: absolute;

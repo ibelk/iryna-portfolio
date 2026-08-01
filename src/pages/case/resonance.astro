@@ -86,8 +86,11 @@ const impact = [
     <!-- RTT design showcase -->
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
-        <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-analytical/rtt-mobile.png" />
+          <img src="/images/case-analytical/rtt.png" alt="Real-time trading terminal — the analytical platform's main working screen"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
         <span class="ap-badge ap-badge--corner">Example design RTT</span>
       </div>
     </section>
@@ -166,8 +169,11 @@ const impact = [
         <p class="ap-figure__desc">Panels and charts can be moved and combined freely. Typography contrast and grid system help users read data in any layout configuration.</p>
       </div>
       <div class="ap-figure__frame">
-        <img src="/images/case-analytical/adaptive.png" alt="Adaptive chart system — panels rearranged into a different layout"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-analytical/adaptive-mobile.png" />
+          <img src="/images/case-analytical/adaptive.png" alt="Adaptive chart system — panels rearranged into a different layout"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
         <span class="ap-badge ap-badge--corner">Example design FTT</span>
       </div>
     </section>
@@ -187,9 +193,12 @@ const impact = [
           ))}
         </ol>
       </div>
-      <img class="ap-horizon__visual" src="/images/case-analytical/horizon-visual.png"
-        alt="Design-system components: a chart and an input, each with its properties panel"
-        width="590" height="520" loading="lazy" decoding="async" />
+      <picture class="ap-horizon__visual">
+        <source media="(max-width: 1023px)" srcset="/images/case-analytical/horizon-visual-mobile.png" />
+        <img src="/images/case-analytical/horizon-visual.png"
+          alt="Design-system components: a chart and an input, each with its properties panel"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </picture>
     </section>
 
     <!-- Product impact — Figma "List bg" type: split content on a raised panel,
@@ -235,7 +244,11 @@ const impact = [
   }
 
   /* Breadcrumb */
-  .ap-crumb { padding-block: var(--space-sm-static); }
+  .ap-crumb { padding-block: 0; }
+
+  @media (min-width: 1024px) {
+    .ap-crumb { padding-block: var(--space-sm-static); }
+  }
 
   /* Hero */
   .ap-hero {
@@ -285,6 +298,7 @@ const impact = [
     height: auto;
     border-radius: var(--radius-card);
   }
+  .ap-figure picture { display: block; width: 100%; }
   .ap-figure__lead {
     display: flex;
     flex-direction: column;
@@ -490,10 +504,17 @@ const impact = [
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual {
+    display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius-card);
     aspect-ratio: 590 / 520;
+    overflow: hidden;
+  }
+  .ap-horizon__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Panel background used by the "List bg" blocks (Problems, Product Impact) */

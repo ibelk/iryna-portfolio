@@ -119,8 +119,11 @@ const impact = [
     <!-- Main product showcase -->
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
-        <img src="/images/case-vpn-typography/mobile.png" alt="VPN app screens — server selection and connection status"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-vpn-typography/mobile-mobile.png" />
+          <img src="/images/case-vpn-typography/mobile.png" alt="VPN app screens — server selection and connection status"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -139,9 +142,12 @@ const impact = [
           ))}
         </ol>
       </div>
-      <img class="ap-horizon__visual" src="/images/case-vpn-typography/desktop.png"
-        alt="VPN desktop app — server list and connection map"
-        width="590" height="520" loading="lazy" decoding="async" />
+      <picture class="ap-horizon__visual">
+        <source media="(max-width: 1023px)" srcset="/images/case-vpn-typography/desktop-mobile.png" />
+        <img src="/images/case-vpn-typography/desktop.png"
+          alt="VPN desktop app — server list and connection map"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </picture>
     </section>
 
     <!-- Quote table -->
@@ -161,9 +167,18 @@ const impact = [
                 <span class="ap-quote__icon" aria-hidden="true" set:html={icons[r.icon]} />
                 <span>{r.role}</span>
               </div>
-              <p role="cell">{r.wrong}</p>
-              <p role="cell">{r.effect}</p>
-              <p role="cell" class="ap-quote__quote">&ldquo;{r.quote}&rdquo;</p>
+              <div role="cell">
+                <span class="ap-quote__label">What went wrong</span>
+                <p>{r.wrong}</p>
+              </div>
+              <div role="cell">
+                <span class="ap-quote__label">How it affected the product</span>
+                <p>{r.effect}</p>
+              </div>
+              <div role="cell">
+                <span class="ap-quote__label">Quote</span>
+                <p class="ap-quote__quote">&ldquo;{r.quote}&rdquo;</p>
+              </div>
             </div>
           ))}
         </div>
@@ -200,9 +215,12 @@ const impact = [
           ))}
         </ol>
       </div>
-      <img class="ap-horizon__visual" src="/images/case-vpn-typography/error.png"
-        alt="Contrast checker showing poor contrast scores before the fix"
-        width="590" height="520" loading="lazy" decoding="async" />
+      <picture class="ap-horizon__visual">
+        <source media="(max-width: 1023px)" srcset="/images/case-vpn-typography/error-mobile.png" />
+        <img src="/images/case-vpn-typography/error.png"
+          alt="Contrast checker showing poor contrast scores before the fix"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </picture>
     </section>
 
     <!-- Improving contrast — Figma wraps title, description and the
@@ -215,8 +233,11 @@ const impact = [
           <p class="ap-figure__desc">{contrastDesc}</p>
         </div>
         <div class="ap-figure__frame">
-          <img src="/images/case-vpn-typography/contrast.png" alt="Contrast checker showing good contrast scores after the fix"
-            width="1000" height="440" loading="lazy" decoding="async" />
+          <picture>
+            <source media="(max-width: 1023px)" srcset="/images/case-vpn-typography/contrast-mobile.png" />
+            <img src="/images/case-vpn-typography/contrast.png" alt="Contrast checker showing good contrast scores after the fix"
+              width="1000" height="440" loading="lazy" decoding="async" />
+          </picture>
         </div>
       </div>
     </section>
@@ -262,7 +283,11 @@ const impact = [
   }
 
   /* Breadcrumb */
-  .ap-crumb { padding-block: var(--space-sm-static); }
+  .ap-crumb { padding-block: 0; }
+
+  @media (min-width: 1024px) {
+    .ap-crumb { padding-block: var(--space-sm-static); }
+  }
 
   /* Hero */
   .ap-hero {
@@ -325,6 +350,13 @@ const impact = [
     height: auto;
     border-radius: var(--radius-card);
   }
+  /* <picture> is inline by default and won't pick up the width:100% aimed
+     at its <img> — the mobile/desktop art-directed sources collapse to
+     zero width without this. */
+  .ap-figure picture {
+    display: block;
+    width: 100%;
+  }
   .ap-figure__lead {
     display: flex;
     flex-direction: column;
@@ -360,7 +392,8 @@ const impact = [
   }
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
-  .ap-horizon__visual { width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; }
+  .ap-horizon__visual { display: block; width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; overflow: hidden; }
+  .ap-horizon__visual img { width: 100%; height: 100%; object-fit: cover; }
 
   /* Panel background used by the "List bg" / full-bleed figure blocks.
      The screenshot already bakes in its own browser-mockup chrome and dark
@@ -372,7 +405,7 @@ const impact = [
     border-radius: var(--radius-card);
     padding: var(--space-panel-inset) var(--space-panel-inset) 0;
   }
-  .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
+  .ap-panel-figure .ap-figure__frame { width: 100%; max-width: 1000px; margin-inline: auto; }
   .ap-panel-figure .ap-figure__frame img { border-radius: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
@@ -436,6 +469,11 @@ const impact = [
   }
   .ap-quote__row--head { display: none; }
   .ap-quote__row p { margin: 0; color: var(--color-text-quote); font-size: var(--text-body); }
+  .ap-quote__row [role='cell'] { display: flex; flex-direction: column; gap: var(--space-3xs-static); }
+  /* Mobile-only field captions — the real column headers are hidden below
+     1024px, so each stacked value needs its own label or the table reads
+     as an unlabeled wall of text. */
+  .ap-quote__label { color: var(--color-text-muted); font-size: var(--text-label); }
   .ap-quote__role {
     display: flex;
     align-items: center;
@@ -547,6 +585,7 @@ const impact = [
     .ap-quote__row--head span { padding: var(--space-xl-static); }
     .ap-quote__row > * { padding: var(--space-xl-static); }
     .ap-quote__role { padding-left: var(--space-panel-inset); }
+    .ap-quote__label { display: none; }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
   }

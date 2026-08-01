@@ -85,8 +85,11 @@ const impact = [
     <!-- Main product showcase -->
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
-        <img src="/images/case-vpn-premium/web.png" alt="VPN web purchase flow — pricing and checkout screens"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-vpn-premium/web-mobile.png" />
+          <img src="/images/case-vpn-premium/web.png" alt="VPN web purchase flow — pricing and checkout screens"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -121,9 +124,12 @@ const impact = [
           ))}
         </ol>
       </div>
-      <img class="ap-horizon__visual" src="/images/case-vpn-premium/mobile.png"
-        alt="Heatmap showing users clicking away from the Premium button"
-        width="590" height="520" loading="lazy" decoding="async" />
+      <picture class="ap-horizon__visual">
+        <source media="(max-width: 1023px)" srcset="/images/case-vpn-premium/mobile-mobile.png" />
+        <img src="/images/case-vpn-premium/mobile.png"
+          alt="Heatmap showing users clicking away from the Premium button"
+          width="590" height="520" loading="lazy" decoding="async" />
+      </picture>
     </section>
 
     <!-- Rebuilding the decision architecture — Figma wraps title, description
@@ -136,8 +142,11 @@ const impact = [
           <p class="ap-figure__desc">We rebuilt the upgrade logic. Before: one screen with many elements. After: structured decision flow. The goal was to guide the user step by step to a clear purchase decision.</p>
         </div>
         <div class="ap-figure__frame">
-          <img src="/images/case-vpn-premium/plan.png" alt="New pricing plan selection screen"
-            width="1000" height="440" loading="lazy" decoding="async" />
+          <picture>
+            <source media="(max-width: 1023px)" srcset="/images/case-vpn-premium/plan-mobile.png" />
+            <img src="/images/case-vpn-premium/plan.png" alt="New pricing plan selection screen"
+              width="1000" height="440" loading="lazy" decoding="async" />
+          </picture>
         </div>
       </div>
     </section>
@@ -187,7 +196,11 @@ const impact = [
   .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
   .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
 
-  .ap-crumb { padding-block: var(--space-sm-static); }
+  .ap-crumb { padding-block: 0; }
+
+  @media (min-width: 1024px) {
+    .ap-crumb { padding-block: var(--space-sm-static); }
+  }
 
   .ap-hero {
     display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
@@ -211,6 +224,11 @@ const impact = [
   .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
   .ap-figure--lead { padding-top: var(--space-section-y-lg); }
   .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure picture { display: block; width: 100%; }
+  /* <picture> is inline by default and won't pick up the width:100% aimed
+     at its <img> — the mobile/desktop art-directed sources collapse to
+     zero width without this. */
+  .ap-figure picture { display: block; width: 100%; }
   .ap-figure__lead {
     display: flex; flex-direction: column; align-items: center; gap: var(--space-sm-static);
     text-align: center; max-width: 60ch; margin-inline: auto;
@@ -229,7 +247,8 @@ const impact = [
   .ap-horizon__list li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
-  .ap-horizon__visual { width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; }
+  .ap-horizon__visual { display: block; width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 590 / 520; overflow: hidden; }
+  .ap-horizon__visual img { width: 100%; height: 100%; object-fit: cover; }
 
   .ap-panel { background: var(--color-surface); border-radius: var(--radius-card); padding: var(--space-panel-inset); }
   /* The screenshot already bakes in its own browser-mockup chrome and dark
@@ -240,7 +259,7 @@ const impact = [
     background: var(--color-surface); border-radius: var(--radius-card);
     padding: var(--space-panel-inset) var(--space-panel-inset) 0;
   }
-  .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
+  .ap-panel-figure .ap-figure__frame { width: 100%; max-width: 1000px; margin-inline: auto; }
   .ap-panel-figure .ap-figure__frame img { border-radius: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {

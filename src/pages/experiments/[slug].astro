@@ -117,7 +117,13 @@ const articles = listsPosts
      larger --space-section-y and pushed the crumb noticeably lower than it
      sits everywhere else on the site. */
   .page-crumb {
-    padding-block: var(--space-sm-static);
+    padding-block: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .page-crumb {
+      padding-block: var(--space-sm-static);
+    }
   }
 
   /* Hero's own top padding (36px, Figma's Hero row) stacks with the crumb's

@@ -79,8 +79,11 @@ const impact = [
     <!-- Freelancer profile showcase -->
     <section class="container ap-figure ap-figure--lead">
       <div class="ap-figure__frame">
-        <img src="/images/case-freelancehunt/profile.png" alt="Freelancer profile page with portfolio"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-freelancehunt/profile-mobile.png" />
+          <img src="/images/case-freelancehunt/profile.png" alt="Freelancer profile page with portfolio"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -103,8 +106,11 @@ const impact = [
     <!-- Portfolio page showcase -->
     <section class="container ap-figure">
       <div class="ap-figure__frame">
-        <img src="/images/case-freelancehunt/portfolio.png" alt="Redesigned portfolio builder page"
-          width="1200" height="680" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/images/case-freelancehunt/portfolio-mobile.png" />
+          <img src="/images/case-freelancehunt/portfolio.png" alt="Redesigned portfolio builder page"
+            width="1200" height="680" loading="lazy" decoding="async" />
+        </picture>
       </div>
     </section>
 
@@ -130,8 +136,11 @@ const impact = [
           <p class="ap-figure__desc">Based on research we chose a portfolio builder concept. It is a flexible block system that adapts to specialization content and user experience level. Portfolio became a key tool for selling expertise on the platform.</p>
         </div>
         <div class="ap-figure__frame">
-          <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
-            width="1000" height="440" loading="lazy" decoding="async" />
+          <picture>
+            <source media="(max-width: 1023px)" srcset="/images/case-freelancehunt/template-mobile.png" />
+            <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
+              width="1000" height="440" loading="lazy" decoding="async" />
+          </picture>
         </div>
       </div>
     </section>
@@ -194,7 +203,11 @@ const impact = [
   .ap h2 { font-size: var(--text-title-l); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
   .ap h3 { font-size: var(--text-title-s); font-weight: var(--weight-semibold); line-height: var(--leading-heading); }
 
-  .ap-crumb { padding-block: var(--space-sm-static); }
+  .ap-crumb { padding-block: 0; }
+
+  @media (min-width: 1024px) {
+    .ap-crumb { padding-block: var(--space-sm-static); }
+  }
 
   .ap-hero {
     display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
@@ -211,6 +224,11 @@ const impact = [
   .ap-figure { display: grid; grid-template-columns: 1fr; gap: var(--space-section-y); padding-block: var(--space-section-y); }
   .ap-figure--lead { padding-top: var(--space-section-y-lg); }
   .ap-figure img { width: 100%; height: auto; border-radius: var(--radius-card); }
+  .ap-figure picture { display: block; width: 100%; }
+  /* <picture> is inline by default and won't pick up the width:100% aimed
+     at its <img> — the mobile/desktop art-directed sources collapse to
+     zero width without this. */
+  .ap-figure picture { display: block; width: 100%; }
   .ap-figure__lead {
     display: flex; flex-direction: column; align-items: center; gap: var(--space-sm-static);
     text-align: center; max-width: 60ch; margin-inline: auto;
@@ -281,7 +299,7 @@ const impact = [
     background: var(--color-surface); border-radius: var(--radius-card);
     padding: var(--space-panel-inset) var(--space-panel-inset) 0;
   }
-  .ap-panel-figure .ap-figure__frame { max-width: 1000px; margin-inline: auto; }
+  .ap-panel-figure .ap-figure__frame { width: 100%; max-width: 1000px; margin-inline: auto; }
   .ap-panel-figure .ap-figure__frame img { border-radius: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
