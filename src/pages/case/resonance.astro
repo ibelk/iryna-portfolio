@@ -329,6 +329,8 @@ const impact = [
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
     white-space: nowrap;
+    isolation: isolate;
+    overflow: hidden;
   }
   .ap-badge--corner {
     position: absolute;
@@ -401,6 +403,10 @@ const impact = [
     color: var(--color-text-primary);
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
+    /* backdrop-filter can ignore border-radius clipping and paint as a
+       hard-edged rectangle unless it gets its own compositing layer. */
+    isolation: isolate;
+    overflow: hidden;
   }
   .ap-compare__label--before { left: var(--space-xs-static); }
   .ap-compare__label--after { right: var(--space-xs-static); }

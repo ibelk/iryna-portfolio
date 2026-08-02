@@ -241,6 +241,7 @@ const impact = [
     border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
     backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold); white-space: nowrap;
+    isolation: isolate; overflow: hidden;
   }
   .ap-badge--corner { position: absolute; top: var(--space-xs-static); right: var(--space-xs-static); }
 
@@ -267,6 +268,7 @@ const impact = [
     border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
     backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold);
+    isolation: isolate; overflow: hidden;
   }
   .ap-compare__label--before { left: var(--space-xs-static); }
   .ap-compare__label--after { right: var(--space-xs-static); }
