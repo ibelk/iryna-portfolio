@@ -148,7 +148,7 @@ const results = [
           <div class="ap-research-card">
             <p class="ap-research-card__question">{chart.question}</p>
             <div class="ap-donut">
-              <DonutChart segments={chart.segments} size={290} />
+              <DonutChart segments={chart.segments} size={290} strokeWidth={55} />
               {chart.segments.map((s) => (
                 <span class:list={['ap-donut__callout', `ap-donut__callout--${s.callout}`]}>
                   <strong>{s.label}</strong>
@@ -302,7 +302,10 @@ const results = [
     border-radius: 16px;
     padding: var(--space-lg-static);
   }
-  .ap-donut { position: relative; align-self: center; }
+  /* This chart's ring uses its own two-tone orange, not the site's
+     --color-accent/--color-donut-dim — read directly off the Figma
+     Ellipse strokes rather than reusing the global brand orange. */
+  .ap-donut { position: relative; align-self: center; --color-accent: #e85737; --color-donut-dim: #4b2b26; }
   .ap-donut__callout {
     position: absolute;
     display: flex;
