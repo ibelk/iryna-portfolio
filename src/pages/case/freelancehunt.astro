@@ -238,6 +238,7 @@ const impact = [
 
   .ap-badge {
     position: relative;
+    isolation: isolate;
     display: inline-flex; align-items: center; padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold); white-space: nowrap;
@@ -268,7 +269,7 @@ const impact = [
     font-size: var(--text-label); letter-spacing: 0.05em;
   }
   .ap-compare__label {
-    position: absolute; bottom: var(--space-xs-static); padding: var(--space-3xs-static) var(--space-xs-static);
+    position: absolute; isolation: isolate; bottom: var(--space-xs-static); padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold);
   }

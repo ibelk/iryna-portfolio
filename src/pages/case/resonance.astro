@@ -319,6 +319,7 @@ const impact = [
      "Example design" / "Comparison of versions" callouts. */
   .ap-badge {
     position: relative;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     padding: var(--space-3xs-static) var(--space-xs-static);
@@ -404,6 +405,7 @@ const impact = [
   }
   .ap-compare__label {
     position: absolute;
+    isolation: isolate;
     bottom: var(--space-xs-static);
     padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control);
