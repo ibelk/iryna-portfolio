@@ -281,22 +281,33 @@ const results = [
   /* Research — real chart/card grid, not an exported screenshot. Mobile
      stacks all four cards in one column; desktop pairs them 2x2. */
   .ap-research-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
+  /* Figma's card frame itself carries no fill at all — what reads as a
+     "card" is really just the individual pills (question label, donut
+     callouts, replies, tags) floating directly on the page background,
+     all sharing the same --color-surface-quote fill. */
   .ap-research-card {
-    background: var(--color-surface-quote);
     border-radius: var(--radius-card);
     padding: var(--space-lg-static);
     display: flex;
     flex-direction: column;
     gap: var(--space-lg-static);
   }
-  .ap-research-card__question { margin: 0; color: var(--color-text-primary); font-size: var(--text-body); font-weight: var(--weight-semibold); }
+  .ap-research-card__question {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    background: var(--color-surface-quote);
+    border-radius: 16px;
+    padding: var(--space-lg-static);
+  }
   .ap-donut { position: relative; align-self: center; }
   .ap-donut__callout {
     position: absolute;
     display: flex;
     flex-direction: column;
     gap: 2px;
-    background: var(--color-surface);
+    background: var(--color-surface-quote);
     border-radius: var(--radius-12);
     padding: var(--space-xs-static) var(--space-sm-static);
     line-height: var(--leading-component);
@@ -308,7 +319,7 @@ const results = [
   .ap-research-replies { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-research-replies p {
     margin: 0;
-    background: var(--color-surface);
+    background: var(--color-surface-quote);
     border-radius: var(--radius-12);
     padding: var(--space-sm-static);
     color: var(--color-text-muted);
@@ -318,7 +329,7 @@ const results = [
   .ap-research-more { color: var(--color-text-muted); letter-spacing: 0.2em; }
   .ap-research-tags { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm-static); }
   .ap-research-tags span {
-    background: var(--color-surface);
+    background: var(--color-surface-quote);
     border-radius: var(--radius-12);
     padding: var(--space-sm-static);
     color: var(--color-text-primary);
