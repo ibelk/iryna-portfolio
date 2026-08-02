@@ -85,7 +85,7 @@ const articles = listsPosts
 
     {
       gallery.length > 0 && (
-        <section class="container gallery">
+        <section class:list={['container', 'gallery', { 'gallery--tight': entry.slug === '3d' }]}>
           {gallery.map((item) => (
             <figure
               class:list={['piece', { 'piece--wide': item.tall }]}
@@ -126,14 +126,11 @@ const articles = listsPosts
     }
   }
 
-  /* Hero's own top padding (36px, Figma's Hero row) stacks with the crumb's
-     16px bottom padding above for a 52px seam — not the 24px spacing-ladder
-     step. */
   .page-head {
     display: flex;
     flex-direction: column;
-    padding-block-start: var(--space-block-gap);
-    padding-block-end: var(--space-block-gap);
+    padding-block-start: var(--space-lg-static);
+    padding-block-end: var(--space-lg-static);
   }
 
   /* Figma keeps the hero-to-cards gap at a fixed 36px (space-block-gap) on
@@ -210,7 +207,7 @@ const articles = listsPosts
 
   .entries {
     display: grid;
-    gap: var(--space-grid-gap);
+    gap: var(--space-lg-static);
     padding-block: var(--space-section-y);
   }
 
@@ -312,6 +309,10 @@ const articles = listsPosts
     padding-block: var(--space-section-y);
   }
 
+  /* 3D gallery's own gap is tighter than the other experiment galleries,
+     per Figma (9px, not the shared --space-xl-static step). */
+  .gallery--tight { gap: 9px; }
+
   .piece {
     margin: 0;
     display: grid;
@@ -333,8 +334,18 @@ const articles = listsPosts
   }
 
   @media (min-width: 1024px) {
+    .page-head {
+      padding-block-start: var(--space-block-gap);
+      padding-block-end: var(--space-block-gap);
+    }
+
     .entries {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-grid-gap);
+    }
+
+    .gallery--tight {
+      gap: var(--space-xl-static);
     }
 
     .entries--cards {

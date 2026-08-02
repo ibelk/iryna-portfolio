@@ -410,15 +410,15 @@ const impact = [
   .ap-cards {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-grid-gap);
+    gap: var(--space-sm-static);
   }
   .ap-card {
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
-    padding: var(--space-card-inset);
+    padding: var(--space-lg-static);
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg-static);
+    gap: var(--space-sm-static);
   }
   .ap-card h3 { font-size: var(--text-title-m); }
   .ap-card ul {
@@ -426,7 +426,7 @@ const impact = [
     padding: 0;
     list-style: none;
     display: grid;
-    gap: var(--space-sm-static);
+    gap: var(--space-xs-static);
   }
   .ap-card li {
     display: flex;
@@ -483,7 +483,7 @@ const impact = [
   .ap-horizon {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-block-gap);
+    gap: var(--space-md-static);
     padding-block: var(--space-section-y);
   }
   .ap-horizon__left {
@@ -579,8 +579,9 @@ const impact = [
       padding-block: var(--space-section-y-lg);
     }
     .ap-hero__lead { gap: var(--space-lg-static); }
-    .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-    .ap-card { padding: var(--space-card-inset-lg); }
+    .ap-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-grid-gap); }
+    .ap-card { padding: var(--space-card-inset-lg); gap: var(--space-lg-static); }
+    .ap-card ul { gap: var(--space-sm-static); }
     .ap-split {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--space-md-static);

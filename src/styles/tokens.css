@@ -152,7 +152,7 @@
   --space-panel-inset: var(--size-24); /* Block/Text "List bg" panel desktop 60 */
   --space-card-gap: var(--size-12); /* stacked card parts    desktop 20 */
   --space-card-stack: var(--size-24); /* text block ↔ tag row  same */
-  --space-card-text-gap: var(--size-20); /* title ↔ subtitle    desktop 24 */
+  --space-card-text-gap: var(--size-16); /* title ↔ subtitle    desktop 24 */
 
   --space-tag-x: var(--size-12); /* tag padding-inline  same */
   --space-tag-y: var(--size-8); /* tag padding-block   same */

@@ -203,13 +203,19 @@ const impact = [
   }
 
   .ap-hero {
-    display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-lg-static);
+    display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); padding-block: var(--space-xl-static);
   }
-  .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-sm-static); }
+  /* Mobile: Figma orders the NDA banner AFTER the meta list, but it lives
+     in the markup inside .ap-hero__lead (before .ap-meta) so desktop can
+     keep its own, unrelated stacked layout untouched. `display: contents`
+     flattens the lead wrapper so h1/sub/nda become direct siblings of
+     .ap-meta in the grid, then `order` moves nda past it — desktop reverts
+     this below, restoring the original nested box. */
+  .ap-hero__lead { display: contents; }
   .ap-hero h1 { font-size: var(--text-display-case); font-weight: var(--weight-semibold); line-height: var(--leading-heading); letter-spacing: -0.01em; }
   .ap-hero__sub { max-width: 34ch; color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-nda {
-    display: flex; align-items: center; gap: var(--space-2xs-static); margin-top: var(--space-sm-static);
+    display: flex; align-items: center; gap: var(--space-2xs-static); order: 1;
     align-self: flex-start; width: fit-content;
     padding: var(--space-sm-static); border-radius: var(--radius-banner); background: rgba(255, 128, 0, 0.27);
     color: white; font-size: var(--text-label); font-weight: var(--weight-medium, 500);
@@ -240,8 +246,8 @@ const impact = [
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
 
   /* Design-system-style horizon — two equal columns on desktop (title+list, visual) */
-  .ap-horizon { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
-  .ap-horizon__left { display: grid; grid-template-columns: 1fr; gap: var(--space-lg-static); }
+  .ap-horizon { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); padding-block: var(--space-section-y); }
+  .ap-horizon__left { display: grid; grid-template-columns: 1fr; gap: var(--space-xl-static); }
   .ap-horizon__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-horizon__list li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-2xs-static); }
   .ap-horizon__list li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
@@ -272,7 +278,7 @@ const impact = [
   .ap-impact__icon::after { content: ''; position: absolute; inset: 16.6%; border-radius: var(--radius-control); background: var(--color-accent); }
   .ap-impact__icon :global(svg) { position: relative; z-index: 1; width: 18px; height: 18px; color: var(--color-text-primary); }
 
-  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-block-gap); padding-block: var(--space-section-y); }
+  .ap-section { display: grid; grid-template-columns: 1fr; gap: var(--space-card-inset-lg); padding-block: var(--space-section-y); }
   .ap-criteria { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); }
   /* flex, not grid: a grid card stretched taller by its row (to match a
      taller sibling elsewhere in the same `.ap-criteria` grid row) spreads
@@ -300,7 +306,8 @@ const impact = [
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start;
       gap: var(--space-md-static); padding-block: var(--space-section-y-lg);
     }
-    .ap-hero__lead { gap: var(--space-lg-static); }
+    .ap-hero__lead { display: flex; flex-direction: column; gap: var(--space-lg-static); }
+    .ap-nda { margin-top: var(--space-sm-static); }
     .ap-figure__lead { gap: var(--space-lg-static); }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-horizon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--space-md-static); }
