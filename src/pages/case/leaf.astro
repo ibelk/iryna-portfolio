@@ -148,7 +148,7 @@ const results = [
           <div class="ap-research-card">
             <p class="ap-research-card__question">{chart.question}</p>
             <div class="ap-donut">
-              <DonutChart segments={chart.segments} />
+              <DonutChart segments={chart.segments} size={290} />
               {chart.segments.map((s) => (
                 <span class:list={['ap-donut__callout', `ap-donut__callout--${s.callout}`]}>
                   <strong>{s.label}</strong>
@@ -286,6 +286,7 @@ const results = [
      callouts, replies, tags) floating directly on the page background,
      all sharing the same --color-surface-quote fill. */
   .ap-research-card {
+    border: 1px solid var(--color-border-quote);
     border-radius: var(--radius-card);
     padding: var(--space-lg-static);
     display: flex;
@@ -314,8 +315,8 @@ const results = [
   }
   .ap-donut__callout strong { font-size: var(--text-body); font-weight: var(--weight-semibold); color: var(--color-text-primary); }
   .ap-donut__callout span { font-size: var(--text-label); color: var(--color-text-muted); }
-  .ap-donut__callout--top-right { top: 15%; right: -8%; }
-  .ap-donut__callout--bottom-left { bottom: 10%; left: -8%; }
+  .ap-donut__callout--top-right { top: 1%; right: -13%; }
+  .ap-donut__callout--bottom-left { bottom: 9%; left: -20%; }
   .ap-research-replies { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-research-replies p {
     margin: 0;
