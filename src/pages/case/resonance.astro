@@ -196,7 +196,7 @@ const impact = [
       <picture class="ap-horizon__visual">
         <img src="/images/case-analytical/horizon-visual.png"
           alt="Design-system components: a chart and an input, each with its properties panel"
-          width="590" height="520" loading="lazy" decoding="async" />
+          width="590" height="502" loading="lazy" decoding="async" />
       </picture>
     </section>
 
@@ -318,19 +318,29 @@ const impact = [
   /* Pill badge overlaid on design showcase images — matches the Figma
      "Example design" / "Comparison of versions" callouts. */
   .ap-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control);
-    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
     color: var(--color-text-primary);
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
     white-space: nowrap;
-    isolation: isolate;
-    overflow: hidden;
+  }
+  /* The blur lives on its own layer behind the text — putting
+     backdrop-filter directly on a text-containing element makes some
+     mobile browsers blur (or fully hide) the text along with the
+     background instead of just sampling what's behind it. */
+  .ap-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
   }
   .ap-badge--corner {
     position: absolute;
@@ -397,16 +407,20 @@ const impact = [
     bottom: var(--space-xs-static);
     padding: var(--space-3xs-static) var(--space-xs-static);
     border-radius: var(--radius-control);
-    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
     color: var(--color-text-primary);
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
-    /* backdrop-filter can ignore border-radius clipping and paint as a
-       hard-edged rectangle unless it gets its own compositing layer. */
-    isolation: isolate;
-    overflow: hidden;
+  }
+  /* Blur on its own layer behind the text — see .ap-badge::before above. */
+  .ap-compare__label::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
   }
   .ap-compare__label--before { left: var(--space-xs-static); }
   .ap-compare__label--after { right: var(--space-xs-static); }
@@ -514,7 +528,7 @@ const impact = [
     width: 100%;
     height: auto;
     border-radius: 0;
-    aspect-ratio: 590 / 520;
+    aspect-ratio: 1180 / 1004;
     overflow: hidden;
   }
   .ap-horizon__visual img {

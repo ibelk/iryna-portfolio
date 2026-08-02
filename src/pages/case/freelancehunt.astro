@@ -237,11 +237,15 @@ const impact = [
   .ap-figure__frame { position: relative; }
 
   .ap-badge {
+    position: relative;
     display: inline-flex; align-items: center; padding: var(--space-3xs-static) var(--space-xs-static);
-    border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
-    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
+    border-radius: var(--radius-control); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold); white-space: nowrap;
-    isolation: isolate; overflow: hidden;
+  }
+  .ap-badge::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
   }
   .ap-badge--corner { position: absolute; top: var(--space-xs-static); right: var(--space-xs-static); }
 
@@ -265,10 +269,13 @@ const impact = [
   }
   .ap-compare__label {
     position: absolute; bottom: var(--space-xs-static); padding: var(--space-3xs-static) var(--space-xs-static);
-    border-radius: var(--radius-control); background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
-    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); color: var(--color-text-primary);
+    border-radius: var(--radius-control); color: var(--color-text-primary);
     font-size: var(--text-label); font-weight: var(--weight-semibold);
-    isolation: isolate; overflow: hidden;
+  }
+  .ap-compare__label::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    background: var(--color-surface-scrim, rgba(60, 60, 60, 0.65));
+    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
   }
   .ap-compare__label--before { left: var(--space-xs-static); }
   .ap-compare__label--after { right: var(--space-xs-static); }

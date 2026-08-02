@@ -350,9 +350,12 @@ const results = [
       radial-gradient(circle at 66% 77%, #5d6fdf 0%, transparent 55%),
       linear-gradient(135deg, #96c5e9 0%, #8c01cc 100%);
     border-radius: var(--radius-card);
-    padding: var(--space-lg-static);
     overflow: hidden;
   }
+  /* The panel itself carries no padding — only the text column does
+     (32px all sides on mobile). The phone-screens image bleeds edge to
+     edge, unpadded, matching Figma's Content Row exactly. */
+  .ap-figure-overlay__text { padding: var(--space-xl-static); }
   .ap-figure-overlay img { width: 100%; height: auto; display: block; }
   .ap-figure-overlay picture { display: block; width: 100%; }
   .ap-figure-overlay__text h2 { order: -1; }
@@ -418,8 +421,10 @@ const results = [
     .ap-figure__title, .ap-figure__desc { flex: 1 0 0; min-width: 0; }
     .ap-research-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md-static); }
     .ap-research-card { padding: var(--space-card-inset-lg); gap: var(--space-xl-static); }
-    .ap-research-card__question { font-size: var(--text-title-s); }
-    .ap-research-replies p, .ap-research-tags span { font-size: var(--text-body); }
+    .ap-research-card__question { font-size: 18px; }
+    .ap-research-replies p, .ap-research-tags span { font-size: 18px; }
+    .ap-donut__callout { padding: var(--space-sm-static); }
+    .ap-donut__callout strong, .ap-donut__callout span { font-size: 18px; }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-process-card { padding: 64px; gap: var(--size-48); }
     .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
@@ -435,13 +440,13 @@ const results = [
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      padding: var(--space-card-inset-lg);
     }
     .ap-figure-overlay__text {
       display: flex;
       flex-direction: column;
       gap: var(--space-sm-static);
       max-width: 42ch;
+      padding: var(--space-card-inset-lg);
     }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }

@@ -214,7 +214,7 @@ const impact = [
           ))}
         </ol>
       </div>
-      <picture class="ap-horizon__visual ap-horizon__visual--rounded">
+      <picture class="ap-horizon__visual">
         <img src="/images/case-vpn-typography/error.png"
           alt="Contrast checker showing poor contrast scores before the fix"
           width="590" height="520" loading="lazy" decoding="async" />
@@ -396,9 +396,6 @@ const impact = [
   .ap-horizon__n { color: var(--color-accent); font-weight: var(--weight-bold); font-size: var(--text-body); }
   .ap-horizon__list p { color: var(--color-text-muted); font-size: var(--text-body); }
   .ap-horizon__visual { display: block; width: 100%; height: auto; border-radius: 0; aspect-ratio: 590 / 520; overflow: hidden; }
-  /* Why Noto Sans' visual is the one horizon image Figma actually rounds
-     (32px) — every other horizon visual on the site is sharp-cornered. */
-  .ap-horizon__visual--rounded { border-radius: 32px; }
   .ap-horizon__visual img { width: 100%; height: 100%; object-fit: cover; }
 
   /* Panel background used by the "List bg" / full-bleed figure blocks.
