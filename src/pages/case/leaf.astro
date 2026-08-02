@@ -39,7 +39,7 @@ const surveyCharts = [
   {
     question: 'Do you have experience with waste sorting or would you like to start?',
     segments: [
-      { label: 'No', value: 74, callout: 'bottom-left', pos: { a: 4, b: 18, aD: 26, bD: -59 } },
+      { label: 'No', value: 74, callout: 'bottom-left', pos: { a: 4, b: 18, aD: 26, bD: -40 } },
       { label: 'Yes', value: 26, dim: true, callout: 'top-right', pos: { a: 10, b: 3, aD: 2, bD: -37 } },
     ],
   },
@@ -475,7 +475,12 @@ const results = [
     .ap-research-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md-static); }
     .ap-research-card { padding: var(--space-card-inset-lg); gap: var(--space-xl-static); }
     .ap-research-card__question { font-size: 18px; }
-    .ap-research-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* Figma has the tag pills FILL the card's full remaining height (unlike
+       the reply pills, which stay compact/HUG) — flex:1 lets the grid
+       consume the leftover height once the card is stretched to match its
+       taller donut-chart sibling in the same grid row, and grid-auto-rows:1fr
+       splits that height evenly so each pill's own stretch fills its row. */
+    .ap-research-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; flex: 1; }
     .ap-research-replies p, .ap-research-tags span { font-size: 18px; }
     .ap-donut__callout { padding: var(--space-sm-static); }
     .ap-donut__callout strong, .ap-donut__callout span { font-size: 18px; }
