@@ -363,21 +363,31 @@ const results = [
      not baked into one flat picture. Mobile stacks them; desktop switches
      to Figma's two-column layout — see the desktop override below. */
   .ap-figure-overlay {
+    position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     gap: var(--space-lg-static);
-    /* Figma layers two large, heavily blurred (400px) glow circles over the
-       base gradient — approximated here as soft radial gradients rather
-       than actual blurred elements (cheaper, and a literal 400px blur
-       radius reads almost identically to a wide soft-stop radial anyway).
-       Positions/colors read directly off the Ellipse 2816/2817 fills. */
-    background-image:
-      radial-gradient(ellipse 55% 65% at 20% 75%, #690895 0%, #690895 35%, transparent 75%),
-      radial-gradient(ellipse 55% 65% at 66% 77%, #5d6fdf 0%, #5d6fdf 35%, transparent 75%),
-      linear-gradient(135deg, #96c5e9 0%, #8c01cc 100%);
+    background-image: linear-gradient(135deg, #96c5e9 0%, #8c01cc 100%);
     border-radius: var(--radius-card);
     overflow: hidden;
   }
+  /* The two glow circles (Ellipse 2816/2817) as real blurred shapes, not an
+     approximated gradient — sized/positioned from the actual Figma layers
+     (400px layer blur ≈ CSS blur(200px)). `isolation:isolate` above keeps
+     their z-index:-1 scoped to this panel instead of escaping to the page's
+     stacking context (same issue that hid the comparison badges). */
+  .ap-figure-overlay::before,
+  .ap-figure-overlay::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(200px);
+    pointer-events: none;
+  }
+  .ap-figure-overlay::before { left: -20px; top: -150px; width: 320px; height: 320px; background: #690895; }
+  .ap-figure-overlay::after { left: -10px; top: -140px; width: 300px; height: 300px; background: #5d6fdf; }
   /* The panel itself carries no padding — only the text column does
      (32px all sides on mobile). The phone-screens image bleeds edge to
      edge, unpadded, matching Figma's Content Row exactly. */
@@ -472,6 +482,8 @@ const results = [
       grid-template-columns: 1fr 1fr;
       align-items: center;
     }
+    .ap-figure-overlay::before { left: -152px; top: 42px; width: 789px; height: 789px; }
+    .ap-figure-overlay::after { left: 433px; top: 66px; width: 765px; height: 765px; }
     .ap-figure-overlay__text {
       display: flex;
       flex-direction: column;
