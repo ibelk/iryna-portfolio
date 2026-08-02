@@ -26,13 +26,16 @@ const { title, body, linkLabel, href } = Astro.props;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: var(--size-32);
-    padding: var(--size-32);
+    padding: var(--space-lg-static);
     background: var(--color-surface-inverse);
     border-radius: var(--radius-card);
     color: var(--color-text-inverse);
     text-decoration: none;
     transition: transform var(--motion-normal) var(--motion-ease);
+  }
+
+  @media (min-width: 1024px) {
+    .writing-cta { padding: var(--size-32); }
   }
 
   .writing-cta:hover {

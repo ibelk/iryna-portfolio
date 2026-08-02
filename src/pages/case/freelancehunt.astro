@@ -137,7 +137,6 @@ const impact = [
         </div>
         <div class="ap-figure__frame">
           <picture>
-            <source media="(max-width: 1023px)" srcset="/images/case-freelancehunt/template-mobile.png" />
             <img src="/images/case-freelancehunt/template.png" alt="Portfolio builder block system"
               width="1000" height="440" loading="lazy" decoding="async" />
           </picture>
@@ -301,6 +300,7 @@ const impact = [
   }
   .ap-panel-figure .ap-figure__frame { width: 100%; max-width: 1000px; margin-inline: auto; }
   .ap-panel-figure .ap-figure__frame img { border-radius: 0; }
+  .ap-panel-figure .ap-figure__lead { align-items: flex-start; text-align: left; margin-inline: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
     display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: start;
@@ -364,6 +364,7 @@ const impact = [
     }
     .ap-hero__lead { gap: var(--space-lg-static); }
     .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-panel-figure .ap-figure__lead { align-items: center; text-align: center; margin-inline: auto; }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-section { gap: var(--space-card-inset-lg); }
     .ap-criteria--3col { grid-template-columns: repeat(3, minmax(0, 1fr)); }

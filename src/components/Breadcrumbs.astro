@@ -1,15 +1,28 @@
 ---
+// Articles have a third level (Main / parent experiment / article title,
+// per Figma's "Breadcrumbs/item" x3 structure) — every other page stays a
+// plain two-level Main / current trail.
 interface Props {
   parentLabel: string;
   parentHref: string;
+  middleLabel?: string;
+  middleHref?: string;
   current: string;
 }
-const { parentLabel, parentHref, current } = Astro.props;
+const { parentLabel, parentHref, middleLabel, middleHref, current } = Astro.props;
 ---
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <a class="breadcrumbs__parent" href={parentHref}>{parentLabel}</a>
   <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+  {
+    middleLabel && middleHref && (
+      <>
+        <a class="breadcrumbs__parent" href={middleHref}>{middleLabel}</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      </>
+    )
+  }
   <span class="breadcrumbs__current" aria-current="page">{current}</span>
 </nav>
 
@@ -19,12 +32,14 @@ const { parentLabel, parentHref, current } = Astro.props;
     align-items: center;
     gap: var(--space-3xs-static);
     font-size: var(--text-body);
+    min-width: 0;
   }
 
   .breadcrumbs__parent,
   .breadcrumbs__sep {
     color: var(--color-text-muted);
     text-decoration: none;
+    flex: none;
   }
 
   .breadcrumbs__parent {
@@ -38,5 +53,10 @@ const { parentLabel, parentHref, current } = Astro.props;
   .breadcrumbs__current {
     color: var(--color-text-primary);
     font-weight: var(--weight-semibold);
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 </style>

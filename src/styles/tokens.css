@@ -151,7 +151,7 @@
   --space-card-padding: var(--size-12); /* card shell padding      same */
   --space-card-inset: var(--size-16); /* card content padding  desktop 48 */
   --space-card-inset-sm: var(--size-12); /* compact card (experiments) same */
-  --space-card-inset-md: var(--size-20); /* writing card content   same */
+  --space-card-inset-md: var(--size-20); /* wip/experiment card content   same */
   --space-card-inset-lg: var(--size-42); /* Block/Cards/Card padding  same */
   --space-panel-inset: var(--size-24); /* Block/Text "List bg" panel desktop 60 */
   --space-card-gap: var(--size-12); /* stacked card parts    desktop 20 */

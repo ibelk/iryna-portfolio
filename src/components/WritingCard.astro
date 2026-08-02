@@ -62,7 +62,13 @@ const { title, image, href, tags } = Astro.props;
     flex: 1 0 0;
     flex-direction: column;
     gap: var(--space-card-text-gap);
-    padding: var(--space-card-inset-md);
+    padding: var(--space-xs-static);
+  }
+
+  @media (min-width: 1024px) {
+    .writing-card__body {
+      padding: var(--space-card-inset-md);
+    }
   }
 
   .writing-card__tags {

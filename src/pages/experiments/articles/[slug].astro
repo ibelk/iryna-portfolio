@@ -23,7 +23,13 @@ const displayTitle = heroTitle ?? title;
 
   <main class="article">
     <div class="container article__crumb">
-      <Breadcrumbs parentLabel={parentLabel} parentHref={parentHref} current={displayTitle} />
+      <Breadcrumbs
+        parentLabel="Main"
+        parentHref="/"
+        middleLabel={parentLabel}
+        middleHref={parentHref}
+        current={displayTitle}
+      />
     </div>
 
     <header class="container article__hero">
@@ -171,10 +177,8 @@ const displayTitle = heroTitle ?? title;
     width: 100%;
   }
 
-  /* Fixed 32px per Figma — not --text-title-l, which is 42px at desktop for
-     its other (section/case-card title) uses elsewhere on the site. */
   .article__section h2 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: var(--weight-semibold);
     line-height: var(--leading-heading);
     margin-bottom: var(--space-lg-static);
