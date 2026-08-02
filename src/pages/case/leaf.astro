@@ -173,8 +173,8 @@ const results = [
           <p class="ap-research-card__question">{interviewReplies.question}</p>
           <div class="ap-research-replies">
             {interviewReplies.replies.map((r) => <p>{r}</p>)}
+            <span class="ap-research-more" aria-hidden="true">•••</span>
           </div>
-          <span class="ap-research-more" aria-hidden="true">•••</span>
         </div>
         <div class="ap-research-card">
           <p class="ap-research-card__question">{interviewTags.question}</p>
@@ -331,22 +331,34 @@ const results = [
   .ap-donut__callout span { font-size: var(--text-label); color: var(--color-text-muted); }
   .ap-donut__callout--top-right { top: var(--co-a); right: var(--co-b); }
   .ap-donut__callout--bottom-left { bottom: var(--co-a); left: var(--co-b); }
+  /* The question→list gap is 12px in Figma at both breakpoints (not the
+     shared card gap used by the donut cards), so it's scoped with :has()
+     rather than changing .ap-research-card's own gap for every card. */
+  .ap-research-card:has(.ap-research-replies),
+  .ap-research-card:has(.ap-research-tags) {
+    gap: var(--space-xs-static);
+  }
   .ap-research-replies { display: flex; flex-direction: column; gap: var(--space-sm-static); }
-  .ap-research-replies p {
+  /* Figma's reply/tag pills carry no fill at all — just the same 1px
+     border + 16px radius as the card shell, not a filled chip. */
+  .ap-research-replies p,
+  .ap-research-more {
     margin: 0;
-    background: var(--color-surface-quote);
-    border-radius: var(--radius-12);
-    padding: var(--space-sm-static);
+    border: 1px solid var(--color-border-quote);
+    border-radius: 16px;
+    padding: var(--space-lg-static);
     color: var(--color-text-muted);
     font-size: var(--text-label);
     line-height: var(--leading-component);
   }
-  .ap-research-more { color: var(--color-text-muted); letter-spacing: 0.2em; }
-  .ap-research-tags { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm-static); }
+  .ap-research-more { align-self: flex-start; letter-spacing: 0.2em; }
+  /* Figma stacks tags in a single column on mobile — the 2-up grid is
+     desktop-only, see the override below. */
+  .ap-research-tags { display: grid; grid-template-columns: 1fr; gap: var(--space-sm-static); }
   .ap-research-tags span {
-    background: var(--color-surface-quote);
-    border-radius: var(--radius-12);
-    padding: var(--space-sm-static);
+    border: 1px solid var(--color-border-quote);
+    border-radius: 16px;
+    padding: var(--space-lg-static);
     color: var(--color-text-primary);
     font-size: var(--text-label);
     line-height: var(--leading-component);
@@ -451,6 +463,7 @@ const results = [
     .ap-research-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md-static); }
     .ap-research-card { padding: var(--space-card-inset-lg); gap: var(--space-xl-static); }
     .ap-research-card__question { font-size: 18px; }
+    .ap-research-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .ap-research-replies p, .ap-research-tags span { font-size: 18px; }
     .ap-donut__callout { padding: var(--space-sm-static); }
     .ap-donut__callout strong, .ap-donut__callout span { font-size: 18px; }
