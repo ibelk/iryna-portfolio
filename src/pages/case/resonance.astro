@@ -164,7 +164,7 @@ const impact = [
 
     <!-- Adaptive chart system -->
     <section class="container ap-figure">
-      <div class="ap-figure__lead">
+      <div class="ap-figure__lead ap-figure__lead--left">
         <h2 class="ap-figure__title">Adaptive Chart System</h2>
         <p class="ap-figure__desc">Panels and charts can be moved and combined freely. Typography contrast and grid system help users read data in any layout configuration.</p>
       </div>
@@ -308,6 +308,7 @@ const impact = [
     max-width: 60ch;
     margin-inline: auto;
   }
+  .ap-figure__lead--left { align-items: flex-start; text-align: left; margin-inline: 0; }
   .ap-figure__title { order: -1; }
   .ap-figure__desc {
     color: var(--color-text-muted);
@@ -530,7 +531,7 @@ const impact = [
     display: grid;
     grid-template-columns: auto 1fr;
     gap: var(--space-sm-static);
-    align-items: center;
+    align-items: start;
     font-size: var(--text-title-s);
     font-weight: var(--weight-semibold);
   }
@@ -604,6 +605,7 @@ const impact = [
     .ap-compare__label--before { left: var(--space-xl-static); }
     .ap-compare__label--after { right: var(--space-xl-static); }
     .ap-figure__lead { gap: var(--space-lg-static); }
+    .ap-figure__lead--left { align-items: center; text-align: center; margin-inline: auto; }
     .ap-section { gap: var(--space-card-inset-lg); }
     .ap-horizon {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
