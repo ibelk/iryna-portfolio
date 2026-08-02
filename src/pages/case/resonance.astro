@@ -550,10 +550,11 @@ const impact = [
     display: grid;
     grid-template-columns: auto 1fr;
     gap: var(--space-sm-static);
-    align-items: start;
+    align-items: center;
     font-size: var(--text-title-s);
     font-weight: var(--weight-semibold);
   }
+  .ap-impact li:last-child { align-items: start; }
   .ap-impact li + li {
     padding-top: var(--space-md);
     border-top: 1px solid var(--color-border-subtle);

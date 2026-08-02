@@ -268,9 +268,10 @@ const impact = [
   .ap-panel-figure .ap-figure__lead { align-items: flex-start; text-align: left; margin-inline: 0; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
-    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: start;
+    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
     font-size: var(--text-title-s); font-weight: var(--weight-semibold);
   }
+  .ap-impact li:first-child { align-items: start; }
   .ap-impact li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
   .ap-impact__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
   .ap-impact__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }

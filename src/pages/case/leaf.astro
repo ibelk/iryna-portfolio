@@ -357,8 +357,8 @@ const results = [
        radius reads almost identically to a wide soft-stop radial anyway).
        Positions/colors read directly off the Ellipse 2816/2817 fills. */
     background-image:
-      radial-gradient(circle at 20% 75%, #690895 0%, transparent 55%),
-      radial-gradient(circle at 66% 77%, #5d6fdf 0%, transparent 55%),
+      radial-gradient(ellipse 55% 65% at 20% 75%, #690895 0%, #690895 35%, transparent 75%),
+      radial-gradient(ellipse 55% 65% at 66% 77%, #5d6fdf 0%, #5d6fdf 35%, transparent 75%),
       linear-gradient(135deg, #96c5e9 0%, #8c01cc 100%);
     border-radius: var(--radius-card);
     overflow: hidden;
@@ -375,9 +375,12 @@ const results = [
   .ap-split { display: grid; grid-template-columns: 1fr; gap: var(--space-md-static); align-items: start; }
   .ap-impact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-md); }
   .ap-impact li {
-    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: start;
+    display: grid; grid-template-columns: auto 1fr; gap: var(--space-sm-static); align-items: center;
     font-size: var(--text-title-s); font-weight: var(--weight-semibold);
   }
+  /* Figma sets each Block/List/Item's icon alignment individually — only
+     the item whose text actually wraps to two lines is top-aligned. */
+  .ap-impact li:first-child { align-items: start; }
   .ap-impact li + li { padding-top: var(--space-md); border-top: 1px solid var(--color-border-subtle); }
   .ap-impact__icon { position: relative; width: 48px; height: 48px; display: grid; place-items: center; }
   .ap-impact__icon::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-control); background: var(--color-accent); opacity: 0.2; }
@@ -456,7 +459,7 @@ const results = [
       display: flex;
       flex-direction: column;
       gap: var(--space-sm-static);
-      max-width: 42ch;
+      max-width: 524px;
       padding: var(--space-card-inset-lg);
     }
     .ap-impact__icon { width: 64px; height: 64px; }
