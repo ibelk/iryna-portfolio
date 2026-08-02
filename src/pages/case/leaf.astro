@@ -27,19 +27,27 @@ const processDesc =
 // of an exported screenshot, since this section is data, not a photo of a
 // design surface. Order matches the ring drawing order in DonutChart: the
 // dominant answer first (full accent), the smaller one second (dimmed).
+// Each callout's offset from its own ring edge is NOT a fixed percentage —
+// Figma places it radially, pointing at the midpoint of its own arc segment,
+// so the exact px gap differs per chart (74/26 split vs 79/21 split) and per
+// label width. Values below are the real Figma frame deltas (callout edge to
+// ring-box edge) for each breakpoint, read directly off the two donut
+// instances via the Plugin API — `a`/`b` are (top,right) for a top-right
+// callout or (bottom,left) for a bottom-left one; `aD`/`bD` are the desktop
+// equivalents.
 const surveyCharts = [
   {
     question: 'Do you have experience with waste sorting or would you like to start?',
     segments: [
-      { label: 'No', value: 74, callout: 'bottom-left' },
-      { label: 'Yes', value: 26, dim: true, callout: 'top-right' },
+      { label: 'No', value: 74, callout: 'bottom-left', pos: { a: 4, b: 18, aD: 26, bD: -59 } },
+      { label: 'Yes', value: 26, dim: true, callout: 'top-right', pos: { a: 10, b: 3, aD: 2, bD: -37 } },
     ],
   },
   {
     question: 'What apps or resources do you use to help with waste sorting?',
     segments: [
-      { label: "I don't know any", value: 79, callout: 'bottom-left' },
-      { label: 'I know and use them', value: 21, dim: true, callout: 'top-right' },
+      { label: "I don't know any", value: 79, callout: 'bottom-left', pos: { a: 27, b: 23, aD: 12, bD: -79 } },
+      { label: 'I know and use them', value: 21, dim: true, callout: 'top-right', pos: { a: 43, b: 0, aD: 0, bD: -125 } },
     ],
   },
 ];
@@ -150,7 +158,10 @@ const results = [
             <div class="ap-donut">
               <DonutChart segments={chart.segments} size={290} strokeWidth={55} />
               {chart.segments.map((s) => (
-                <span class:list={['ap-donut__callout', `ap-donut__callout--${s.callout}`]}>
+                <span
+                  class:list={['ap-donut__callout', `ap-donut__callout--${s.callout}`]}
+                  style={`--co-a:${s.pos.a}px;--co-b:${s.pos.b}px;--co-a-d:${s.pos.aD}px;--co-b-d:${s.pos.bD}px;`}
+                >
                   <strong>{s.label}</strong>
                   <span>{s.value}%</span>
                 </span>
@@ -318,8 +329,8 @@ const results = [
   }
   .ap-donut__callout strong { font-size: var(--text-body); font-weight: var(--weight-semibold); color: var(--color-text-primary); }
   .ap-donut__callout span { font-size: var(--text-label); color: var(--color-text-muted); }
-  .ap-donut__callout--top-right { top: 1%; right: -13%; }
-  .ap-donut__callout--bottom-left { bottom: 9%; left: -20%; }
+  .ap-donut__callout--top-right { top: var(--co-a); right: var(--co-b); }
+  .ap-donut__callout--bottom-left { bottom: var(--co-a); left: var(--co-b); }
   .ap-research-replies { display: flex; flex-direction: column; gap: var(--space-sm-static); }
   .ap-research-replies p {
     margin: 0;
@@ -443,6 +454,8 @@ const results = [
     .ap-research-replies p, .ap-research-tags span { font-size: 18px; }
     .ap-donut__callout { padding: var(--space-sm-static); }
     .ap-donut__callout strong, .ap-donut__callout span { font-size: 18px; }
+    .ap-donut__callout--top-right { top: var(--co-a-d); right: var(--co-b-d); }
+    .ap-donut__callout--bottom-left { bottom: var(--co-a-d); left: var(--co-b-d); }
     .ap-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-md-static); }
     .ap-process-card { padding: 64px; gap: var(--size-48); }
     .ap-process-card__head { flex-direction: row; align-items: flex-start; gap: var(--space-md-static); }
