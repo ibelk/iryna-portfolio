@@ -101,10 +101,6 @@
   --color-text-inverse-secondary: var(--ink-a90);
 
   --color-accent: var(--brand-orange-500);
-  /* Secondary donut-chart segment fill — Figma dims the accent to a dark
-     maroon for the smaller/less prominent slice rather than using a flat
-     opacity, which would also fade the segment against the dark card. */
-  --color-donut-dim: color-mix(in srgb, var(--brand-orange-500) 35%, var(--neutral-950));
 
   /* Component-level: the footer email is an accent link in the Figma design */
   --color-footer-link-accent: var(--brand-orange-500);
