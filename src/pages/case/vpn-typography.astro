@@ -472,18 +472,23 @@ const impact = [
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
   .ap-quote__row--head { display: none; }
-  .ap-quote__row p { margin: 0; color: var(--color-text-quote); font-size: var(--text-body); }
+  /* Figma sets this table's own type size (18px) rather than reusing
+     --text-body (16px) — label and value share the same size/color and are
+     told apart by weight alone (label SemiBold, value Regular), not by a
+     dimmer/smaller caption treatment. */
+  .ap-quote__row p { margin: 0; color: var(--color-text-quote); font-size: 18px; }
   .ap-quote__row [role='cell'] { display: flex; flex-direction: column; gap: var(--space-3xs-static); }
   /* Mobile-only field captions — the real column headers are hidden below
      1024px, so each stacked value needs its own label or the table reads
      as an unlabeled wall of text. */
-  .ap-quote__label { color: var(--color-text-muted); font-size: var(--text-label); }
+  .ap-quote__label { color: var(--color-text-quote); font-size: 18px; font-weight: var(--weight-semibold); }
   .ap-quote__role {
     display: flex;
     align-items: center;
     gap: var(--space-xs-static);
     color: var(--color-text-quote);
-    font-size: var(--text-body);
+    font-size: 18px;
+    font-weight: var(--weight-semibold);
   }
   .ap-quote__icon {
     position: relative;

@@ -199,8 +199,8 @@ const results = [
         </div>
         <picture>
           <source media="(max-width: 1023px)" srcset="/images/case-leaf/ui-design-showcase-mobile.png" />
-          <img src="/images/case-leaf/ui-design.png" alt="Final UI — material catalog and recycling point map screens"
-            width="1240" height="580" loading="lazy" decoding="async" />
+          <img src="/images/case-leaf/ui-design-showcase.png" alt="Final UI — material catalog and recycling point map screens"
+            width="620" height="580" loading="lazy" decoding="async" />
         </picture>
       </div>
     </section>
@@ -332,10 +332,10 @@ const results = [
 
   /* UI Design — title+description live inside the same gradient panel as the
      phone mockups. Mobile: the gradient is real CSS on this wrapper (Figma's
-     linear-gradient fill), text stacks above a transparent phone-screens
-     cutout. Desktop: the exported image already bakes in the gradient
-     edge-to-edge, so the wrapper's own background/padding reset to nothing
-     and the text overlays on top instead — see the desktop override below. */
+     linear-gradient fill, matching Figma's own fill on this panel), text
+     and the transparent phone-screens cutout are real HTML/image content,
+     not baked into one flat picture. Mobile stacks them; desktop switches
+     to Figma's two-column layout — see the desktop override below. */
   .ap-figure-overlay {
     display: flex;
     flex-direction: column;
@@ -416,24 +416,21 @@ const results = [
     .ap-stages__row { flex-direction: column; gap: var(--space-2xs-static); }
     .ap-stages__col { gap: var(--space-lg-static); }
     .ap-progress__segment { width: 100%; height: 20px; }
+    /* Figma's own composition: one continuous gradient card, title+description
+       centered in the left half, phone screens filling the right half — not
+       text overlaid on a flat baked image. */
     .ap-figure-overlay {
-      position: relative;
-      background: none;
-      padding: 0;
-      border-radius: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: var(--space-card-inset-lg);
     }
-    .ap-figure-overlay img { border-radius: var(--radius-card); }
     .ap-figure-overlay__text {
-      position: absolute;
-      top: 50%;
-      left: var(--space-panel-inset);
-      transform: translateY(-50%);
-      max-width: 42%;
       display: flex;
       flex-direction: column;
       gap: var(--space-sm-static);
+      max-width: 42ch;
     }
-    .ap-figure-overlay__text p { color: var(--color-text-muted); }
     .ap-impact__icon { width: 64px; height: 64px; }
     .ap-impact__icon :global(svg) { width: 24px; height: 24px; }
   }
