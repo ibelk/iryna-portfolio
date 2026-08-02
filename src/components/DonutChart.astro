@@ -2,8 +2,10 @@
 // Two-segment donut ring built from stacked SVG arcs (stroke-dasharray/
 // dashoffset), not an exported image — used for the Leaf case study's
 // survey results. `segments` is ordered as drawn: the first segment starts
-// at 12 o'clock and each following one continues clockwise from where the
-// last one ended.
+// at 3 o'clock (confirmed by reverse-engineering the actual bezier points
+// of Figma's two overlaid arc vectors — its "0%" reference point is 3
+// o'clock, not 12) and each following one continues clockwise from where
+// the last one ended.
 interface Segment {
   value: number; // 0-100, segments in a chart should sum to 100
   dim?: boolean; // true = the muted/secondary fill
@@ -29,18 +31,16 @@ const arcs = segments.map((s) => {
 ---
 
 <svg class="donut-chart" viewBox={`0 0 ${size} ${size}`} width={size} height={size} role="img" aria-hidden="true">
-  <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-    {arcs.map((arc) => (
-      <circle
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke={arc.dim ? 'var(--color-donut-dim)' : 'var(--color-accent)'}
-        stroke-width={strokeWidth}
-        stroke-dasharray={`${arc.arcLength} ${circumference - arc.arcLength}`}
-        stroke-dashoffset={arc.dashoffset}
-      />
-    ))}
-  </g>
+  {arcs.map((arc) => (
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      fill="none"
+      stroke={arc.dim ? 'var(--color-donut-dim)' : 'var(--color-accent)'}
+      stroke-width={strokeWidth}
+      stroke-dasharray={`${arc.arcLength} ${circumference - arc.arcLength}`}
+      stroke-dashoffset={arc.dashoffset}
+    />
+  ))}
 </svg>
